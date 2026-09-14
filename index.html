@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login Website</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f3f4f6;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --error: #ef4444;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .message {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .error {
+            color: var(--error);
+        }
+
+        .success {
+            color: var(--success);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .logout-btn {
+            background-color: var(--error);
+            margin-top: 1rem;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc2626;
+        }
+        
+        .hint {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 1rem;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- LOGIN VIEW -->
+        <div id="login-section">
+            <h2>Welcome Back</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Log In</button>
+            </form>
+            <div id="login-message" class="message"></div>
+            
+            <div class="hint">
+                <strong>Test Accounts:</strong><br>
+                1. alice / password123<br>
+                2. bob / secure456
+            </div>
+        </div>
+
+        <!-- DASHBOARD VIEW (Hidden by default) -->
+        <div id="dashboard-section" class="hidden">
+            <h2>Dashboard</h2>
+            <p>Hello, <span id="current-user" style="font-weight: bold;"></span>! You have successfully logged in.</p>
+            <button class="logout-btn" id="logout-btn">Log Out</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize default test users in localStorage if they don't exist yet
+        const defaultUsers = {
+            "alice": "password123",
+            "bob": "secure456"
+        };
+
+        if (!localStorage.getItem('siteUsers')) {
+            localStorage.setItem('siteUsers', JSON.stringify(defaultUsers));
+        }
+
+        // DOM Elements
+        const loginSection = document.getElementById('login-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const loginForm = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginMessage = document.getElementById('login-message');
+        const currentUserSpan = document.getElementById('current-user');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // Check if user was already logged in during this session
+        const loggedInUser = sessionStorage.getItem('loggedInUser');
+        if (loggedInUser) {
+            showDashboard(loggedInUser);
+        }
+
+        // Handle Login Submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('siteUsers'));
+
+            // Validate credentials
+            if (users[username] && users[username] === password) {
+                // Save session state
+                sessionStorage.setItem('loggedInUser', username);
+                showDashboard(username);
+                loginForm.reset();
+                loginMessage.textContent = '';
+            } else {
+                loginMessage.textContent = 'Invalid username or password.';
+                loginMessage.className = 'message error';
+            }
+        });
+
+        // Handle Logout
+        logoutBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('loggedInUser');
+            dashboardSection.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+        });
+
+        // Helper function to switch views
+        function showDashboard(username) {
+            currentUserSpan.textContent = username;
+            loginSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
