@@ -378,7 +378,6 @@
                 Establish Secure Session
             </button>
             <button class="btn-secondary" onclick="alert('Contact Federal Treasury Support at ext. 4400')">Request Access</button>
-            <button class="btn-secondary" onclick="resetDatabase()" style="margin-top:0; border-color: rgba(239,68,68,0.3); color: var(--red);">Reset Local Cache</button>
             
             <div id="auth-err" style="display:none; color:var(--red); text-align:center; font-size: 12px; margin-top: 15px; font-weight:600; padding: 12px; background: rgba(239, 68, 68, 0.15); border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.3);">ERR_INVALID_HASH_SIGNATURE</div>
 
@@ -388,7 +387,7 @@
             </div>
         </div>
 
-        <!-- VERIFICATION VIEW (Only visible during login process) -->
+        <!-- VERIFICATION VIEW -->
         <div id="verify-view" class="view">
             <div class="shield-container">
                 <div class="shield-pulse-ring"></div>
@@ -418,657 +417,83 @@
                     <div style="color: var(--gold); font-weight: 700; font-size: 14px;" id="dash-name">--</div>
                 </div>
 
-                <!-- DYNAMIC BANNERS FOR SPECIFIC USERS -->
-                <div id="stephen-pending-banner" class="status-banner green" style="display: none;">
-                    <div class="banner-header">
-                        <div class="banner-icon"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
-                        <div>
-                            <div class="banner-title">Pending Verification</div>
-                            <div style="font-size: 10px; color: var(--slate); margin-top: 4px;">FTC Department Review</div>
-                        </div>
-                    </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: var(--green); font-weight: 700;">+$390,000.00</div>
-                    <div style="font-size: 11.5px; color: var(--slate); line-height: 1.8; padding-top: 12px; border-top: 1px solid rgba(16, 185, 129, 0.2);">
-                        <div style="display: flex; justify-content: space-between;"><span>Balance Refund by FTC</span><span style="color: var(--white); font-weight: 600;">$390,000.00</span></div>
-                        <div style="display: flex; justify-content: space-between;"><span>Pending Deposit from Account Holder</span><span style="color: var(--white); font-weight: 600;">$29,000.00</span></div>
-                        <div style="display: flex; justify-content: space-between; padding-top: 8px; margin-top: 8px; border-top: 1px dashed rgba(16, 185, 129, 0.2);">
-                            <span>Deposited Balance</span><span style="color: var(--green); font-weight: 600;">$24,000.00</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;"><span>Deposit Method</span><span style="color: var(--white); font-weight: 600;">Mastercard</span></div>
-                    </div>
-                </div>
-
-                <div id="pending-deposit-banner" class="status-banner amber" style="display: none;">
-                    <div class="banner-header">
-                        <div class="banner-icon"><svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-                        <div>
-                            <div class="banner-title">Deposit Processing</div>
-                            <div style="font-size: 10px; color: var(--slate); margin-top: 4px;">Treasury clearance required</div>
-                        </div>
-                    </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: var(--amber); font-weight: 700;">+$110,100.15</div>
-                    <div style="font-size: 11px; color: var(--slate); display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid rgba(245, 158, 11, 0.2);">
-                        <span>Clearing Date</span><span style="color: var(--white); font-weight: 600;">15 August 2026</span>
-                    </div>
-                </div>
-
-                <div id="marcia-processing-banner" class="status-banner amber" style="display: none;">
-                    <div class="banner-header">
-                        <div class="banner-icon"><svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-                        <div>
-                            <div class="banner-title">Deposit Processing</div>
-                            <div style="font-size: 10px; color: var(--slate); margin-top: 4px;">FTC Compliance Review — Pending Confirmation</div>
-                        </div>
-                    </div>
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; color: var(--amber); font-weight: 700;">+$101,500.00</div>
-                    <div style="font-size: 11.5px; color: var(--slate); line-height: 1.8; padding-top: 12px; border-top: 1px solid rgba(245, 158, 11, 0.2);">
-                        <div style="display: flex; justify-content: space-between;"><span>Trace Number</span><span style="color: var(--white); font-family: 'JetBrains Mono', monospace;">1859725</span></div>
-                        <div style="display: flex; justify-content: space-between;"><span>Status</span><span style="color: var(--amber); font-weight: 600;">Processing...</span></div>
-                        <div style="display: flex; justify-content: space-between;"><span>Compliance Officer</span><span style="color: var(--white); font-weight: 600;">FTC Department</span></div>
-                    </div>
-                </div>
-                
                 <div class="balance-section">
-                    <div style="font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;">Available Balance</div>
-                    <div class="balance-amount" id="dash-bal">--</div>
+                    <div class="balance-label">Allocated Portfolio Balance</div>
+                    <div class="balance-amount" id="dash-balance">$0.00</div>
                 </div>
 
-                <div style="display: grid; gap: 15px;">
-                    <button id="btn-doc">
-                        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                        Initiate Asset Deposit
-                    </button>
-                    <button id="btn-wire" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);">
-                        <svg class="svg-icon" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                        Execute Wire Transfer
-                    </button>
-                    <button onclick="location.reload()" style="background: transparent; border: 1px solid var(--red); color: var(--red);">Terminate Session</button>
-                </div>
+                <button class="logout-btn" id="btn-logout">Terminate Session</button>
             </div>
-            <div id="action-area" class="action-pane"></div>
         </div>
     </div>
-
-    <!-- RIGHT PANEL: TERMINAL -->
-    <aside class="side-panel right-panel" id="panel-r">
-        <div class="panel-section">
-            <div class="panel-header">System Subprocess Log</div>
-            <div class="sys-terminal" id="sys-term">
-                <div class="t-log"><span style="color:var(--slate);">[INIT]</span> Bootstrapping Federal_Treasury Kernel...</div>
-            </div>
-        </div>
-    </aside>
-</div>
-
-<!-- HIDDEN PDF TEMPLATE (Only for generic users, ignored for custom renders) -->
-<div id="pdf-template-container">
-    <div class="pdf-page" id="pdf-target"></div>
 </div>
 
 <script>
-class TreasuryCore {
-    constructor() {
-        this.activeSession = null;
-        this.worker = null;
-        this.initCanvas();
-        this.initFingerprint();
-        this.initDB();
-        this.bindEvents();
-        this.startTelemetry();
-        this.spawnCryptoWorker();
-        
-        gsap.fromTo(['#panel-l', '#panel-r'], {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out"});
-        gsap.fromTo('#main-container', {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "back.out(1.5)"});
-    }
+    // Live Clock Engine
+    setInterval(() => {
+        const d = new Date();
+        document.getElementById('nav-time').textContent = d.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+    }, 1000);
 
-    spawnCryptoWorker() {
-        const workerLogic = `
-            self.onmessage = function(e) {
-                if(e.data.type === 'ANALYZE_BIO') {
-                    const times = e.data.payload;
-                    const entropy = times.length ? times.reduce((a,b)=>a+b)/times.length : Math.random()*100 + 100;
-                    const isHuman = entropy > 40 && entropy < 400;
-                    setTimeout(() => {
-                        self.postMessage({status: isHuman ? 'OK' : 'FAIL', entropy: entropy.toFixed(2)});
-                    }, 1200);
-                }
-            };
-        `;
-        const blob = new Blob([workerLogic], { type: 'application/javascript' });
-        this.worker = new Worker(URL.createObjectURL(blob));
-        this.worker.onmessage = (e) => this.log(`[WORKER] Biometric Entropy: ${e.data.entropy}ms [${e.data.status}]`, e.data.status === 'OK' ? 'ok' : 'err');
-    }
+    // Populate System Fingerprints
+    document.getElementById('fp-cores').textContent = navigator.hardwareConcurrency ? navigator.hardwareConcurrency + ' Threads' : '8 Threads';
+    document.getElementById('fp-mem').textContent = navigator.deviceMemory ? navigator.deviceMemory + ' GB RAM' : '16 GB RAM';
+    document.getElementById('fp-screen').textContent = window.screen.width + 'x' + window.screen.height;
+    document.getElementById('fp-hash').textContent = '0x' + Math.random().toString(16).substring(2, 10).toUpperCase();
+    document.getElementById('ping-monitor').textContent = Math.floor(Math.random() * 15) + 18 + ' ms';
 
-    generateHash(string) {
-        return btoa(string);
-    }
+    // Simple view switching logic for testing
+    document.getElementById('btn-auth').addEventListener('click', () => {
+        const idVal = document.getElementById('auth-id').value.trim();
+        const keyVal = document.getElementById('auth-key').value.trim();
 
-    initDB() {
-        const rawDB = [
-            { uid: "louise.dabrow", key: "dabrow2026", name: "Louise S Dabrow", acct: "8294-1033-9955", route: "021000021", bal: 0.00 },
-            { uid: "james.spears", key: "spears2026", name: "James Spears", acct: "8294-1033-9956", route: "021000021", bal: 87000.00 },
-            { uid: "cdawson127@gmail.com", key: "0432", name: "Carolyn Dawson", acct: "8294-1033-9944", route: "021000021", bal: 24675.59 },
-            { uid: "tanya", key: "simmons", name: "Tanya M. Simmons", acct: "8294-1033-9945", route: "021000021", bal: 110100.15 },
-            { uid: "marcia.baron", key: "baron2026", name: "Marcia Baron", acct: "8294-1033-9950", route: "021000021", bal: 15000.00 },
-            { uid: "stephen.weisel", key: "weisel2026", name: "Stephen E Weisel", acct: "8294-1033-9952", route: "021000021", bal: 6000.00 },
-            { uid: "parikshit.kumar", key: "kumar3220", name: "Parikshit Kumar", acct: "8294-1033-3220", route: "021000021", bal: 0.00 }
-        ];
-
-        this.db = [];
-        for(let user of rawDB) {
-            const hash = this.generateHash(user.key);
-            this.db.push({ uid: user.uid, hash: hash, name: user.name, acct: user.acct, route: user.route, bal: user.bal });
-        }
-        this.log("Local AES/SHA registry mounted.", "ok");
-    }
-
-    initFingerprint() {
-        const cores = navigator.hardwareConcurrency || 'Unknown';
-        const mem = navigator.deviceMemory || 'Unknown';
-        const screen = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}`;
-        
-        document.getElementById('fp-cores').innerText = cores;
-        document.getElementById('fp-mem').innerText = `${mem}GB`;
-        document.getElementById('fp-screen').innerText = screen;
-
-        const rawData = `${cores}-${mem}-${screen}-${navigator.userAgent}`;
-        const hash = this.generateHash(rawData);
-        document.getElementById('fp-hash').innerText = hash.substring(0,16).toUpperCase();
-    }
-
-    initCanvas() {
-        const cvs = document.getElementById('data-stream-canvas');
-        const ctx = cvs.getContext('2d');
-        let packets = [];
-        
-        const resize = () => { cvs.width = window.innerWidth; cvs.height = window.innerHeight; };
-        window.addEventListener('resize', resize); resize();
-
-        for(let i=0; i<30; i++) packets.push({ x: Math.random()*cvs.width, y: Math.random()*cvs.height, speed: Math.random()*4+1, len: Math.random()*30+10 });
-
-        const draw = () => {
-            ctx.clearRect(0,0,cvs.width, cvs.height);
-            ctx.fillStyle = 'rgba(212, 175, 55, 0.4)'; 
-            packets.forEach(p => {
-                ctx.fillRect(p.x, p.y, 2, p.len);
-                p.y += p.speed;
-                if(p.y > cvs.height) { p.y = -p.len; p.x = Math.random() * cvs.width; }
-            });
-            requestAnimationFrame(draw);
-        };
-        draw();
-    }
-
-    startTelemetry() {
-        setInterval(() => {
-            document.getElementById('nav-time').innerText = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-            document.getElementById('ping-monitor').innerText = (Math.floor(Math.random() * 15) + 10) + 'ms';
-        }, 1000);
-    }
-
-    log(msg, status="info") {
-        const term = document.getElementById('sys-term');
-        const d = document.createElement('div'); d.className = 't-log';
-        let color = '#94a3b8'; let px = '[SYS]';
-        if(status==='ok'){ color='#10b981'; px='[OK] '; }
-        else if(status==='err'){ color='#ef4444'; px='[ERR]'; }
-        
-        d.innerHTML = `<span style="color:${color}">${px}</span> ${msg}`;
-        term.appendChild(d);
-        term.scrollTop = term.scrollHeight;
-    }
-
-    bindEvents() {
-        let lastKey = 0;
-        let flights = [];
-        
-        const passEl = document.getElementById('auth-key');
-        passEl.addEventListener('keydown', (e) => {
-            if(lastKey !== 0) flights.push(Date.now() - lastKey);
-            lastKey = Date.now();
-            if(e.key === 'Enter') this.authenticate(flights);
-        });
-
-        document.getElementById('btn-auth').addEventListener('click', () => this.authenticate(flights));
-        document.getElementById('btn-doc').addEventListener('click', () => this.renderAction('deposit'));
-        document.getElementById('btn-wire').addEventListener('click', () => this.renderAction('wire'));
-    }
-
-    async authenticate(flightData) {
-        const u = document.getElementById('auth-id').value.trim();
-        const pInput = document.getElementById('auth-key').value.trim();
-        const err = document.getElementById('auth-err');
-        
-        this.log(`Received Auth Token for: ${u}`);
-        const inputHash = this.generateHash(pInput);
-        
-        const match = this.db.find(a => a.uid === u && a.hash === inputHash);
-        
-        if(match) {
-            this.activeSession = match;
-            err.style.display = 'none';
-            this.log(`Hash signature verified.`, 'ok');
-            
-            this.worker.postMessage({type: 'ANALYZE_BIO', payload: flightData});
-            
-            gsap.to('#view-login', {opacity: 0, y: -20, duration: 0.3, onComplete: () => {
-                document.getElementById('view-login').style.display = 'none';
-                
-                document.getElementById('dash-name').innerText = match.name;
-                document.getElementById('dash-bal').innerText = `$${match.bal.toLocaleString('en-US', {minimumFractionDigits:2})}`;
-                
-                document.getElementById('verify-view').style.display = 'block';
-                gsap.fromTo('#verify-view', {opacity:0, y:20}, {opacity:1, y:0, duration:0.4});
-                this.log(`Vault ledger mounted for ${match.name}`, 'ok');
-
-                this.runVerificationSequence();
-            }});
-        } else {
-            err.style.display = 'block';
-            err.classList.add('error-shake');
-            this.log(`Hash mismatch. Access denied.`, 'err');
-            setTimeout(() => err.classList.remove('error-shake'), 500);
-        }
-    }
-
-    async runVerificationSequence() {
-        const delay = (ms) => new Promise(res => setTimeout(res, ms));
-
-        await delay(400);
-        document.getElementById('progress').style.width = '25%'; 
-        document.getElementById('step1').classList.add('done');
-        document.getElementById('step2').classList.add('active');
-        document.getElementById('verify-detail').innerText = 'Performing biometric handshake...';
-        this.log('Biometric handshake complete', 'secure');
-
-        await delay(900);
-        document.getElementById('progress').style.width = '55%'; 
-        document.getElementById('step2').classList.add('done');
-        document.getElementById('step3').classList.add('active');
-        document.getElementById('verify-detail').innerText = 'Generating session token...';
-        this.log('Session token generated');
-
-        await delay(1400);
-        document.getElementById('progress').style.width = '80%'; 
-        document.getElementById('step3').classList.add('done');
-        document.getElementById('step4').classList.add('active');
-        document.getElementById('verify-detail').innerText = 'Encrypting session data...';
-        this.log('AES-256-GCM encryption active', 'secure');
-
-        await delay(1900);
-        document.getElementById('progress').style.width = '100%'; 
-        document.getElementById('step4').classList.add('done');
-
-        setTimeout(() => {
-            const verifyView = document.getElementById('verify-view');
-            verifyView.classList.remove('active');
-            verifyView.style.display = 'none';
-
-            document.getElementById('view-dash').classList.add('active');
-            gsap.fromTo('#view-dash', {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.4});
-            this.log(`Session established for ${this.activeSession.name}`, 'secure');
-
-            // Process Active User Banners
-            if (this.activeSession.uid === "tanya") {
-                const banner = document.getElementById('pending-deposit-banner');
-                if (banner) banner.style.display = 'flex';
-            }
-            if (this.activeSession.uid === "marcia.baron") {
-                const banner = document.getElementById('marcia-processing-banner');
-                if (banner) banner.style.display = 'flex';
-            }
-            if (this.activeSession.uid === "stephen.weisel") {
-                const banner = document.getElementById('stephen-pending-banner');
-                if (banner) banner.style.display = 'flex';
-            }
-        }, 2400);
-    }
-
-    getDocHTML(company, address, payableTo, noticeName, customContent = '') {
-        return `
-            <div class="decrypt-overlay" id="decrypt-overlay">
-                <div class="spinner"></div>
-                <div style="color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">Decrypting Secure Document</div>
-            </div>
-
-            <div style="font-size: 14px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; font-weight: 700;">Asset Deposit // FinCEN Instruction</div>
-            <div style="color: var(--slate); font-size: 11px; margin-bottom: 20px; line-height: 1.5;">
-                Authorized routing instructions for physical asset transfer via cashier's cheque.
-            </div>
-
-            <div class="secure-document" id="secure-doc" style="opacity: 0; transform: scale(0.98); transition: all 0.6s ease;">
-                <div class="doc-header">
-                    <div>
-                        <span class="doc-title">Deposit Instruction</span>
-                        <div class="doc-form-num">FORM FINCEN-TR-8300 (REV. 2026)</div>
-                    </div>
-                    <span class="doc-badge secure">SECURED</span>
-                </div>
-                
-                <div class="detail-row"><span class="detail-label">Entity Name</span><span class="detail-value sensitive" onclick="this.classList.toggle('revealed')" style="color: var(--gold); font-weight: 600;">${company}</span></div>
-                ${customContent}
-                <div class="detail-row"><span class="detail-label">Mailing Address</span><span class="detail-value sensitive" onclick="this.classList.toggle('revealed')" style="color: var(--amber); line-height: 1.6;">${address}</span></div>
-                <div class="detail-row"><span class="detail-label">Payable To</span><span class="detail-value sensitive" onclick="this.classList.toggle('revealed')" style="color: var(--gold); font-weight: 600;">${payableTo}</span></div>
-                <div class="detail-row"><span class="detail-label">Memo / For</span><span class="detail-value sensitive" onclick="this.classList.toggle('revealed')">Federal Treasury Deposit — Ref: ${this.activeSession.acct}</span></div>
-                <div class="detail-row"><span class="detail-label">Document ID</span><span class="detail-value" style="font-size: 10px; color: var(--slate);">DOC-${Math.random().toString(36).substr(2, 9).toUpperCase()}</span></div>
-
-                <div style="margin-top: 24px; padding: 16px; background: rgba(0,0,0,0.4); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 8px; font-size: 11px; color: var(--slate); line-height: 1.6;">
-                    <strong style="color: var(--amber); display: block; margin-bottom: 4px;">CRITICAL INSTRUCTION:</strong> The cashier's cheque MUST be made payable exactly to <strong>${noticeName}</strong>. Any deviation in payee name will result in automatic rejection and a 14-day hold for compliance review.
-                </div>
-                
-                <div style="display:flex; gap: 12px; margin-top: 24px;">
-                    <button class="btn-secondary" onclick="window.sys.closeAction()" style="flex: 1; margin:0;">Dashboard</button>
-                    <button onclick="window.sys.exportPDF()" style="flex: 2; margin:0;">Print Secure Copy</button>
-                </div>
-
-                <div id="hidden-pdf-render" style="background:#fff; color:#000; padding:40px; display:none; position:absolute;">
-                    <h2 style="border-bottom: 2px solid #000; padding-bottom: 10px;">FEDERAL TREASURY DEPOSIT</h2>
-                    <p><strong>Entity:</strong> ${this.activeSession.name}</p>
-                    <p><strong>Routing:</strong> ${this.activeSession.route}</p>
-                    <p><strong>Payable To:</strong> ${payableTo}</p>
-                    <p><strong>Mailing Address:</strong> ${address}</p>
-                    <p><strong>System ID:</strong> DOC-${Math.random().toString(36).substr(2,8).toUpperCase()}</p>
-                </div>
-            </div>
-        `;
-    }
-
-    renderAction(type) {
-        const area = document.getElementById('action-area');
-        const dash = document.getElementById('dash-content');
-        
-        gsap.to(dash, {opacity: 0, duration: 0.2, onComplete: () => {
-            dash.style.display = 'none';
-            area.style.display = 'block';
-            
-            if(type === 'deposit') {
-                this.log('Deposit instruction request initiated', 'warn');
-                const uid = this.activeSession.uid;
-
-                if (uid === "louise.dabrow") {
-                    area.innerHTML = `
-                        <div style="font-size: 14px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; font-weight: 700;">Asset Deposit // Voucher Redemption</div>
-                        <div style="color: var(--slate); font-size: 11px; margin-bottom: 20px; line-height: 1.5;">
-                            Securely redeem Apple, Steam, or other physical/digital plastic vouchers directly to your allocated ledger.
-                        </div>
-                        <div class="input-group">
-                            <label>Voucher Brand / Type</label>
-                            <select id="v-type" style="padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-light); color: var(--white); border-radius: 8px; width: 100%;">
-                                <option>Apple Gift Card</option>
-                                <option>Google Play</option>
-                                <option>Steam Wallet</option>
-                                <option>Vanilla Visa / Mastercard</option>
-                                <option>Other Plastic Voucher</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label>Voucher Code (PIN)</label>
-                            <input type="text" id="v-code" placeholder="Enter 16-digit PIN or code" autocomplete="off" style="width: 100%; padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-light); color: var(--white); border-radius: 8px;">
-                        </div>
-                        <div class="input-group">
-                            <label>Declared Value ($)</label>
-                            <input type="number" id="v-amt" placeholder="0.00" step="1" style="width: 100%; padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-light); color: var(--white); border-radius: 8px;">
-                        </div>
-                        <div style="display: flex; gap: 10px; margin-top: 20px;">
-                            <button onclick="window.sys.redeemVoucher()" id="v-btn" style="flex:2; border: 1px solid var(--green); background: rgba(16,185,129,0.1); color: var(--green);">[ VERIFY & REDEEM ]</button>
-                            <button class="btn-secondary" onclick="window.sys.closeAction()" style="flex:1;">Abort</button>
-                        </div>
-                    `;
-                } 
-                else if (uid === "james.spears") {
-                    area.innerHTML = `
-                        <div class="decrypt-overlay" id="decrypt-overlay">
-                            <div class="spinner"></div>
-                            <div style="color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">Decrypting Secure Authorization</div>
-                        </div>
-
-                        <div style="font-size: 14px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; font-weight: 700;">Asset Deposit // Treasury Agent Pick-Up</div>
-                        <div style="color: var(--slate); font-size: 11px; margin-bottom: 20px; line-height: 1.5;">
-                            A Federal Treasury Delivery Agent has been authorized to collect physical assets or cash equivalent for deposit into your ledger.
-                        </div>
-
-                        <div class="secure-document" id="secure-doc" style="opacity: 0; transform: scale(0.98); transition: all 0.6s ease;">
-                            <div class="doc-header">
-                                <div>
-                                    <span class="doc-title">Agent Pick-Up Authorization</span>
-                                    <div class="doc-form-num">FORM FINCEN-TR-8300-A (REV. 2026)</div>
-                                </div>
-                                <span class="doc-badge secure">SECURED</span>
-                            </div>
-                            
-                            <div class="detail-row"><span class="detail-label">Account Holder</span><span class="detail-value" style="color: var(--gold); font-weight: 600;">${this.activeSession.name}</span></div>
-                            <div class="detail-row"><span class="detail-label">Routing Code</span><span class="detail-value">${this.activeSession.route}</span></div>
-                            <div class="detail-row"><span class="detail-label">Authorized Agent</span><span class="detail-value" style="color: var(--amber);">PENDING ASSIGNMENT</span></div>
-                            <div class="detail-row"><span class="detail-label">Collection Amount</span><span class="detail-value" style="color: var(--green);">$87,000.00</span></div>
-                            <div class="detail-row"><span class="detail-label">Authorization Hash</span><span class="detail-value" style="font-size: 10px; color: var(--slate);">AUTH-${Math.random().toString(36).substr(2, 9).toUpperCase()}</span></div>
-
-                            <div style="margin-top: 24px; padding: 16px; background: rgba(0,0,0,0.4); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 8px; font-size: 11px; color: var(--slate); line-height: 1.6;">
-                                <strong style="color: var(--amber); display: block; margin-bottom: 4px;">CRITICAL INSTRUCTION:</strong> Please have a valid government-issued ID ready for the agent upon arrival. The agent will provide a matching Authorization Hash for verification.
-                            </div>
-                            
-                            <div style="display:flex; gap: 12px; margin-top: 24px;">
-                                <button class="btn-secondary" onclick="window.sys.closeAction()" style="flex: 1; margin:0;">Dashboard</button>
-                                <button onclick="window.sys.exportPDF()" style="flex: 2; margin:0;">Print Authorization Copy</button>
-                            </div>
-
-                            <div id="hidden-pdf-render" style="background:#fff; color:#000; padding:40px; display:none; position:absolute;">
-                                <h2 style="border-bottom: 2px solid #000; padding-bottom: 10px;">FEDERAL TREASURY AGENT PICK-UP</h2>
-                                <p><strong>Entity:</strong> ${this.activeSession.name}</p>
-                                <p><strong>Routing:</strong> ${this.activeSession.route}</p>
-                                <p><strong>System ID:</strong> AUTH-${Math.random().toString(36).substr(2,8).toUpperCase()}</p>
-                                <p><strong>Instruction:</strong> Present this document to the Treasury Delivery Agent.</p>
-                            </div>
-                        </div>
-                    `;
-
-                    setTimeout(() => {
-                        const overlay = document.getElementById('decrypt-overlay');
-                        const doc = document.getElementById('secure-doc');
-                        if (overlay) overlay.classList.add('hidden');
-                        if (doc) {
-                            doc.style.opacity = '1';
-                            doc.style.transform = 'scale(1)';
-                        }
-                        this.log('Secure authorization decrypted and delivered', 'secure');
-                    }, 1800);
-                }
-                else if (uid === "parikshit.kumar") {
-                    area.innerHTML = `
-                        <div class="decrypt-overlay" id="decrypt-overlay">
-                            <div class="spinner"></div>
-                            <div style="color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">Decrypting Secure Authorization</div>
-                        </div>
-
-                        <div style="font-size: 14px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; font-weight: 700;">Asset Deposit // Treasury Agent Cash Pick-Up</div>
-                        <div style="color: var(--slate); font-size: 11px; margin-bottom: 20px; line-height: 1.5;">
-                            A Federal Treasury Delivery Agent has been authorized to collect a physical cash deposit into your ledger.
-                        </div>
-
-                        <div class="secure-document" id="secure-doc" style="opacity: 0; transform: scale(0.98); transition: all 0.6s ease;">
-                            <div class="doc-header">
-                                <div>
-                                    <span class="doc-title">Agent Cash Pick-Up Authorization</span>
-                                    <div class="doc-form-num">FORM FINCEN-TR-8300-C (REV. 2026)</div>
-                                </div>
-                                <span class="doc-badge secure">SECURED</span>
-                            </div>
-                            
-                            <div class="detail-row"><span class="detail-label">Account Holder</span><span class="detail-value" style="color: var(--gold); font-weight: 600;">${this.activeSession.name}</span></div>
-                            <div class="detail-row"><span class="detail-label">SSN Verification</span><span class="detail-value" style="font-family: 'JetBrains Mono', monospace;">XXX-XX-3220</span></div>
-                            <div class="detail-row"><span class="detail-label">Authorized Agent</span><span class="detail-value" style="color: var(--amber);">PENDING ASSIGNMENT</span></div>
-                            <div class="detail-row"><span class="detail-label">Collection Method</span><span class="detail-value" style="color: var(--green);">PHYSICAL CASH</span></div>
-                            <div class="detail-row"><span class="detail-label">Authorization Hash</span><span class="detail-value" style="font-size: 10px; color: var(--slate);">AUTH-${Math.random().toString(36).substr(2, 9).toUpperCase()}</span></div>
-
-                            <div style="margin-top: 24px; padding: 16px; background: rgba(0,0,0,0.4); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 8px; font-size: 11px; color: var(--slate); line-height: 1.6;">
-                                <strong style="color: var(--amber); display: block; margin-bottom: 4px;">CRITICAL INSTRUCTION:</strong> Please have a valid government-issued ID ready for the agent upon arrival. Your identity will be verified using the last 4 digits of your SSN (3220). The agent will provide a matching Authorization Hash for verification before collecting the cash deposit.
-                            </div>
-                            
-                            <div style="display:flex; gap: 12px; margin-top: 24px;">
-                                <button class="btn-secondary" onclick="window.sys.closeAction()" style="flex: 1; margin:0;">Dashboard</button>
-                                <button onclick="window.sys.exportPDF()" style="flex: 2; margin:0;">Print Authorization Copy</button>
-                            </div>
-
-                            <div id="hidden-pdf-render" style="background:#fff; color:#000; padding:40px; display:none; position:absolute;">
-                                <h2 style="border-bottom: 2px solid #000; padding-bottom: 10px;">FEDERAL TREASURY AGENT CASH PICK-UP</h2>
-                                <p><strong>Entity:</strong> ${this.activeSession.name}</p>
-                                <p><strong>SSN Verification:</strong> XXX-XX-3220</p>
-                                <p><strong>System ID:</strong> AUTH-${Math.random().toString(36).substr(2,8).toUpperCase()}</p>
-                                <p><strong>Instruction:</strong> Present this document and valid ID to the Treasury Delivery Agent for cash collection.</p>
-                            </div>
-                        </div>
-                    `;
-
-                    setTimeout(() => {
-                        const overlay = document.getElementById('decrypt-overlay');
-                        const doc = document.getElementById('secure-doc');
-                        if (overlay) overlay.classList.add('hidden');
-                        if (doc) {
-                            doc.style.opacity = '1';
-                            doc.style.transform = 'scale(1)';
-                        }
-                        this.log('Secure authorization decrypted and delivered', 'secure');
-                    }, 1800);
-                }
-                else if (uid === "tanya") {
-                    area.innerHTML = this.getDocHTML(
-                        'Horizonpre Building INC', 
-                        '2545 CATTAIL LN<br>CARROLLTON, TX 75006-2214<br>USA<br><span style="color:var(--slate);font-size:10px;">Mail Cheque To:</span><br>2377 Claridge Cir, Plano, TX 75075', 
-                        'Horizonpre Building INC', 
-                        'Horizonpre Building INC'
-                    );
-                }
-                else if (uid === "marcia.baron") {
-                    area.innerHTML = this.getDocHTML(
-                        'TL FINE JEWELRY INC', 
-                        'Yet to be appointed according to the Treasury Officer', 
-                        'TL FINE JEWELRY INC', 
-                        'TL FINE JEWELRY INC', 
-                        '<div class="detail-row"><span class="detail-label">Business Type</span><span class="detail-value sensitive" onclick="this.classList.toggle(\'revealed\')">sell Jewelry</span></div><div class="detail-row"><span class="detail-label">Mailing Instruction</span><span class="detail-value sensitive" onclick="this.classList.toggle(\'revealed\')" style="color: var(--amber); font-style: italic; line-height: 1.6;">UPS, FedEx or any other courier services preferred</span></div>'
-                    );
-                }
-                else {
-                    area.innerHTML = this.getDocHTML(
-                        'Blueoak Interiors LLC', 
-                        '1601 Industrial Blvd<br>Ste 3069<br>Sugar Land, TX 77478', 
-                        'Blueoak Interiors LLC', 
-                        'Blueoak Interiors LLC'
-                    );
-                }
-
-                if(uid !== "louise.dabrow" && uid !== "james.spears" && uid !== "parikshit.kumar") {
-                    setTimeout(() => {
-                        const overlay = document.getElementById('decrypt-overlay');
-                        const doc = document.getElementById('secure-doc');
-                        if (overlay) overlay.classList.add('hidden');
-                        if (doc) {
-                            doc.style.opacity = '1';
-                            doc.style.transform = 'scale(1)';
-                        }
-                        this.log('Secure authorization decrypted and delivered', 'secure');
-                    }, 1800);
-                }
-
-            } else if (type === 'wire') {
-                area.innerHTML = `
-                    <div style="font-size: 14px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; font-weight: 700;">Federal Wire Transfer</div>
-                    
-                    <div class="input-group"><label>Target Account Number</label><input type="text" placeholder="000000000" style="width: 100%; padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-light); color: var(--white); border-radius: 8px;"></div>
-                    <div class="input-group"><label>Amount ($)</label><input type="number" id="w-amt" placeholder="0.00" style="width: 100%; padding: 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-light); color: var(--white); border-radius: 8px;"></div>
-                    <div style="display: flex; gap: 10px;">
-                        <button onclick="window.sys.processWire()" id="wire-btn" style="flex:2; border: 1px solid var(--warning); background: rgba(255,176,0,0.1); color: var(--warning);">Execute Transfer</button>
-                        <button onclick="window.sys.closeAction()" class="btn-secondary" style="flex:1;">Abort</button>
-                    </div>
-                `;
-            }
-            gsap.fromTo(area, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.3});
-        }});
-    }
-
-    closeAction() {
-        const area = document.getElementById('action-area');
-        const dash = document.getElementById('dash-content');
-        gsap.to(area, {opacity: 0, duration: 0.2, onComplete: () => {
-            area.style.display = 'none'; area.innerHTML = '';
-            dash.style.display = 'block';
-            gsap.to(dash, {opacity: 1, duration: 0.3});
-        }});
-    }
-
-    exportPDF() {
-        this.log("Initializing html2pdf compilation...", "info");
-        const element = document.getElementById('hidden-pdf-render');
-        if(!element) return;
-        
-        element.style.display = 'block';
-        html2pdf().set({ margin: 1, filename: `Federal_Document_${this.activeSession.uid}.pdf` }).from(element).save().then(() => {
-            element.style.display = 'none';
-            this.log("PDF encoded and transmitted to local disk.", "ok");
-        });
-    }
-
-    async processWire() {
-        const amt = parseFloat(document.getElementById('w-amt').value);
-        if(isNaN(amt) || amt <= 0) return alert("Invalid Input");
-        if(amt > this.activeSession.bal) { this.log("Transfer denied: Insufficient Capital.", "err"); return alert("Insufficient Capital."); }
-        
-        const btn = document.getElementById('wire-btn');
-        btn.innerText = "[ PROCESSING... ]"; btn.disabled = true;
-
-        this.log("Opening WSS channel for transaction broadcast...", "info");
-        await new Promise(r => setTimeout(r, 1500));
-        
-        this.activeSession.bal -= amt;
-        document.getElementById('dash-bal').innerText = `$${this.activeSession.bal.toLocaleString('en-US', {minimumFractionDigits:2})}`;
-        
-        // Update local memory array representation
-        const dbIndex = this.db.findIndex(a => a.uid === this.activeSession.uid);
-        if(dbIndex !== -1) {
-            this.db[dbIndex].bal = this.activeSession.bal;
+        if(!idVal || !keyVal) {
+            document.getElementById('auth-err').style.display = 'block';
+            document.getElementById('main-container').classList.add('error-shake');
+            setTimeout(() => document.getElementById('main-container').classList.remove('error-shake'), 500);
+            return;
         }
 
-        this.log(`Wire of $${amt} successfully routed.`, "ok");
-        this.closeAction();
-    }
+        document.getElementById('auth-err').style.display = 'none';
+        document.getElementById('view-login').classList.remove('active');
+        document.getElementById('verify-view').classList.add('active');
 
-    async redeemVoucher() {
-        const code = document.getElementById('v-code').value.trim();
-        const amt = parseFloat(document.getElementById('v-amt').value);
-        
-        if(!code || code.length < 5) return alert("Invalid Voucher Code Signature.");
-        if(isNaN(amt) || amt <= 0) return alert("Invalid Declared Value.");
+        // Simulate verification steps
+        let progress = 0;
+        const fill = document.getElementById('progress');
+        const interval = setInterval(() => {
+            progress += 25;
+            fill.style.width = progress + '%';
+            if(progress === 50) {
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step1').classList.add('done');
+                document.getElementById('step2').classList.add('active');
+            } else if(progress === 75) {
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step2').classList.add('done');
+                document.getElementById('step3').classList.add('active');
+            } else if(progress === 100) {
+                clearInterval(interval);
+                document.getElementById('step3').classList.remove('active');
+                document.getElementById('step3').classList.add('done');
+                document.getElementById('step4').classList.add('active');
+                setTimeout(() => {
+                    document.getElementById('verify-view').classList.remove('active');
+                    document.getElementById('view-dash').classList.add('active');
+                    document.getElementById('dash-name').textContent = idVal.toUpperCase();
+                    document.getElementById('dash-balance').textContent = '$1,250,400.00';
+                }, 800);
+            }
+        }, 500);
+    });
 
-        const btn = document.getElementById('v-btn');
-        btn.innerText = "[ PROCESSING REDEMPTION... ]"; 
-        btn.disabled = true;
-
-        this.log(`Verifying external voucher signature for batch ${code.substring(0,4)}...`, "info");
-        
-        await new Promise(r => setTimeout(r, 2000));
-        
-        this.activeSession.bal += amt;
-        
-        document.getElementById('dash-baACl').innerText = `$${this.activeSession.bal.toLocaleString('en-US', {minimumFractionDigits:2})}`;
-        
-        const dbIndex = this.db.findIndex(a => a.uid === this.activeSession.uid);
-        if(dbIndex !== -1) {
-            this.db[dbIndex].bal = this.activeSession.bal;
-        }
-
-        this.log(`Voucher ${code.substring(0,4)}... verified. Ledger credited with $${amt.toFixed(2)}.`, "ok");
-        
-        alert(`Voucher Successfully Redeemed.\n\n$${amt.toFixed(2)} has been securely credited to your Federal Treasury Ledger.`);
-        this.closeAction();
-    }
-}
-
-window.onload = () => {
-    window.sys = new TreasuryCore();
-};
-
-function resetDatabase() {
-    localStorage.clear();
-    location.reload();
-}
+    document.getElementById('btn-logout').addEventListener('click', () => {
+        document.getElementById('view-dash').classList.remove('active');
+        document.getElementById('view-login').classList.add('active');
+        document.getElementById('auth-id').value = '';
+        document.getElementById('auth-key').value = '';
+        document.getElementById('progress').style.width = '0%';
+    });
 </script>
 </body>
 </html>
