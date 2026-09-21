@@ -89,7 +89,6 @@ body::after {
     min-height: 100dvh;
 }
 
-/* ═══════════════════ LOGIN ═══════════════════ */
 .portal-container {
     width: 100%;
     max-width: min(520px, 92vw);
@@ -254,7 +253,7 @@ body::after {
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .demo-hint {
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: flex-start; gap: 8px;
     padding: 8px 12px;
     background: rgba(59, 130, 246, 0.08);
     border: 1px dashed rgba(96, 165, 250, 0.35);
@@ -264,8 +263,9 @@ body::after {
     color: #93c5fd;
     margin-bottom: clamp(16px, 2vw, 20px);
     flex-wrap: wrap;
+    line-height: 1.6;
 }
-.demo-hint svg { width: 14px; height: 14px; flex-shrink: 0; color: #60a5fa; }
+.demo-hint svg { width: 14px; height: 14px; flex-shrink: 0; color: #60a5fa; margin-top: 2px; }
 .demo-hint code { background: rgba(96, 165, 250, 0.12); padding: 2px 6px; border-radius: 3px; color: #bfdbfe; font-weight: 600; font-size: 0.95em; }
 
 .security-notice {
@@ -352,7 +352,6 @@ body::after {
 }
 .verification-badge svg { width: 12px; height: 12px; }
 
-/* ═══════════════════ DASHBOARD ═══════════════════ */
 .topbar {
     position: sticky; top: 0; z-index: 100;
     background: linear-gradient(180deg, rgba(5, 10, 20, 0.98) 0%, rgba(5, 10, 20, 0.92) 100%);
@@ -467,7 +466,6 @@ body::after {
     z-index: 1;
 }
 
-/* ═══════════════ ASSET PROTECTION BANNER (big & visible) ═══════════════ */
 .protection-banner {
     position: relative;
     padding: clamp(20px, 3vw, 28px);
@@ -566,6 +564,126 @@ body::after {
     text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
+.refund-banner {
+    position: relative;
+    padding: clamp(20px, 3vw, 28px);
+    background:
+        linear-gradient(135deg, rgba(167, 139, 250, 0.16) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(167, 139, 250, 0.12) 100%);
+    border: 2px solid rgba(167, 139, 250, 0.55);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(167, 139, 250, 0.2),
+        0 12px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.refund-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--purple), var(--gold-bright), var(--purple), transparent);
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.9);
+    animation: shimmer 4s ease-in-out infinite;
+}
+.refund-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #c4b5fd 0%, #a78bfa 40%, #6d28d9 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white);
+    flex-shrink: 0;
+    box-shadow:
+        0 0 0 3px rgba(167, 139, 250, 0.25),
+        0 0 30px rgba(167, 139, 250, 0.7),
+        0 8px 24px rgba(0, 0, 0, 0.5);
+    animation: refundPulse 3s ease-in-out infinite;
+}
+@keyframes refundPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25), 0 0 30px rgba(167, 139, 250, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(167, 139, 250, 0.12), 0 0 55px rgba(167, 139, 250, 1), 0 8px 24px rgba(0, 0, 0, 0.5); }
+}
+.refund-icon svg { width: 34px; height: 34px; }
+.refund-content { flex: 1; min-width: 0; }
+.refund-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    background: rgba(167, 139, 250, 0.25);
+    border: 1px solid rgba(196, 181, 253, 0.55);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ddd6fe;
+    margin-bottom: 12px;
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+}
+.refund-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #ddd6fe;
+    box-shadow: 0 0 10px #ddd6fe;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.refund-title {
+    font-size: clamp(1.15rem, 2vw + 0.5rem, 1.45rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+.refund-text {
+    font-size: clamp(0.86rem, 0.6vw + 0.72rem, 0.96rem);
+    line-height: 1.7;
+    color: #e2e8f0;
+    max-width: 780px;
+    margin-bottom: 14px;
+}
+.refund-text strong {
+    color: #ddd6fe;
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(167, 139, 250, 0.6);
+}
+.refund-amount-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid var(--purple);
+    flex-wrap: wrap;
+}
+.refund-amount-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.4rem, 2.4vw + 0.6rem, 1.9rem);
+    font-weight: 800;
+    color: #ddd6fe;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(167, 139, 250, 0.6);
+}
+.refund-amount-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--slate);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
 .page-head { margin-bottom: clamp(20px, 3vw, 28px); }
 .page-head h2 {
     font-size: clamp(1.4rem, 2vw + 0.6rem, 1.9rem);
@@ -621,6 +739,18 @@ body::after {
     background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
 }
+.balance-card.pending-featured {
+    background: linear-gradient(165deg, rgba(30, 25, 55, 0.95) 0%, rgba(14, 10, 28, 0.98) 100%);
+    border-color: rgba(167, 139, 250, 0.5);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(167, 139, 250, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.balance-card.pending-featured::before {
+    content: '';
+    position: absolute; top: 0;
+    left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), transparent);
+    box-shadow: 0 0 12px rgba(167, 139, 250, 0.8);
+}
 .balance-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
 .balance-label {
     font-size: 0.68rem;
@@ -641,6 +771,11 @@ body::after {
     color: var(--gold);
     flex-shrink: 0;
 }
+.balance-icon.pending {
+    background: rgba(167, 139, 250, 0.1);
+    border-color: rgba(167, 139, 250, 0.3);
+    color: var(--purple);
+}
 .balance-icon svg { width: 18px; height: 18px; }
 .balance-amount {
     font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2rem);
@@ -650,12 +785,18 @@ body::after {
     margin-bottom: 8px;
     font-variant-numeric: tabular-nums;
 }
+.balance-amount.pending {
+    color: #ddd6fe;
+    text-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
+}
 .balance-amount .cents { font-size: 0.65em; color: var(--slate); font-weight: 500; }
+.balance-amount.pending .cents { color: #c4b5fd; }
 .balance-note {
     font-size: 0.72rem;
     color: var(--slate-dim);
     font-family: 'JetBrains Mono', monospace;
     line-height: 1.5;
+    margin-bottom: 6px;
 }
 .balance-badge {
     display: inline-flex; align-items: center; gap: 5px;
@@ -668,6 +809,12 @@ body::after {
     color: var(--purple);
     border: 1px solid rgba(167, 139, 250, 0.3);
     margin-top: 4px;
+}
+.balance-badge.pending-active {
+    background: rgba(167, 139, 250, 0.2);
+    color: #ddd6fe;
+    border-color: rgba(196, 181, 253, 0.5);
+    box-shadow: 0 0 16px rgba(167, 139, 250, 0.35);
 }
 .balance-badge svg { width: 11px; height: 11px; }
 
@@ -769,12 +916,14 @@ body::after {
 .txn-icon svg { width: 18px; height: 18px; }
 .txn-icon.in { background: var(--green-bg); color: var(--green); border: 1px solid rgba(52, 211, 153, 0.3); }
 .txn-icon.out { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248, 113, 113, 0.3); }
+.txn-icon.pending { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(167, 139, 250, 0.35); }
 .txn-info { min-width: 0; }
 .txn-info strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .txn-info small { font-size: 0.68rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
 .txn-amount { font-size: 0.86rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 .txn-amount.in { color: var(--green); }
 .txn-amount.out { color: var(--white); }
+.txn-amount.pending { color: #ddd6fe; }
 
 .credit-card {
     background: linear-gradient(135deg, #1a2540 0%, #0a1120 60%, #050a14 100%);
@@ -867,7 +1016,6 @@ body::after {
 .deposit-method-info strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
 .deposit-method-info small { font-size: 0.68rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
 
-/* ═══════════════════ ACTION PAGES ═══════════════════ */
 .action-header {
     position: sticky; top: 0; z-index: 100;
     background: linear-gradient(180deg, rgba(5, 10, 20, 0.98) 0%, rgba(5, 10, 20, 0.92) 100%);
@@ -967,7 +1115,6 @@ body::after {
 .receipt-details .row span:first-child { color: var(--slate-dim); flex-shrink: 0; }
 .receipt-details .row span:last-child { color: var(--white); font-weight: 600; text-align: right; }
 
-/* Pending info box — for methods awaiting Treasury approval */
 .pending-box {
     padding: 22px 24px;
     background:
@@ -1261,6 +1408,9 @@ body::after {
     .protection-banner { flex-direction: column; gap: 14px; padding: 20px; }
     .protection-shield { width: 54px; height: 54px; }
     .protection-shield svg { width: 26px; height: 26px; }
+    .refund-banner { flex-direction: column; gap: 14px; padding: 20px; }
+    .refund-icon { width: 54px; height: 54px; }
+    .refund-icon svg { width: 26px; height: 26px; }
     .pending-box { flex-direction: column; gap: 14px; padding: 18px; }
     .pending-icon { width: 46px; height: 46px; }
     .pending-icon svg { width: 22px; height: 22px; }
@@ -1285,7 +1435,6 @@ body::after {
 </head>
 <body>
 
-<!-- ══════════════ LOGIN ══════════════ -->
 <div class="view active" id="loginView">
     <div class="portal-container">
         <div class="portal-header">
@@ -1344,7 +1493,10 @@ body::after {
                             <circle cx="12" cy="12" r="10"/>
                             <path d="M12 16v-4M12 8h.01"/>
                         </svg>
-                        <span>Demo — User: <code>mark.ma</code> · Pass: <code>Treasury@2025</code></span>
+                        <span>
+                            Demo 1 — User: <code>mark.ma</code> · Pass: <code>Treasury@2025</code><br>
+                            Demo 2 — User: <code>donn.gannarelli</code> · Pass: <code>Treasury@2025</code>
+                        </span>
                     </div>
 
                     <div class="security-notice">
@@ -1389,7 +1541,6 @@ body::after {
     </div>
 </div>
 
-<!-- ══════════════ DASHBOARD ══════════════ -->
 <div class="view" id="dashboardView">
     <header class="topbar">
         <div class="topbar-inner">
@@ -1464,7 +1615,6 @@ body::after {
     </header>
 
     <main class="dashboard-main">
-        <!-- ═══ ASSET PROTECTION BANNER — the hero element ═══ -->
         <div class="protection-banner fade-in-up" style="animation-delay: 0.03s;">
             <div class="protection-shield">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1485,27 +1635,50 @@ body::after {
             </div>
         </div>
 
+        <div class="refund-banner fade-in-up" id="refundBanner" style="animation-delay: 0.04s; display: none;">
+            <div class="refund-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+            </div>
+            <div class="refund-content">
+                <div class="refund-label">Pending Deposit</div>
+                <div class="refund-title">Victim Restitution · Pic Butchering Scam</div>
+                <div class="refund-text">
+                    This account has been opened as a <strong>confidential holding vehicle</strong> to receive your
+                    pending restitution deposit as a <strong>verified victim of the pic butchering scam</strong>. The
+                    amount below has been approved by the Treasury's Restitution Division and is pending release to
+                    your operational alias. Your legal name is never disclosed to the originating parties.
+                </div>
+                <div class="refund-amount-row">
+                    <div class="refund-amount-value">US$ 66,812.00</div>
+                    <div class="refund-amount-label">Pending Deposit · Awaiting Release</div>
+                </div>
+            </div>
+        </div>
+
         <div class="page-head fade-in-up" style="animation-delay: 0.06s;">
             <h2>Welcome back, <span id="welcomeName">Mark</span></h2>
             <p id="lastLoginLine">Last login: — · — UTC from —</p>
         </div>
 
         <section class="balance-grid">
-            <div class="balance-card featured fade-in-up" style="animation-delay: 0.1s;">
+            <div class="balance-card featured fade-in-up" id="primaryCard" style="animation-delay: 0.1s;">
                 <div class="balance-head">
                     <div>
                         <div class="balance-label">Primary Checking</div>
-                        <div class="balance-account">•••• 4821 · Treasury Reserve</div>
+                        <div class="balance-account" id="primaryAccount">•••• 4821 · Treasury Reserve</div>
                     </div>
-                    <div class="balance-icon">
+                    <div class="balance-icon" id="primaryIcon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                         </svg>
                     </div>
                 </div>
                 <div class="balance-amount" id="checkingBalance">$0<span class="cents">.00</span></div>
-                <div class="balance-note">New account · Awaiting first deposit</div>
-                <div class="balance-badge">
+                <div class="balance-note" id="primaryNote">New account · Awaiting first deposit</div>
+                <div class="balance-badge" id="primaryBadge">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
@@ -1628,8 +1801,12 @@ body::after {
                             </div>
                         </div>
                         <div class="cc-number-label">Card Number</div>
-                        <div class="cc-number">4821 7390 1265 4821</div>
+                        <div class="cc-number" id="cardNumber">4821 7390 1265 4821</div>
                         <div class="cc-bottom">
+                            <div class="cc-field">
+                                <span class="cc-field-label">Cardholder</span>
+                                <span class="cc-field-value" id="cardHolder">M. ALIAS</span>
+                            </div>
                             <div class="cc-field">
                                 <span class="cc-field-label">Expires</span>
                                 <span class="cc-field-value">09 / 28</span>
@@ -1760,7 +1937,6 @@ body::after {
     </main>
 </div>
 
-<!-- ══════════════ DEPOSIT PAGE ══════════════ -->
 <div class="view action-page" id="depositView">
     <div class="action-header">
         <div class="action-header-inner">
@@ -1853,7 +2029,6 @@ body::after {
     </main>
 </div>
 
-<!-- ══════════════ CARD PAGE ══════════════ -->
 <div class="view action-page" id="cardView">
     <div class="action-header">
         <div class="action-header-inner">
@@ -1891,11 +2066,11 @@ body::after {
                     </div>
                 </div>
                 <div class="cc-number-label">Card Number</div>
-                <div class="cc-number">4821 7390 1265 4821</div>
+                <div class="cc-number" id="cardNumberDetail">4821 7390 1265 4821</div>
                 <div class="cc-bottom">
                     <div class="cc-field">
                         <span class="cc-field-label">Cardholder</span>
-                        <span class="cc-field-value">M. ALIAS</span>
+                        <span class="cc-field-value" id="cardHolderDetail">M. ALIAS</span>
                     </div>
                     <div class="cc-field">
                         <span class="cc-field-label">Expires</span>
@@ -1943,7 +2118,6 @@ body::after {
     </main>
 </div>
 
-<!-- ══════════════ STATEMENTS PAGE ══════════════ -->
 <div class="view action-page" id="statementsView">
     <div class="action-header">
         <div class="action-header-inner">
@@ -1997,7 +2171,6 @@ body::after {
     </main>
 </div>
 
-<!-- ══════════════ SUPPORT PAGE ══════════════ -->
 <div class="view action-page" id="supportView">
     <div class="action-header">
         <div class="action-header-inner">
@@ -2031,7 +2204,7 @@ body::after {
             <div class="chat-container" id="chatContainer">
                 <div class="chat-message">
                     <div class="chat-avatar agent">PB</div>
-                    <div class="chat-bubble">Welcome Mark. I'm Elena, your private banker. How may I assist you today?</div>
+                    <div class="chat-bubble">Welcome. I'm Elena, your private banker. How may I assist you today?</div>
                 </div>
             </div>
 
@@ -2049,13 +2222,34 @@ body::after {
 (function () {
     'use strict';
 
-    var DEMO_USER = {
-        userId: 'mark.ma',
-        password: 'Treasury@2025',
-        displayName: 'Mark Ma',
-        alias: 'M. Alias',
-        memberId: 'FR-88412'
+    var USERS = {
+        'mark.ma': {
+            userId: 'mark.ma',
+            password: 'Treasury@2025',
+            displayName: 'Mark Ma',
+            firstName: 'Mark',
+            memberId: 'FR-88412',
+            alias: 'M. Alias',
+            cardNumber: '4821 7390 1265 4821',
+            cardHolder: 'M. ALIAS',
+            avatar: 'MM',
+            pendingDeposit: 0
+        },
+        'donn.gannarelli': {
+            userId: 'donn.gannarelli',
+            password: 'Treasury@2025',
+            displayName: 'Donn Gannarelli',
+            firstName: 'Donn',
+            memberId: 'FR-88413',
+            alias: 'D. Alias',
+            cardNumber: '7390 4821 6650 2731',
+            cardHolder: 'D. GANNARELLI',
+            avatar: 'DG',
+            pendingDeposit: 66812.00
+        }
     };
+
+    var currentUser = null;
 
     var allViews = document.querySelectorAll('.view');
 
@@ -2098,9 +2292,6 @@ body::after {
     }
     window.toast = toast;
 
-    // ═══════════════════════════════════════════════════
-    // LOGIN
-    // ═══════════════════════════════════════════════════
     var loginForm = document.getElementById('loginForm');
     var submitBtn = document.getElementById('submitBtn');
     var userIdInput = document.getElementById('userId');
@@ -2122,9 +2313,68 @@ body::after {
         card.classList.add('shake');
     }
 
+    function applyUserProfile(user) {
+        currentUser = user;
+
+        document.getElementById('welcomeName').textContent = user.firstName;
+        document.getElementById('userDisplayName').textContent = user.displayName;
+        document.getElementById('userMemberId').textContent = 'ID: ' + user.memberId;
+        document.getElementById('userAvatar').textContent = user.avatar;
+
+        document.getElementById('cardNumber').textContent = user.cardNumber;
+        document.getElementById('cardNumberDetail').textContent = user.cardNumber;
+        document.getElementById('cardHolder').textContent = user.cardHolder;
+        document.getElementById('cardHolderDetail').textContent = user.cardHolder;
+
+        document.getElementById('primaryAccount').textContent = '•••• ' + user.cardNumber.slice(-4) + ' · Treasury Reserve';
+
+        var refundBanner = document.getElementById('refundBanner');
+        var primaryCard = document.getElementById('primaryCard');
+        var primaryIcon = document.getElementById('primaryIcon');
+        var primaryNote = document.getElementById('primaryNote');
+        var primaryBadge = document.getElementById('primaryBadge');
+        var balanceEl = document.getElementById('checkingBalance');
+
+        if (user.pendingDeposit > 0) {
+            refundBanner.style.display = 'flex';
+
+            primaryCard.classList.remove('featured');
+            primaryCard.classList.add('pending-featured');
+            primaryIcon.classList.add('pending');
+
+            var whole = Math.floor(user.pendingDeposit).toLocaleString('en-US');
+            var cents = '.' + String(Math.round((user.pendingDeposit - Math.floor(user.pendingDeposit)) * 100)).padStart(2, '0');
+            balanceEl.innerHTML = 'US$ ' + whole + '<span class="cents">' + cents + '</span>';
+            balanceEl.classList.add('pending');
+
+            primaryNote.textContent = 'Pending deposit · Awaiting release';
+
+            primaryBadge.classList.add('pending-active');
+            primaryBadge.innerHTML =
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' +
+                '</svg>' +
+                'Pending Deposit';
+        } else {
+            refundBanner.style.display = 'none';
+            primaryCard.classList.remove('pending-featured');
+            primaryCard.classList.add('featured');
+            primaryIcon.classList.remove('pending');
+            balanceEl.classList.remove('pending');
+            balanceEl.innerHTML = '$0<span class="cents">.00</span>';
+            primaryNote.textContent = 'New account · Awaiting first deposit';
+            primaryBadge.classList.remove('pending-active');
+            primaryBadge.innerHTML =
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
+                '</svg>' +
+                'Aliased';
+        }
+    }
+
     loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        var userId = (userIdInput.value || '').trim();
+        var userId = (userIdInput.value || '').trim().toLowerCase();
         var password = (passwordInput.value || '').trim();
 
         if (!userId || !password) { shakeCard(); return; }
@@ -2133,7 +2383,8 @@ body::after {
         submitBtn.disabled = true;
 
         setTimeout(function () {
-            var valid = userId.toLowerCase() === DEMO_USER.userId && password === DEMO_USER.password;
+            var user = USERS[userId];
+            var valid = user && password === user.password;
 
             if (valid) {
                 submitBtn.textContent = '✓ ACCESS GRANTED';
@@ -2142,12 +2393,7 @@ body::after {
                 setStatus('ok', '✓ AUTHENTICATION SUCCESSFUL <span>· LOADING ACCOUNT</span>');
 
                 setTimeout(function () {
-                    var firstName = DEMO_USER.displayName.split(' ')[0];
-                    document.getElementById('welcomeName').textContent = firstName;
-                    document.getElementById('userDisplayName').textContent = DEMO_USER.displayName;
-                    document.getElementById('userMemberId').textContent = 'ID: ' + DEMO_USER.memberId;
-                    document.getElementById('userAvatar').textContent =
-                        DEMO_USER.displayName.split(' ').map(function (n) { return n[0]; }).join('').slice(0, 2).toUpperCase();
+                    applyUserProfile(user);
 
                     var now = new Date();
                     var dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -2156,7 +2402,7 @@ body::after {
                         'Last login: ' + dateStr + ' · ' + timeStr + ' UTC from 203.0.113.42';
 
                     showView('dashboardView');
-                    toast('Welcome back, Mark', 'success');
+                    toast('Welcome back, ' + user.firstName, 'success');
                 }, 700);
             } else {
                 submitBtn.textContent = 'INVALID CREDENTIALS';
@@ -2178,9 +2424,6 @@ body::after {
         }, 850);
     });
 
-    // ═══════════════════════════════════════════════════
-    // QUICK ACTIONS
-    // ═══════════════════════════════════════════════════
     var actionMap = {
         deposit: 'depositView',
         card: 'cardView',
@@ -2204,9 +2447,6 @@ body::after {
         });
     }
 
-    // ═══════════════════════════════════════════════════
-    // BACK BUTTONS
-    // ═══════════════════════════════════════════════════
     var backBtns = document.querySelectorAll('[data-back]');
     for (var b = 0; b < backBtns.length; b++) {
         backBtns[b].addEventListener('click', function () {
@@ -2214,9 +2454,6 @@ body::after {
         });
     }
 
-    // ═══════════════════════════════════════════════════
-    // MAIN NAV
-    // ═══════════════════════════════════════════════════
     var navRoute = {
         overview: 'dashboardView',
         deposit: 'depositView',
@@ -2257,6 +2494,7 @@ body::after {
     if (userChip) {
         userChip.addEventListener('click', function () {
             if (window.confirm('Sign out of the Treasury Portal?')) {
+                currentUser = null;
                 passwordInput.value = '';
                 submitBtn.textContent = 'Sign In & Access Account';
                 submitBtn.disabled = false;
@@ -2269,9 +2507,6 @@ body::after {
         });
     }
 
-    // ═══════════════════════════════════════════════════
-    // DEPOSIT — PENDING INFO BOXES FOR APPROVAL-METHODS
-    // ═══════════════════════════════════════════════════
     var selectedMethod = 'cheque';
     var fundingTiles = document.querySelectorAll('#fundingGrid .funding-tile');
     var methodSpecificFields = document.getElementById('methodSpecificFields');
@@ -2496,9 +2731,6 @@ body::after {
 
     renderMethodFields();
 
-    // ═══════════════════════════════════════════════════
-    // DEPOSIT FORM SUBMIT
-    // ═══════════════════════════════════════════════════
     document.getElementById('depositForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -2582,7 +2814,7 @@ body::after {
         }
 
         var txnRef = 'REF #DP-' + Math.floor(10000 + Math.random() * 90000);
-        var aliasRef = 'M. ALIAS / ' + txnRef.split(' ')[1];
+        var aliasRef = (currentUser ? currentUser.alias : 'M. Alias') + ' / ' + txnRef.split(' ')[1];
 
         var details = document.getElementById('depositReceiptDetails');
         var html = '';
@@ -2601,17 +2833,7 @@ body::after {
         details.innerHTML = html;
         document.getElementById('depositReceipt').classList.add('show');
 
-        addTransaction('Deposit · ' + methodLabel, aliasRef + ' · Awaiting approval', amount, true);
-
-        var balanceEl = document.getElementById('checkingBalance');
-        if (balanceEl) {
-            var currentText = balanceEl.textContent.replace(/[$,]/g, '');
-            var current = parseFloat(currentText) || 0;
-            var next = current + amount;
-            var whole = Math.floor(next).toLocaleString('en-US');
-            var cents = '.' + String(Math.round((next - Math.floor(next)) * 100)).padStart(2, '0');
-            balanceEl.innerHTML = '$' + whole + '<span class="cents">' + cents + '</span>';
-        }
+        addTransaction('Deposit · ' + methodLabel, aliasRef + ' · Awaiting approval', amount, 'pending');
 
         toast('Deposit of $' + amount.toFixed(2) + ' logged · awaiting Treasury approval', 'success');
         this.reset();
@@ -2626,7 +2848,7 @@ body::after {
         }, 9000);
     });
 
-    function addTransaction(description, ref, amount, isIncoming) {
+    function addTransaction(description, ref, amount, type) {
         var list = document.getElementById('txnList');
         if (!list) return;
 
@@ -2637,15 +2859,23 @@ body::after {
         row.className = 'txn-row';
         row.style.animation = 'fadeInUp 0.4s ease';
 
-        var iconSvg = isIncoming
-            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="7" x2="7" y2="17"/><polyline points="17 17 7 17 7 7"/></svg>'
-            : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
-
-        var amountClass = isIncoming ? 'in' : 'out';
-        var amountSign = isIncoming ? '+' : '−';
+        var iconSvg, amountClass, amountSign;
+        if (type === 'in') {
+            iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="7" x2="7" y2="17"/><polyline points="17 17 7 17 7 7"/></svg>';
+            amountClass = 'in';
+            amountSign = '+';
+        } else if (type === 'pending') {
+            iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+            amountClass = 'pending';
+            amountSign = '+';
+        } else {
+            iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
+            amountClass = 'out';
+            amountSign = '−';
+        }
 
         row.innerHTML =
-            '<div class="txn-icon ' + (isIncoming ? 'in' : 'out') + '">' + iconSvg + '</div>' +
+            '<div class="txn-icon ' + (type === 'pending' ? 'pending' : type) + '">' + iconSvg + '</div>' +
             '<div class="txn-info">' +
                 '<strong>' + description + '</strong>' +
                 '<small>' + ref + '</small>' +
@@ -2655,17 +2885,17 @@ body::after {
         list.insertBefore(row, list.firstChild);
     }
 
-    // ═══════════════════════════════════════════════════
-    // STATEMENTS DOWNLOAD
-    // ═══════════════════════════════════════════════════
     var downloadBtns = document.querySelectorAll('.download-btn');
     for (var d = 0; d < downloadBtns.length; d++) {
         downloadBtns[d].addEventListener('click', function () {
             var month = this.getAttribute('data-month');
+            var aliasName = currentUser ? currentUser.cardHolder : 'M. ALIAS';
+            var cardNum = currentUser ? currentUser.cardNumber.slice(-4) : '4821';
+
             var csv = 'Treasury Reserve · Confidential Statement\n';
-            csv += 'Account Holder (Alias): M. Alias\n';
+            csv += 'Account Holder (Alias): ' + aliasName + '\n';
             csv += 'Legal Entity: Withheld\n';
-            csv += 'Account: •••• 4821\n';
+            csv += 'Account: •••• ' + cardNum + '\n';
             csv += 'Statement Period: ' + month + '\n';
             csv += 'Generated: ' + new Date().toISOString() + '\n\n';
             csv += 'Date,Description,Reference,Amount,Balance\n';
@@ -2687,9 +2917,6 @@ body::after {
         });
     }
 
-    // ═══════════════════════════════════════════════════
-    // CARD CONTROLS
-    // ═══════════════════════════════════════════════════
     var cardCtrlMsgs = {
         freeze: 'Card freeze requested. Card will freeze within 60 seconds.',
         limits: 'Opening spending limits configuration…',
@@ -2704,9 +2931,6 @@ body::after {
         });
     }
 
-    // ═══════════════════════════════════════════════════
-    // SUPPORT CHAT
-    // ═══════════════════════════════════════════════════
     var chatResponses = [
         "The Treasury issues cheque aliases, vault addresses, and wire beneficiaries only after each deposit is approved — this is standard asset-protection protocol.",
         "For cashier's cheques, the endorsement name is not fixed in advance. Once approved, you'll receive the exact alias and lockbox address.",
@@ -2714,8 +2938,9 @@ body::after {
         "Wires are routed through intermediary banks — that's why the beneficiary and SWIFT are only revealed post-approval.",
         "Cash pickups require a one-time vault code that expires within 24 hours of issuance.",
         "Gift card consolidation supports Apple, Sephora, Google Play, Nordstrom, Lululemon, Visa, Mastercard, and Amex.",
-        "Your card is issued under the alias M. Alias — the full PAN never appears in any external statement.",
-        "All deposit instructions are reviewed within 4 business hours. Urgent approvals may be expedited on request."
+        "Your card is issued under the alias — the full PAN never appears in any external statement.",
+        "All deposit instructions are reviewed within 4 business hours. Urgent approvals may be expedited on request.",
+        "Restitution deposits from verified scam cases are released to the operational alias only — never to a legal name."
     ];
 
     var chatContainer = document.getElementById('chatContainer');
@@ -2726,10 +2951,12 @@ body::after {
         var msg = (chatInput.value || '').trim();
         if (!msg) return;
 
+        var initials = currentUser ? currentUser.avatar : 'MM';
+
         var userMsg = document.createElement('div');
         userMsg.className = 'chat-message user';
         userMsg.innerHTML =
-            '<div class="chat-avatar user">MM</div>' +
+            '<div class="chat-avatar user">' + initials + '</div>' +
             '<div class="chat-bubble">' + msg.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
         chatContainer.appendChild(userMsg);
         chatContainer.scrollTop = chatContainer.scrollHeight;
