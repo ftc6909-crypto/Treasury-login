@@ -1,696 +1,1321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="theme-color" content="#050a14">
-    <title>Secure Treasury Portal | Federal Reserve Gateway</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#050a14">
+<title>Secure Treasury Portal | Private Account</title>
 
-        :root { 
-            --navy: #050a14; 
-            --navy-light: #0a1120;
-            --gold: #d4af37; 
-            --gold-bright: #f0d878;
-            --gold-dim: #8a7324;
-            --slate: #cbd5e1;
-            --slate-dim: #94a3b8;
-            --white: #ffffff; 
-            --border: #334155;
-            --red: #f87171;
-            --green: #34d399;
-            --green-glow: rgba(52, 211, 153, 0.2);
-        }
+<link rel="preconnect" href="https://i.ibb.co" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="https://i.ibb.co/mWvp0bV/images-1-removebg-preview-1.png" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<style>
+:root {
+    --navy: #050a14;
+    --navy-card: #0d1526;
+    --gold: #d4af37;
+    --gold-bright: #f0d878;
+    --gold-dim: #8a7324;
+    --slate: #cbd5e1;
+    --slate-dim: #94a3b8;
+    --slate-dimmer: #64748b;
+    --white: #ffffff;
+    --border: #334155;
+    --border-light: #475569;
+    --red: #f87171;
+    --red-bg: rgba(248, 113, 113, 0.1);
+    --green: #34d399;
+    --green-bg: rgba(52, 211, 153, 0.1);
+    --green-glow: rgba(52, 211, 153, 0.2);
+    --blue: #60a5fa;
+    --blue-bg: rgba(96, 165, 250, 0.1);
+    --amber: #fbbf24;
+    --amber-bg: rgba(251, 191, 36, 0.1);
+    --purple: #a78bfa;
+    --purple-bg: rgba(167, 139, 250, 0.1);
+}
 
-        html, body { height: 100%; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--navy);
-            color: var(--white);
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: clamp(16px, 3vh, 40px) clamp(12px, 3vw, 24px);
-            position: relative;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(180deg, rgba(5, 10, 20, 0.55) 0%, rgba(5, 10, 20, 0.35) 40%, rgba(5, 10, 20, 0.45) 70%, rgba(5, 10, 20, 0.78) 100%),
-                radial-gradient(ellipse at 50% 40%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
-                url('https://i.ibb.co/XZCxGGFs/images.jpg');
-            background-size: cover, cover, cover;
-            background-position: center, center, center;
-            background-attachment: fixed, fixed, fixed;
-            background-repeat: no-repeat;
-        }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-image:
+        linear-gradient(180deg, rgba(5, 10, 20, 0.55) 0%, rgba(5, 10, 20, 0.35) 40%, rgba(5, 10, 20, 0.45) 70%, rgba(5, 10, 20, 0.78) 100%),
+        radial-gradient(ellipse at 50% 40%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+        url('https://i.ibb.co/XZCxGGFs/images.jpg');
+    background-size: cover, cover, cover;
+    background-position: center, center, center;
+    background-attachment: fixed, fixed, fixed;
+    background-repeat: no-repeat;
+}
 
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(ellipse 90% 80% at 50% 50%, 
-                transparent 0%, 
-                transparent 45%, 
-                rgba(0, 0, 0, 0.25) 75%, 
-                rgba(0, 0, 0, 0.55) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 90% 80% at 50% 50%,
+        transparent 0%, transparent 45%,
+        rgba(0, 0, 0, 0.25) 75%, rgba(0, 0, 0, 0.55) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
 
-        /* ══════════════════════════════════════════════
-           MAIN CONTAINER
-           ══════════════════════════════════════════════ */
-        .portal-container {
-            width: 100%;
-            max-width: min(520px, 92vw);
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
+.view { display: none !important; visibility: hidden; height: 0; overflow: hidden; }
+.view.active { display: block !important; visibility: visible; height: auto; overflow: visible; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px) translateZ(0); }
-            to { opacity: 1; transform: translateY(0) translateZ(0); }
-        }
+#loginView { position: relative; z-index: 1; }
+#loginView.active {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: clamp(16px, 3vh, 40px) clamp(12px, 3vw, 24px);
+}
+#dashboardView, .action-page { position: relative; z-index: 1; }
+#dashboardView.active, .action-page.active {
+    display: block !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
 
-        /* ── Header ── */
-        .portal-header {
-            text-align: center;
-            margin-bottom: clamp(20px, 3vh, 28px);
-        }
+/* ═══════════════════ LOGIN ═══════════════════ */
+.portal-container {
+    width: 100%;
+    max-width: min(520px, 92vw);
+    position: relative;
+    animation: fadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        .portal-header h1 {
-            font-size: clamp(1.05rem, 1.6vw + 0.6rem, 1.45rem);
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            /* Realistic gold gradient text */
-            background: linear-gradient(180deg, #f4de8e 0%, #d4af37 45%, #a8862a 70%, #d4af37 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            margin-bottom: 10px;
-            line-height: 1.3;
-            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.35));
-        }
+.portal-header { text-align: center; margin-bottom: clamp(20px, 3vh, 28px); }
+.portal-header h1 {
+    font-size: clamp(1.05rem, 1.6vw + 0.6rem, 1.45rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #f4de8e 0%, #d4af37 45%, #a8862a 70%, #d4af37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.35));
+}
+.portal-header .subtitle {
+    font-size: clamp(0.68rem, 0.9vw + 0.4rem, 0.82rem);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
+}
+.card-wrap { position: relative; padding-top: clamp(48px, 6vw, 60px); }
 
-        .portal-header .subtitle {
-            font-size: clamp(0.68rem, 0.9vw + 0.4rem, 0.82rem);
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #e2e8f0;
-            font-family: 'JetBrains Mono', monospace;
-            line-height: 1.4;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
-        }
+.crest {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: clamp(88px, 15vw, 116px);
+    height: clamp(88px, 15vw, 116px);
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 70% 85%, rgba(0, 0, 0, 0.5) 0%, transparent 50%),
+        linear-gradient(145deg, #1a2540 0%, #0a1120 50%, #050a14 100%);
+    border: 3px solid #b8942e;
+    box-shadow:
+        0 0 0 1px #f0d878, 0 0 0 2px #5c4a17,
+        inset 0 3px 8px rgba(0, 0, 0, 0.7),
+        inset 0 -2px 4px rgba(240, 216, 120, 0.25),
+        0 0 60px rgba(212, 175, 55, 0.35),
+        0 16px 40px rgba(0, 0, 0, 0.8);
+    display: flex; align-items: center; justify-content: center;
+    padding: 12px; z-index: 3; overflow: hidden;
+}
+.crest img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6)); }
 
-        /* ── Card wrap ── */
-        .card-wrap {
-            position: relative;
-            padding-top: clamp(48px, 6vw, 60px);
-        }
+.card {
+    background: linear-gradient(165deg, rgba(10, 17, 32, 0.85) 0%, rgba(5, 10, 20, 0.92) 100%);
+    backdrop-filter: blur(12px) saturate(1.3);
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    border: 1px solid rgba(71, 85, 105, 0.55);
+    border-radius: 8px;
+    padding: clamp(54px, 7vw, 68px) clamp(20px, 4vw, 36px) clamp(24px, 3vw, 32px);
+    position: relative;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.1), 0 24px 70px rgba(0, 0, 0, 0.65), 0 0 100px rgba(212, 175, 55, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    z-index: 2;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 22%; right: 22%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+}
 
-        /* ══════════════════════════════════════════════
-           REALISTIC 3D CREST — seal in ORIGINAL colors
-           ══════════════════════════════════════════════ */
-        .crest {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%) translateZ(0);
-            width: clamp(88px, 15vw, 116px);
-            height: clamp(88px, 15vw, 116px);
-            border-radius: 50%;
-            /* Realistic metal medallion base */
-            background: 
-                radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 70% 85%, rgba(0, 0, 0, 0.5) 0%, transparent 50%),
-                linear-gradient(145deg, #1a2540 0%, #0a1120 50%, #050a14 100%);
-            /* Multi-layer gold rim — realistic beveled metal */
-            border: 3px solid #b8942e;
-            box-shadow: 
-                /* Outer bright gold rim */
-                0 0 0 1px #f0d878,
-                /* Outer dark shadow */
-                0 0 0 2px #5c4a17,
-                /* Inner dark recessed shadow */
-                inset 0 3px 8px rgba(0, 0, 0, 0.7),
-                inset 0 -2px 4px rgba(240, 216, 120, 0.25),
-                /* Outer glow */
-                0 0 60px rgba(212, 175, 55, 0.35),
-                /* Deep drop shadow for lift */
-                0 16px 40px rgba(0, 0, 0, 0.8),
-                0 4px 12px rgba(0, 0, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px;
-            z-index: 3;
-        }
+.status-bar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    border-radius: 5px;
+    margin-bottom: clamp(20px, 2.5vw, 26px);
+    transition: background 0.3s, border-color 0.3s;
+}
+.status-bar.error {
+    background: linear-gradient(180deg, rgba(248, 113, 113, 0.1) 0%, rgba(248, 113, 113, 0.05) 100%);
+    border-color: rgba(248, 113, 113, 0.35);
+}
+.status-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 10px var(--green), 0 0 20px var(--green-glow);
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+.status-bar.error .status-dot { background: var(--red); box-shadow: 0 0 10px var(--red), 0 0 20px rgba(248, 113, 113, 0.4); }
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.85); }
+}
+.status-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.68rem, 0.6vw + 0.55rem, 0.78rem);
+    color: var(--green);
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+.status-bar.error .status-text { color: var(--red); }
+.status-text span { color: var(--slate-dim); margin-left: 6px; font-weight: 500; }
 
-        /* Rotating conic shimmer behind crest */
-        .crest::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg,
-                rgba(212, 175, 55, 0.7) 60deg,
-                transparent 120deg,
-                transparent 180deg,
-                rgba(240, 216, 120, 0.6) 240deg,
-                transparent 300deg,
-                transparent 360deg
-            );
-            z-index: -1;
-            opacity: 0.6;
-            animation: rotate 16s linear infinite;
-            will-change: transform;
-            filter: blur(1px);
-        }
+.form-group { margin-bottom: clamp(16px, 2.2vw, 22px); }
+.form-group label {
+    display: block;
+    font-size: clamp(0.72rem, 0.5vw + 0.6rem, 0.82rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+}
+.input-wrapper { position: relative; display: flex; align-items: center; }
+.input-icon {
+    position: absolute; left: 16px;
+    color: var(--slate-dim);
+    display: flex; align-items: center;
+    pointer-events: none; transition: color 0.2s;
+}
+.input-icon svg { width: 20px; height: 20px; }
 
-        /* Soft radial glow behind everything */
-        .crest::after {
-            content: '';
-            position: absolute;
-            inset: -22px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.28) 0%, transparent 70%);
-            z-index: -2;
-            animation: glowPulse 4s ease-in-out infinite;
-            pointer-events: none;
-        }
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: clamp(14px, 1.6vw, 17px) 16px clamp(14px, 1.6vw, 17px) 48px;
+    background: linear-gradient(180deg, rgba(2, 6, 14, 0.92) 0%, rgba(2, 6, 14, 0.85) 100%);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: max(16px, clamp(0.95rem, 0.6vw + 0.85rem, 1.05rem));
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: #94a3b8; font-size: 0.95em; }
+.form-group input:hover, .form-group select:hover, .form-group textarea:hover { border-color: #475569; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15), inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.form-group input:focus ~ .input-icon,
+.form-group input:focus + .input-icon { color: var(--gold); }
+.form-group select {
+    padding-left: 16px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 18px;
+    padding-right: 48px;
+    cursor: pointer;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-        @keyframes rotate {
-            to { transform: rotate(360deg); }
-        }
+.demo-hint {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px;
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px dashed rgba(96, 165, 250, 0.35);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.68rem, 0.4vw + 0.6rem, 0.76rem);
+    color: #93c5fd;
+    margin-bottom: clamp(16px, 2vw, 20px);
+    flex-wrap: wrap;
+}
+.demo-hint svg { width: 14px; height: 14px; flex-shrink: 0; color: #60a5fa; }
+.demo-hint code { background: rgba(96, 165, 250, 0.12); padding: 2px 6px; border-radius: 3px; color: #bfdbfe; font-weight: 600; font-size: 0.95em; }
 
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50%      { opacity: 1;   transform: scale(1.08); }
-        }
+.security-notice {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: clamp(12px, 1.6vw, 16px);
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.04) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 5px;
+    margin: clamp(18px, 2.4vw, 24px) 0;
+}
+.security-notice svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--gold); filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)); }
+.security-notice p { font-size: clamp(0.78rem, 0.5vw + 0.7rem, 0.88rem); line-height: 1.65; color: var(--slate); }
+.security-notice p strong { color: var(--gold-bright); font-weight: 600; }
 
-        /* ── IMAGE — ORIGINAL COLORS, NO FILTER ── */
-        .crest img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            position: relative;
-            z-index: 2;
-            /* Subtle glass reflection only — no color change */
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-        }
+.btn-submit {
+    width: 100%;
+    padding: clamp(16px, 1.8vw, 19px);
+    background: linear-gradient(180deg, #f0d878 0%, #d4af37 40%, #a8862a 75%, #c9a430 100%);
+    border: 1.5px solid #8a7324;
+    border-radius: 6px;
+    color: #1a1206;
+    font-size: clamp(0.85rem, 0.5vw + 0.75rem, 0.95rem);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+    position: relative; overflow: hidden;
+    min-height: 56px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(212, 175, 55, 0.4),
+        0 8px 20px rgba(0, 0, 0, 0.5);
+}
+.btn-submit:hover:not(:disabled) {
+    background: linear-gradient(180deg, #f8e79a 0%, #e6c855 40%, #ba972f 75%, #d4af37 100%);
+    transform: translateY(-1px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 0 50px rgba(212, 175, 55, 0.7),
+        0 10px 24px rgba(0, 0, 0, 0.55);
+}
+.btn-submit:active { transform: translateY(0); }
+.btn-submit:disabled { cursor: not-allowed; opacity: 0.9; }
 
-        .crest .fallback {
-            position: absolute;
-            inset: 12px;
-            z-index: 1;
-            opacity: 1;
-            transition: opacity 0.3s;
-        }
+.portal-footer { text-align: center; margin-top: clamp(18px, 2.4vw, 26px); }
+.portal-footer .footer-links { display: flex; justify-content: center; gap: clamp(12px, 2vw, 22px); margin-bottom: 12px; flex-wrap: wrap; }
+.portal-footer a {
+    font-size: clamp(0.7rem, 0.4vw + 0.62rem, 0.78rem);
+    color: #cbd5e1;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    transition: color 0.15s;
+    padding: 6px 4px;
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+}
+.portal-footer a:hover { color: var(--gold); }
+.portal-footer .copyright {
+    font-size: clamp(0.68rem, 0.35vw + 0.6rem, 0.75rem);
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', monospace;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+}
 
-        .crest img.loaded ~ .fallback {
-            opacity: 0;
-        }
+.badge-wrap { text-align: center; }
+.verification-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px;
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.06) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.62rem, 0.3vw + 0.56rem, 0.72rem);
+    color: var(--gold-bright);
+    letter-spacing: 0.08em;
+    margin-top: 14px;
+    font-weight: 600;
+}
+.verification-badge svg { width: 12px; height: 12px; }
 
-        /* ── Card ── */
-        .card {
-            background: linear-gradient(165deg, 
-                rgba(10, 17, 32, 0.85) 0%, 
-                rgba(5, 10, 20, 0.92) 100%);
-            backdrop-filter: blur(12px) saturate(1.3) brightness(1.05);
-            -webkit-backdrop-filter: blur(12px) saturate(1.3) brightness(1.05);
-            border: 1px solid rgba(71, 85, 105, 0.55);
-            border-radius: 8px;
-            padding: clamp(54px, 7vw, 68px) clamp(20px, 4vw, 36px) clamp(24px, 3vw, 32px);
-            position: relative;
-            box-shadow: 
-                0 0 0 1px rgba(212, 175, 55, 0.1),
-                0 24px 70px rgba(0, 0, 0, 0.65),
-                0 0 100px rgba(212, 175, 55, 0.06),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            z-index: 2;
-        }
+/* ═══════════════════ DASHBOARD ═══════════════════ */
+.topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(180deg, rgba(5, 10, 20, 0.98) 0%, rgba(5, 10, 20, 0.92) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+.topbar-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 12px clamp(16px, 3vw, 32px);
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.brand-seal {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #1a2540 0%, #050a14 100%);
+    border: 2px solid var(--gold-dim);
+    padding: 5px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 1px rgba(240, 216, 120, 0.3), 0 0 12px rgba(212, 175, 55, 0.3);
+    flex-shrink: 0;
+}
+.brand-seal img { width: 100%; height: 100%; object-fit: contain; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-title { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; color: var(--gold); text-transform: uppercase; }
+.brand-sub { font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.14em; color: var(--slate-dim); text-transform: uppercase; }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 22%;
-            right: 22%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
-        }
+.main-nav { display: none; align-items: center; gap: 4px; flex: 1; justify-content: center; }
+.main-nav a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--slate);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.15s;
+    white-space: nowrap;
+    border: 1px solid transparent;
+}
+.main-nav a:hover { color: var(--gold); background: rgba(212, 175, 55, 0.08); }
+.main-nav a.active { color: var(--gold-bright); background: rgba(212, 175, 55, 0.12); border-color: rgba(212, 175, 55, 0.3); }
+.main-nav svg { width: 15px; height: 15px; }
 
-        /* ── Status Bar ── */
-        .status-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: linear-gradient(180deg, rgba(52, 211, 153, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
-            border: 1px solid rgba(52, 211, 153, 0.3);
-            border-radius: 5px;
-            margin-bottom: clamp(20px, 2.5vw, 26px);
-            box-shadow: inset 0 1px 0 rgba(52, 211, 153, 0.15), 0 0 20px rgba(52, 211, 153, 0.06);
-        }
+.user-menu { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.notif-btn {
+    position: relative;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--slate);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+}
+.notif-btn:hover { color: var(--gold); border-color: var(--gold-dim); background: rgba(212, 175, 55, 0.1); }
+.notif-btn svg { width: 18px; height: 18px; }
+.notif-dot {
+    position: absolute; top: 8px; right: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--navy);
+    box-shadow: 0 0 8px var(--red);
+}
+.user-chip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 5px 12px 5px 5px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.user-chip:hover { border-color: var(--gold-dim); background: rgba(212, 175, 55, 0.06); }
+.user-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37 0%, #8a7324 100%);
+    color: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.78rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}
+.user-name { display: flex; flex-direction: column; line-height: 1.15; }
+.user-name strong { font-size: 0.82rem; font-weight: 600; color: var(--white); }
+.user-name small { font-size: 0.66rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
 
-        .status-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 10px var(--green), 0 0 20px var(--green-glow);
-            animation: pulse 2s ease-in-out infinite;
-            flex-shrink: 0;
-        }
+.menu-btn {
+    display: none;
+    width: 38px; height: 38px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--slate);
+    cursor: pointer;
+    align-items: center; justify-content: center;
+}
+.menu-btn svg { width: 18px; height: 18px; }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(0.85); }
-        }
+.dashboard-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(20px, 3vw, 36px) clamp(16px, 3vw, 32px) 60px;
+    position: relative;
+    z-index: 1;
+}
 
-        .status-text {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(0.68rem, 0.6vw + 0.55rem, 0.78rem);
-            color: var(--green);
-            letter-spacing: 0.04em;
-            line-height: 1.4;
-            font-weight: 600;
-        }
+/* ═══════════════ ASSET PROTECTION BANNER (big & visible) ═══════════════ */
+.protection-banner {
+    position: relative;
+    padding: clamp(20px, 3vw, 28px);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.14) 0%, rgba(167, 139, 250, 0.08) 50%, rgba(212, 175, 55, 0.1) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.5);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(212, 175, 55, 0.15),
+        0 12px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.protection-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), var(--purple), var(--gold-bright), transparent);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.9);
+    animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+    0%, 100% { opacity: 0.7; transform: scaleX(0.9); }
+    50% { opacity: 1; transform: scaleX(1.1); }
+}
+.protection-shield {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f0d878 0%, #d4af37 40%, #8a7324 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--navy);
+    flex-shrink: 0;
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.2),
+        0 0 30px rgba(212, 175, 55, 0.6),
+        0 8px 24px rgba(0, 0, 0, 0.5);
+    animation: shieldPulse 3s ease-in-out infinite;
+}
+@keyframes shieldPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2), 0 0 30px rgba(212, 175, 55, 0.6), 0 8px 24px rgba(0, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.1), 0 0 50px rgba(212, 175, 55, 0.9), 0 8px 24px rgba(0, 0, 0, 0.5); }
+}
+.protection-shield svg { width: 34px; height: 34px; }
+.protection-content { flex: 1; min-width: 0; }
+.protection-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(240, 216, 120, 0.5);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 12px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+.protection-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 10px var(--gold-bright);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.protection-title {
+    font-size: clamp(1.2rem, 2.2vw + 0.5rem, 1.55rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #f0d878 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+.protection-text {
+    font-size: clamp(0.86rem, 0.6vw + 0.72rem, 0.96rem);
+    line-height: 1.7;
+    color: #e2e8f0;
+    max-width: 780px;
+}
+.protection-text strong {
+    color: var(--gold-bright);
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
 
-        .status-text span {
-            color: var(--slate-dim);
-            margin-left: 6px;
-            font-weight: 500;
-        }
+.page-head { margin-bottom: clamp(20px, 3vw, 28px); }
+.page-head h2 {
+    font-size: clamp(1.4rem, 2vw + 0.6rem, 1.9rem);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+}
+.page-head h2 span {
+    background: linear-gradient(180deg, #f4de8e 0%, #d4af37 45%, #a8862a 70%, #d4af37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.page-head p {
+    font-size: 0.86rem;
+    color: var(--slate-dim);
+    font-family: 'JetBrains Mono', monospace;
+}
 
-        /* ── Form ── */
-        .form-group {
-            margin-bottom: clamp(16px, 2.2vw, 22px);
-        }
+.balance-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.balance-card {
+    background: linear-gradient(165deg, rgba(13, 21, 38, 0.9) 0%, rgba(5, 10, 20, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    border-radius: 8px;
+    padding: 22px 22px 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.balance-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.1);
+}
+.balance-card.featured {
+    background: linear-gradient(165deg, rgba(20, 30, 55, 0.95) 0%, rgba(8, 14, 28, 0.98) 100%);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(212, 175, 55, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.balance-card.featured::before {
+    content: '';
+    position: absolute; top: 0;
+    left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+}
+.balance-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+.balance-label {
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.12em;
+    color: var(--slate-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.balance-account { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--slate-dimmer); }
+.balance-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+}
+.balance-icon svg { width: 18px; height: 18px; }
+.balance-amount {
+    font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2rem);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
+}
+.balance-amount .cents { font-size: 0.65em; color: var(--slate); font-weight: 500; }
+.balance-note {
+    font-size: 0.72rem;
+    color: var(--slate-dim);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.5;
+}
+.balance-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    background: var(--purple-bg);
+    color: var(--purple);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    margin-top: 4px;
+}
+.balance-badge svg { width: 11px; height: 11px; }
 
-        .form-group label {
-            display: block;
-            font-size: clamp(0.72rem, 0.5vw + 0.6rem, 0.82rem);
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--slate);
-            margin-bottom: 10px;
-            font-family: 'JetBrains Mono', monospace;
-        }
+.section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; flex-wrap: wrap; }
+.section-head h3 { font-size: 1rem; font-weight: 600; color: var(--white); }
 
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+}
+.action-btn {
+    background: linear-gradient(165deg, rgba(13, 21, 38, 0.85) 0%, rgba(5, 10, 20, 0.9) 100%);
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    border-radius: 8px;
+    padding: 18px 12px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+    cursor: pointer;
+    transition: all 0.18s;
+    color: var(--white);
+    font-family: inherit;
+    font-size: 0.76rem; font-weight: 500;
+    text-align: center;
+}
+.action-btn:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    background: linear-gradient(165deg, rgba(20, 30, 55, 0.9) 0%, rgba(8, 14, 28, 0.95) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.1);
+}
+.action-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    transition: all 0.2s;
+}
+.action-icon svg { width: 20px; height: 20px; }
+.action-btn:hover .action-icon {
+    background: rgba(212, 175, 55, 0.18);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+}
 
-        .input-icon {
-            position: absolute;
-            left: 16px;
-            color: var(--slate-dim);
-            display: flex;
-            align-items: center;
-            pointer-events: none;
-            transition: color 0.2s;
-        }
+.dashboard-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; margin-bottom: 24px; }
 
-        .input-icon svg {
-            width: 20px;
-            height: 20px;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-        }
+.panel {
+    background: linear-gradient(165deg, rgba(13, 21, 38, 0.85) 0%, rgba(5, 10, 20, 0.92) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    border-radius: 8px;
+    padding: 20px 22px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.panel-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; padding-bottom: 14px;
+    border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+}
+.panel-head h3 { font-size: 0.95rem; font-weight: 600; color: var(--white); }
+.panel-head .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--slate-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.panel-head .filter-btn:hover { color: var(--gold); border-color: var(--gold-dim); }
 
-        .form-group input {
-            width: 100%;
-            padding: clamp(14px, 1.6vw, 17px) 16px clamp(14px, 1.6vw, 17px) 48px;
-            /* Realistic inset field — subtle inner shadow */
-            background: linear-gradient(180deg, rgba(2, 6, 14, 0.92) 0%, rgba(2, 6, 14, 0.85) 100%);
-            border: 1.5px solid var(--border);
-            border-radius: 6px;
-            color: var(--white);
-            font-family: 'JetBrains Mono', monospace;
-            letter-spacing: 0.02em;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-            font-size: max(16px, clamp(0.95rem, 0.6vw + 0.85rem, 1.05rem));
-            box-shadow: 
-                inset 0 2px 6px rgba(0, 0, 0, 0.5),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.03);
-        }
+.empty-state { text-align: center; padding: 40px 20px; color: var(--slate-dim); }
+.empty-state svg { width: 48px; height: 48px; margin-bottom: 14px; color: var(--slate-dimmer); opacity: 0.6; }
+.empty-state strong { display: block; font-size: 0.92rem; font-weight: 600; color: var(--slate); margin-bottom: 6px; }
+.empty-state p { font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
 
-        .form-group input::placeholder {
-            color: #94a3b8;
-            font-size: 0.95em;
-            letter-spacing: 0;
-        }
+.txn-row {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center; gap: 14px;
+    padding: 12px 8px;
+    border-radius: 6px;
+    transition: background 0.15s;
+}
+.txn-row:hover { background: rgba(255, 255, 255, 0.03); }
+.txn-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.txn-icon svg { width: 18px; height: 18px; }
+.txn-icon.in { background: var(--green-bg); color: var(--green); border: 1px solid rgba(52, 211, 153, 0.3); }
+.txn-icon.out { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248, 113, 113, 0.3); }
+.txn-info { min-width: 0; }
+.txn-info strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.txn-info small { font-size: 0.68rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
+.txn-amount { font-size: 0.86rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.txn-amount.in { color: var(--green); }
+.txn-amount.out { color: var(--white); }
 
-        .form-group input:hover {
-            border-color: #475569;
-            background: linear-gradient(180deg, rgba(2, 6, 14, 0.95) 0%, rgba(2, 6, 14, 0.88) 100%);
-        }
+.credit-card {
+    background: linear-gradient(135deg, #1a2540 0%, #0a1120 60%, #050a14 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 60px rgba(212, 175, 55, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.credit-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+.cc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 26px; position: relative; }
+.cc-brand { font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; font-weight: 700; }
+.cc-type { font-size: 0.6rem; color: var(--slate-dim); letter-spacing: 0.14em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+.cc-chip {
+    width: 34px; height: 26px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #d4af37 0%, #8a7324 100%);
+    position: relative;
+    margin-top: 6px;
+}
+.cc-chip::before, .cc-chip::after { content: ''; position: absolute; background: rgba(0, 0, 0, 0.3); }
+.cc-chip::before { top: 0; bottom: 0; left: 33%; width: 1px; }
+.cc-chip::after { top: 0; bottom: 0; right: 33%; width: 1px; }
+.cc-number-label { font-size: 0.55rem; color: var(--slate-dim); letter-spacing: 0.18em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; }
+.cc-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    letter-spacing: 0.18em;
+    color: var(--white);
+    margin-bottom: 22px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    font-weight: 600;
+    word-spacing: 0.3em;
+}
+.cc-bottom { display: flex; justify-content: space-between; align-items: flex-end; position: relative; }
+.cc-field { display: flex; flex-direction: column; gap: 4px; }
+.cc-field-label { font-size: 0.55rem; color: var(--slate-dim); letter-spacing: 0.14em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+.cc-field-value { font-size: 0.82rem; color: var(--white); font-family: 'JetBrains Mono', monospace; font-weight: 600; letter-spacing: 0.06em; }
+.cc-logo { display: flex; align-items: center; }
+.cc-logo-circle { width: 24px; height: 24px; border-radius: 50%; background: #d4af37; opacity: 0.85; }
+.cc-logo-circle:last-child { background: #b91c1c; margin-left: -11px; opacity: 0.75; }
 
-        .form-group input:focus {
-            border-color: var(--gold);
-            background: linear-gradient(180deg, rgba(2, 6, 14, 0.98) 0%, rgba(2, 6, 14, 0.92) 100%);
-            box-shadow: 
-                0 0 0 4px rgba(212, 175, 55, 0.15), 
-                inset 0 2px 6px rgba(0, 0, 0, 0.5),
-                inset 0 0 20px rgba(212, 175, 55, 0.05);
-        }
+.card-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.card-control {
+    padding: 10px 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--slate);
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 5px;
+}
+.card-control:hover { border-color: var(--gold-dim); color: var(--gold); background: rgba(212, 175, 55, 0.06); }
+.card-control svg { width: 15px; height: 15px; }
 
-        .form-group input:focus ~ .input-icon,
-        .form-group input:focus + .input-icon {
-            color: var(--gold);
-        }
+.deposit-methods-list { display: flex; flex-direction: column; gap: 8px; }
+.deposit-method {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: all 0.15s;
+}
+.deposit-method:hover { border-color: var(--gold-dim); background: rgba(212, 175, 55, 0.04); }
+.deposit-method-icon {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+}
+.deposit-method-icon svg { width: 18px; height: 18px; }
+.deposit-method-info { flex: 1; min-width: 0; }
+.deposit-method-info strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+.deposit-method-info small { font-size: 0.68rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
 
-        /* ── Security Notice ── */
-        .security-notice {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: clamp(12px, 1.6vw, 16px);
-            background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.04) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 5px;
-            margin: clamp(18px, 2.4vw, 24px) 0;
-            box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.12);
-        }
+/* ═══════════════════ ACTION PAGES ═══════════════════ */
+.action-header {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(180deg, rgba(5, 10, 20, 0.98) 0%, rgba(5, 10, 20, 0.92) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+.action-header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px clamp(16px, 3vw, 32px);
+    display: flex; align-items: center;
+    gap: 16px;
+}
+.back-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--slate);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+}
+.back-btn:hover { color: var(--gold); border-color: var(--gold-dim); background: rgba(212, 175, 55, 0.08); }
+.back-btn svg { width: 16px; height: 16px; }
+.action-header-title { font-size: 1rem; font-weight: 600; color: var(--white); }
+.action-header-sub { font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: var(--slate-dim); margin-top: 2px; }
 
-        .security-notice svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            margin-top: 2px;
-            color: var(--gold);
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
-        }
+.action-main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 40px) clamp(16px, 3vw, 32px) 60px;
+    position: relative;
+    z-index: 1;
+}
+.action-card {
+    background: linear-gradient(165deg, rgba(13, 21, 38, 0.9) 0%, rgba(5, 10, 20, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    border-radius: 10px;
+    padding: clamp(24px, 3vw, 32px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.action-icon-hero {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    margin-bottom: 18px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+}
+.action-icon-hero svg { width: 28px; height: 28px; }
+.action-title { font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.action-desc { font-size: 0.88rem; color: var(--slate-dim); margin-bottom: 26px; line-height: 1.6; }
 
-        .security-notice p {
-            font-size: clamp(0.78rem, 0.5vw + 0.7rem, 0.88rem);
-            line-height: 1.65;
-            color: var(--slate);
-            letter-spacing: 0.01em;
-        }
+.receipt {
+    display: none;
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.08) 0%, rgba(52, 211, 153, 0.03) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.35);
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.receipt.show { display: block; animation: fadeIn 0.4s ease; }
+.receipt-check {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(52, 211, 153, 0.15);
+    border: 2px solid var(--green);
+    color: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px;
+    box-shadow: 0 0 24px rgba(52, 211, 153, 0.4);
+}
+.receipt-check svg { width: 26px; height: 26px; }
+.receipt-title { font-size: 1.05rem; font-weight: 700; color: var(--green); margin-bottom: 6px; }
+.receipt-message { font-size: 0.82rem; color: var(--slate); font-family: 'JetBrains Mono', monospace; margin-bottom: 16px; }
+.receipt-details {
+    display: grid; gap: 10px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+.receipt-details .row { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+.receipt-details .row span:first-child { color: var(--slate-dim); flex-shrink: 0; }
+.receipt-details .row span:last-child { color: var(--white); font-weight: 600; text-align: right; }
 
-        .security-notice p strong {
-            color: var(--gold-bright);
-            font-weight: 600;
-            text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
-        }
+/* Pending info box — for methods awaiting Treasury approval */
+.pending-box {
+    padding: 22px 24px;
+    background:
+        linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border: 2px dashed rgba(251, 191, 36, 0.5);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    box-shadow: inset 0 1px 0 rgba(251, 191, 36, 0.15), 0 0 40px rgba(251, 191, 36, 0.08);
+}
+.pending-icon {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #1a1206;
+    flex-shrink: 0;
+    box-shadow: 0 0 24px rgba(251, 191, 36, 0.5), 0 8px 20px rgba(0, 0, 0, 0.4);
+    animation: pendingPulse 2.4s ease-in-out infinite;
+}
+@keyframes pendingPulse {
+    0%, 100% { box-shadow: 0 0 24px rgba(251, 191, 36, 0.5), 0 8px 20px rgba(0, 0, 0, 0.4); }
+    50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.85), 0 8px 20px rgba(0, 0, 0, 0.4); }
+}
+.pending-icon svg { width: 26px; height: 26px; }
+.pending-content { flex: 1; min-width: 0; }
+.pending-label {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.5);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+}
+.pending-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.35;
+}
+.pending-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--slate);
+    margin-bottom: 14px;
+}
+.pending-text strong { color: var(--gold-bright); font-weight: 700; }
+.pending-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    border-left: 3px solid var(--amber);
+}
+.pending-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--slate);
+    line-height: 1.55;
+    font-family: 'JetBrains Mono', monospace;
+}
+.pending-step-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.5);
+    color: var(--amber);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
 
-        /* ── Button — realistic gold ── */
-        .btn-submit {
-            width: 100%;
-            padding: clamp(16px, 1.8vw, 19px);
-            background: linear-gradient(180deg, #f0d878 0%, #d4af37 40%, #a8862a 75%, #c9a430 100%);
-            border: 1.5px solid #8a7324;
-            border-radius: 6px;
-            color: #1a1206;
-            font-size: clamp(0.85rem, 0.5vw + 0.75rem, 0.95rem);
-            font-weight: 800;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
-            position: relative;
-            overflow: hidden;
-            transform: translateZ(0);
-            min-height: 56px;
-            touch-action: manipulation;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-                0 0 30px rgba(212, 175, 55, 0.4),
-                0 8px 20px rgba(0, 0, 0, 0.5);
-        }
+.funding-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.funding-tile {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    color: var(--white);
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.funding-tile:hover {
+    border-color: var(--gold-dim);
+    background: rgba(212, 175, 55, 0.06);
+    transform: translateY(-1px);
+}
+.funding-tile.active {
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+.funding-tile-logo {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+}
+.funding-tile-logo.visa { background: linear-gradient(135deg, #1a1f71 0%, #0e1247 100%); }
+.funding-tile-logo.mastercard { background: linear-gradient(135deg, #eb001b 0%, #f79e1b 100%); }
+.funding-tile-logo.amex { background: linear-gradient(135deg, #2e77bc 0%, #1a4c8b 100%); }
+.funding-tile-logo.nordstrom { background: linear-gradient(135deg, #000 0%, #333 100%); }
+.funding-tile-logo.apple { background: linear-gradient(135deg, #333 0%, #000 100%); }
+.funding-tile-logo.lululemon { background: linear-gradient(135deg, #d31334 0%, #a30d28 100%); }
+.funding-tile-logo.sephora { background: linear-gradient(135deg, #000 0%, #111 100%); color: #fff; }
+.funding-tile-logo.google { background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc05 100%); }
 
-        .btn-submit::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, transparent 100%);
-            transition: left 0.55s;
-        }
+.statement-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    transition: all 0.15s;
+}
+.statement-row:hover { border-color: var(--gold-dim); background: rgba(212, 175, 55, 0.04); }
+.statement-info { display: flex; flex-direction: column; gap: 4px; }
+.statement-info strong { font-size: 0.88rem; font-weight: 600; color: var(--white); }
+.statement-info small { font-size: 0.7rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
+.statement-actions { display: flex; gap: 8px; }
+.download-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 12px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 5px;
+    color: var(--gold-bright);
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.download-btn:hover { background: rgba(212, 175, 55, 0.2); border-color: var(--gold); }
+.download-btn svg { width: 13px; height: 13px; }
 
-        .btn-submit:hover {
-            background: linear-gradient(180deg, #f8e79a 0%, #e6c855 40%, #ba972f 75%, #d4af37 100%);
-            box-shadow: 
-                inset 0 1px 0 rgba(255, 255, 255, 0.6),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-                0 0 50px rgba(212, 175, 55, 0.7),
-                0 10px 24px rgba(0, 0, 0, 0.55);
-            transform: translateY(-1px) translateZ(0);
-        }
+.chat-container {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    max-height: 340px;
+    overflow-y: auto;
+}
+.chat-message { display: flex; gap: 10px; margin-bottom: 14px; animation: fadeIn 0.3s ease; }
+.chat-message:last-child { margin-bottom: 0; }
+.chat-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+.chat-avatar.agent { background: linear-gradient(135deg, #d4af37 0%, #8a7324 100%); color: var(--navy); }
+.chat-avatar.user { background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%); color: var(--white); }
+.chat-bubble {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--slate);
+    max-width: 80%;
+}
+.chat-message.user { flex-direction: row-reverse; }
+.chat-message.user .chat-bubble { background: rgba(59, 130, 246, 0.15); border-color: rgba(96, 165, 250, 0.3); color: var(--white); }
+.chat-input-row { display: flex; gap: 8px; }
+.chat-input-row input { flex: 1; padding-left: 16px; }
+.chat-send-btn {
+    padding: 0 20px;
+    background: linear-gradient(180deg, #d4af37 0%, #8a7324 100%);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    color: var(--navy);
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.82rem;
+    transition: all 0.15s;
+}
+.chat-send-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3); }
 
-        .btn-submit:hover::after {
-            left: 100%;
-        }
+.toast-host {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex; flex-direction: column;
+    gap: 8px; pointer-events: none;
+    width: calc(100% - 32px);
+    max-width: 420px;
+}
+.toast {
+    padding: 12px 18px;
+    background: rgba(13, 21, 38, 0.98);
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--white);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center; gap: 10px;
+    animation: toastIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.toast::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px currentColor;
+}
+.toast.info { border-color: rgba(212, 175, 55, 0.4); color: var(--gold-bright); }
+.toast.success { border-color: rgba(52, 211, 153, 0.4); color: var(--green); }
+.toast.error { border-color: rgba(248, 113, 113, 0.4); color: var(--red); }
+@keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.toast.leaving { animation: toastOut 0.3s ease forwards; }
+@keyframes toastOut { to { opacity: 0; transform: translateY(10px); } }
 
-        .btn-submit:active {
-            transform: translateY(0) translateZ(0);
-            transition-duration: 0.05s;
-            box-shadow: 
-                inset 0 2px 6px rgba(0, 0, 0, 0.3),
-                0 0 30px rgba(212, 175, 55, 0.4),
-                0 4px 10px rgba(0, 0, 0, 0.5);
-        }
+.fade-in-up { animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-submit:disabled {
-            cursor: not-allowed;
-            opacity: 0.9;
-        }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+.shake { animation: shake 0.35s ease; }
 
-        /* ── Footer ── */
-        .portal-footer {
-            text-align: center;
-            margin-top: clamp(18px, 2.4vw, 26px);
-        }
-
-        .portal-footer .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: clamp(12px, 2vw, 22px);
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
-
-        .portal-footer a {
-            font-size: clamp(0.7rem, 0.4vw + 0.62rem, 0.78rem);
-            color: #cbd5e1;
-            text-decoration: none;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            font-family: 'JetBrains Mono', monospace;
-            transition: color 0.15s;
-            padding: 6px 4px;
-            font-weight: 500;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
-        }
-
-        .portal-footer a:hover {
-            color: var(--gold);
-            text-shadow: 0 0 12px rgba(212, 175, 55, 0.6), 0 1px 4px rgba(0, 0, 0, 0.95);
-        }
-
-        .portal-footer .copyright {
-            font-size: clamp(0.68rem, 0.35vw + 0.6rem, 0.75rem);
-            color: #94a3b8;
-            font-family: 'JetBrains Mono', monospace;
-            letter-spacing: 0.03em;
-            line-height: 1.5;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
-        }
-
-        /* ── Verification Badge ── */
-        .badge-wrap {
-            text-align: center;
-        }
-
-        .verification-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 14px;
-            background: linear-gradient(180deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.06) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(0.62rem, 0.3vw + 0.56rem, 0.72rem);
-            color: var(--gold-bright);
-            letter-spacing: 0.08em;
-            margin-top: 14px;
-            font-weight: 600;
-            box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.15);
-        }
-
-        .verification-badge .lock-icon {
-            width: 12px;
-            height: 12px;
-        }
-
-        /* ══════════════════════════════════════════════
-           TABLET LANDSCAPE
-           ══════════════════════════════════════════════ */
-        @media (min-width: 768px) and (orientation: landscape) {
-            .portal-container { max-width: 520px; }
-        }
-
-        /* ══════════════════════════════════════════════
-           SHORT SCREENS
-           ══════════════════════════════════════════════ */
-        @media (max-height: 560px) {
-            body { padding: 12px 16px; justify-content: flex-start; }
-            .portal-header { margin-bottom: 14px; }
-            .card-wrap { padding-top: 36px; }
-            .crest { width: 68px; height: 68px; padding: 8px; border-width: 2px; }
-            .card { padding: 44px 20px 18px; }
-            .status-bar { padding: 8px 12px; margin-bottom: 14px; }
-            .form-group { margin-bottom: 12px; }
-            .form-group label { margin-bottom: 6px; }
-            .form-group input { padding: 11px 12px 11px 44px; min-height: 46px; }
-            .security-notice { margin: 12px 0; padding: 10px 12px; }
-            .btn-submit { padding: 14px; min-height: 48px; }
-            .portal-footer { margin-top: 12px; }
-            .portal-footer .footer-links { margin-bottom: 6px; gap: 12px; }
-            .verification-badge { margin-top: 8px; padding: 5px 10px; }
-        }
-
-        /* ══════════════════════════════════════════════
-           MOBILE
-           ══════════════════════════════════════════════ */
-        @media (max-width: 480px) {
-            body {
-                padding: 18px 14px 14px;
-                background-attachment: scroll, scroll, scroll;
-            }
-            .portal-header { margin-bottom: 18px; }
-            .card-wrap { padding-top: 46px; }
-            .card { padding: 54px 20px 22px; border-radius: 6px; }
-            .portal-footer .footer-links { gap: 10px; }
-            .portal-footer a { padding: 8px 2px; font-size: 0.72rem; }
-        }
-
-        /* ══════════════════════════════════════════════
-           SMALL MOBILE
-           ══════════════════════════════════════════════ */
-        @media (max-width: 360px) {
-            .portal-header h1 { font-size: 1rem; }
-            .portal-header .subtitle { font-size: 0.64rem; letter-spacing: 0.14em; }
-            .card { padding: 50px 16px 18px; }
-            .form-group input { padding: 13px 12px 13px 42px; }
-            .btn-submit { padding: 15px; letter-spacing: 0.1em; }
-        }
-
-        /* ══════════════════════════════════════════════
-           ACCESSIBILITY
-           ══════════════════════════════════════════════ */
-        @media (prefers-contrast: more) {
-            :root {
-                --slate: #f1f5f9;
-                --slate-dim: #e2e8f0;
-                --border: #94a3b8;
-            }
-            .form-group input { border-width: 2px; background: rgba(2, 6, 14, 0.97); }
-            .card { background: rgba(5, 10, 20, 0.96); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        *:focus-visible {
-            outline: 3px solid var(--gold-bright);
-            outline-offset: 2px;
-            border-radius: 4px;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-6px); }
-            40% { transform: translateX(6px); }
-            60% { transform: translateX(-4px); }
-            80% { transform: translateX(4px); }
-        }
-
-        .shake { animation: shake 0.35s ease; }
-    </style>
+@media (min-width: 900px) { .main-nav { display: flex; } }
+@media (max-width: 900px) {
+    .menu-btn { display: flex; }
+    .main-nav {
+        position: fixed;
+        top: 65px; left: 0; right: 0;
+        background: rgba(5, 10, 20, 0.98);
+        backdrop-filter: blur(14px);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px; gap: 4px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        transform: translateY(-120%);
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        display: flex;
+        z-index: 99;
+    }
+    .main-nav.open { transform: translateY(0); }
+    .main-nav a { justify-content: flex-start; padding: 14px 16px; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .balance-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+    .balance-grid { grid-template-columns: 1fr; }
+    .protection-banner { flex-direction: column; gap: 14px; padding: 20px; }
+    .protection-shield { width: 54px; height: 54px; }
+    .protection-shield svg { width: 26px; height: 26px; }
+    .pending-box { flex-direction: column; gap: 14px; padding: 18px; }
+    .pending-icon { width: 46px; height: 46px; }
+    .pending-icon svg { width: 22px; height: 22px; }
+}
+@media (max-width: 560px) {
+    .brand-text { display: none; }
+    .user-name { display: none; }
+    .user-chip { padding: 4px; }
+    .actions-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .statement-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+*:focus-visible { outline: 3px solid var(--gold-bright); outline-offset: 2px; border-radius: 4px; }
+</style>
 </head>
 <body>
 
+<!-- ══════════════ LOGIN ══════════════ -->
+<div class="view active" id="loginView">
     <div class="portal-container">
         <div class="portal-header">
             <h1>Secure Treasury Portal</h1>
-            <div class="subtitle">Federal Reserve Gateway · Tier IV</div>
+            <div class="subtitle">Private Account · Tier IV</div>
         </div>
 
         <div class="card-wrap">
             <div class="crest" aria-hidden="true">
-                <img src="https://i.ibb.co/mWvp0bV/images-1-removebg-preview-1.png" 
+                <img src="https://i.ibb.co/mWvp0bV/images-1-removebg-preview-1.png"
                      alt="U.S. Department of the Treasury Seal"
-                     onload="this.classList.add('loaded')"
+                     fetchpriority="high"
+                     decoding="async"
                      onerror="this.style.display='none'">
-                <svg class="fallback" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="100" cy="100" r="96" fill="#050a14" stroke="#d4af37" stroke-width="3"/>
-                    <circle cx="100" cy="100" r="88" fill="none" stroke="#d4af37" stroke-width="1.5"/>
-                    <g stroke="#d4af37" stroke-width="1.8" fill="none" stroke-linecap="round">
-                        <line x1="100" y1="58" x2="100" y2="130"/>
-                        <line x1="68" y1="72" x2="132" y2="72"/>
-                        <path d="M68 72 L60 92 M68 72 L76 92 M60 92 Q68 98 76 92"/>
-                        <path d="M132 72 L124 92 M132 72 L140 92 M124 92 Q132 98 140 92"/>
-                    </g>
-                    <text x="100" y="162" text-anchor="middle" fill="#d4af37"
-                          font-family="Georgia, serif" font-size="9" font-weight="bold" letter-spacing="1.5">
-                        TREASURY
-                    </text>
-                </svg>
             </div>
 
             <div class="card">
-                <div class="status-bar">
+                <div class="status-bar" id="statusBar">
                     <div class="status-dot"></div>
-                    <div class="status-text">
+                    <div class="status-text" id="loginStatus">
                         SECURE CHANNEL ACTIVE <span>· AES-256 · TLS 1.3</span>
                     </div>
                 </div>
 
-                <form id="loginForm" autocomplete="off">
+                <form id="loginForm" autocomplete="off" novalidate>
                     <div class="form-group">
                         <label for="userId">User ID</label>
                         <div class="input-wrapper">
-                            <input type="text" id="userId" placeholder="Enter your User ID" 
-                                   maxlength="32" spellcheck="false" autocomplete="off"
-                                   inputmode="text" autocapitalize="none">
+                            <input type="text" id="userId" placeholder="Enter your User ID"
+                                   maxlength="32" spellcheck="false" autocomplete="off" autocapitalize="none">
                             <div class="input-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -703,7 +1328,7 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="input-wrapper">
-                            <input type="password" id="password" placeholder="Enter your password" 
+                            <input type="password" id="password" placeholder="Enter your password"
                                    autocomplete="current-password">
                             <div class="input-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -714,25 +1339,33 @@
                         </div>
                     </div>
 
+                    <div class="demo-hint">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                        <span>Demo — User: <code>mark.ma</code> · Pass: <code>Treasury@2025</code></span>
+                    </div>
+
                     <div class="security-notice">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
                         <p>
-                            <strong>Zero-Trust Verification.</strong> All sessions are monitored and recorded. 
-                            Unauthorized access attempts will result in immediate account lockout and 
-                            federal referral under 18 U.S.C. § 1030.
+                            <strong>Confidential Client Access.</strong> This account operates under strict
+                            asset-protection protocol. All sessions are monitored, encrypted, and not
+                            disclosed to third parties.
                         </p>
                     </div>
 
                     <button type="submit" class="btn-submit" id="submitBtn">
-                        Sign In &amp; Access Gateway
+                        Sign In &amp; Access Account
                     </button>
                 </form>
 
                 <div class="badge-wrap">
                     <div class="verification-badge">
-                        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="11" width="18" height="11" rx="2"/>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
@@ -750,64 +1383,1404 @@
                 <a href="#">Contact</a>
             </div>
             <div class="copyright">
-                © 2025 Federal Reserve System · All transactions are final and binding.
+                © 2025 Federal Reserve System · Confidential client services
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ DASHBOARD ══════════════ -->
+<div class="view" id="dashboardView">
+    <header class="topbar">
+        <div class="topbar-inner">
+            <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+
+            <div class="brand">
+                <div class="brand-seal">
+                    <img src="https://i.ibb.co/mWvp0bV/images-1-removebg-preview-1.png" alt="">
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">Treasury Portal</span>
+                    <span class="brand-sub">Private Client</span>
+                </div>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <a href="#" class="active" data-page="overview">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="9"/>
+                        <rect x="14" y="3" width="7" height="5"/>
+                        <rect x="14" y="12" width="7" height="9"/>
+                        <rect x="3" y="16" width="7" height="5"/>
+                    </svg>
+                    Overview
+                </a>
+                <a href="#" data-page="deposit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="19" x2="12" y2="5"/>
+                        <polyline points="5 12 12 5 19 12"/>
+                    </svg>
+                    Fund Account
+                </a>
+                <a href="#" data-page="statements">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                    </svg>
+                    Statements
+                </a>
+                <a href="#" data-page="support">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    Support
+                </a>
+            </nav>
+
+            <div class="user-menu">
+                <button class="notif-btn" aria-label="Notifications" id="notifBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notif-dot"></span>
+                </button>
+
+                <button class="user-chip" id="userChip" aria-label="User menu">
+                    <div class="user-avatar" id="userAvatar">MM</div>
+                    <div class="user-name">
+                        <strong id="userDisplayName">Mark Ma</strong>
+                        <small id="userMemberId">ID: FR-88412</small>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <!-- ═══ ASSET PROTECTION BANNER — the hero element ═══ -->
+        <div class="protection-banner fade-in-up" style="animation-delay: 0.03s;">
+            <div class="protection-shield">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+            </div>
+            <div class="protection-content">
+                <div class="protection-label">Asset Protection Active</div>
+                <div class="protection-title">This Account Is a Confidential Holding Vehicle</div>
+                <div class="protection-text">
+                    Your registered <strong>legal name is protected</strong> and never disclosed to receiving institutions.
+                    All incoming deposits are recorded under an <strong>operational alias</strong> — counterparties see
+                    only the alias, <strong>never your identity</strong>. Vault instructions, cheque endorsement names,
+                    wire beneficiary details and bullion intake addresses are generated by the Treasury only after
+                    each deposit is approved.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-head fade-in-up" style="animation-delay: 0.06s;">
+            <h2>Welcome back, <span id="welcomeName">Mark</span></h2>
+            <p id="lastLoginLine">Last login: — · — UTC from —</p>
+        </div>
+
+        <section class="balance-grid">
+            <div class="balance-card featured fade-in-up" style="animation-delay: 0.1s;">
+                <div class="balance-head">
+                    <div>
+                        <div class="balance-label">Primary Checking</div>
+                        <div class="balance-account">•••• 4821 · Treasury Reserve</div>
+                    </div>
+                    <div class="balance-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="balance-amount" id="checkingBalance">$0<span class="cents">.00</span></div>
+                <div class="balance-note">New account · Awaiting first deposit</div>
+                <div class="balance-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    Aliased
+                </div>
+            </div>
+
+            <div class="balance-card fade-in-up" style="animation-delay: 0.15s;">
+                <div class="balance-head">
+                    <div>
+                        <div class="balance-label">High-Yield Savings</div>
+                        <div class="balance-account">•••• 7203 · APY 4.85%</div>
+                    </div>
+                    <div class="balance-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="balance-amount">$0<span class="cents">.00</span></div>
+                <div class="balance-note">Ready to receive funds</div>
+            </div>
+
+            <div class="balance-card fade-in-up" style="animation-delay: 0.2s;">
+                <div class="balance-head">
+                    <div>
+                        <div class="balance-label">Investment Portfolio</div>
+                        <div class="balance-account">•••• 9912 · Managed</div>
+                    </div>
+                    <div class="balance-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18"/>
+                            <path d="M18 17l-5-5-3 3-5-5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="balance-amount">$0<span class="cents">.00</span></div>
+                <div class="balance-note">Ready to receive funds</div>
+            </div>
+        </section>
+
+        <div class="section-head fade-in-up" style="animation-delay: 0.25s;">
+            <h3>Quick Actions</h3>
+        </div>
+
+        <section class="actions-grid">
+            <button class="action-btn fade-in-up" style="animation-delay: 0.28s;" data-action="deposit">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="19" x2="12" y2="5"/>
+                        <polyline points="5 12 12 5 19 12"/>
+                    </svg>
+                </div>
+                Deposit Funds
+            </button>
+
+            <button class="action-btn fade-in-up" style="animation-delay: 0.31s;" data-action="card">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2"/>
+                        <line x1="2" y1="10" x2="22" y2="10"/>
+                    </svg>
+                </div>
+                View Card
+            </button>
+
+            <button class="action-btn fade-in-up" style="animation-delay: 0.34s;" data-action="statements">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                    </svg>
+                </div>
+                Statements
+            </button>
+
+            <button class="action-btn fade-in-up" style="animation-delay: 0.37s;" data-action="support">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                Concierge
+            </button>
+        </section>
+
+        <div class="dashboard-grid">
+            <div class="panel fade-in-up" style="animation-delay: 0.46s;">
+                <div class="panel-head">
+                    <h3>Recent Transactions</h3>
+                    <button class="filter-btn" id="txnFilter">Last 7 days ▾</button>
+                </div>
+
+                <div id="txnList">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                        <strong>No transactions yet</strong>
+                        <p>Fund the account using one of the deposit methods to get started.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="panel fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="panel-head">
+                        <h3>Your Card</h3>
+                    </div>
+
+                    <div class="credit-card">
+                        <div class="cc-top">
+                            <div>
+                                <div class="cc-brand">Treasury Reserve</div>
+                                <div class="cc-type">Platinum Debit · Alias</div>
+                                <div class="cc-chip"></div>
+                            </div>
+                        </div>
+                        <div class="cc-number-label">Card Number</div>
+                        <div class="cc-number">4821 7390 1265 4821</div>
+                        <div class="cc-bottom">
+                            <div class="cc-field">
+                                <span class="cc-field-label">Expires</span>
+                                <span class="cc-field-value">09 / 28</span>
+                            </div>
+                            <div class="cc-field">
+                                <span class="cc-field-label">CVV</span>
+                                <span class="cc-field-value">•••</span>
+                            </div>
+                            <div class="cc-logo">
+                                <div class="cc-logo-circle"></div>
+                                <div class="cc-logo-circle"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-controls">
+                        <button class="card-control" data-card-action="freeze">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="2" x2="12" y2="22"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                            </svg>
+                            Freeze
+                        </button>
+                        <button class="card-control" data-card-action="limits">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                            Limits
+                        </button>
+                        <button class="card-control" data-card-action="settings">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            PIN
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel fade-in-up" style="animation-delay: 0.54s;">
+                    <div class="panel-head">
+                        <h3>Deposit Methods</h3>
+                    </div>
+
+                    <div class="deposit-methods-list">
+                        <div class="deposit-method">
+                            <div class="deposit-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                            </div>
+                            <div class="deposit-method-info">
+                                <strong>Cashier's Cheque</strong>
+                                <small>Alias issued after approval</small>
+                            </div>
+                        </div>
+
+                        <div class="deposit-method">
+                            <div class="deposit-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="7" width="20" height="14" rx="2"/>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                                </svg>
+                            </div>
+                            <div class="deposit-method-info">
+                                <strong>Cash Parcel (UPS)</strong>
+                                <small>Insured courier</small>
+                            </div>
+                        </div>
+
+                        <div class="deposit-method">
+                            <div class="deposit-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                            </div>
+                            <div class="deposit-method-info">
+                                <strong>Cash Pickup</strong>
+                                <small>Vault details on approval</small>
+                            </div>
+                        </div>
+
+                        <div class="deposit-method">
+                            <div class="deposit-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="deposit-method-info">
+                                <strong>Cold Bullion Bars</strong>
+                                <small>Vault address on approval</small>
+                            </div>
+                        </div>
+
+                        <div class="deposit-method">
+                            <div class="deposit-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="17 1 21 5 17 9"/>
+                                    <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                                    <polyline points="7 23 3 19 7 15"/>
+                                    <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                                </svg>
+                            </div>
+                            <div class="deposit-method-info">
+                                <strong>Wire Transfer</strong>
+                                <small>Beneficiary issued on approval</small>
+                            </div>
+                        </div>
+
+                        <div class="deposit-method">
+                            <div class="deposit-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                                    <line x1="2" y1="10" x2="22" y2="10"/>
+                                </svg>
+                            </div>
+                            <div class="deposit-method-info">
+                                <strong>Plastic Cards</strong>
+                                <small>Instant code submission</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ══════════════ DEPOSIT PAGE ══════════════ -->
+<div class="view action-page" id="depositView">
+    <div class="action-header">
+        <div class="action-header-inner">
+            <button class="back-btn" data-back>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back
+            </button>
+            <div>
+                <div class="action-header-title">Fund Account</div>
+                <div class="action-header-sub">Confidential deposit methods</div>
             </div>
         </div>
     </div>
 
-    <script>
-        (function() {
-            const form = document.getElementById('loginForm');
-            const submitBtn = document.getElementById('submitBtn');
+    <main class="action-main">
+        <div class="action-card">
+            <div class="action-icon-hero">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="19" x2="12" y2="5"/>
+                    <polyline points="5 12 12 5 19 12"/>
+                </svg>
+            </div>
+            <h2 class="action-title">Deposit Funds</h2>
+            <p class="action-desc">
+                Choose a funding method below. Every deposit is recorded under your operational alias — no
+                counterparty will ever see your legal name. <strong style="color:#f0d878;">Alias details, vault
+                addresses, and wire beneficiary instructions are generated by the Treasury only after each
+                deposit is approved.</strong>
+            </p>
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+            <div class="receipt" id="depositReceipt">
+                <div class="receipt-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <div class="receipt-title">Deposit Instruction Logged</div>
+                <div class="receipt-message">Your deposit has been filed with the Treasury</div>
+                <div class="receipt-details" id="depositReceiptDetails"></div>
+            </div>
 
-                const userId = document.getElementById('userId').value.trim();
-                const password = document.getElementById('password').value.trim();
+            <form id="depositForm">
+                <div class="form-group">
+                    <label>Deposit Method</label>
+                    <div class="funding-grid" id="fundingGrid">
+                        <button type="button" class="funding-tile active" data-method="cheque">
+                            <div class="funding-tile-logo visa">CQ</div>
+                            Cashier's Cheque
+                        </button>
+                        <button type="button" class="funding-tile" data-method="parcel">
+                            <div class="funding-tile-logo nordstrom">UP</div>
+                            Cash Parcel (UPS)
+                        </button>
+                        <button type="button" class="funding-tile" data-method="pickup">
+                            <div class="funding-tile-logo amex">CP</div>
+                            Cash Pickup
+                        </button>
+                        <button type="button" class="funding-tile" data-method="bullion">
+                            <div class="funding-tile-logo mastercard">AU</div>
+                            Cold Bullion Bars
+                        </button>
+                        <button type="button" class="funding-tile" data-method="wire">
+                            <div class="funding-tile-logo apple">WT</div>
+                            Wire Transfer
+                        </button>
+                        <button type="button" class="funding-tile" data-method="plastic">
+                            <div class="funding-tile-logo lululemon">PC</div>
+                            Plastic Cards
+                        </button>
+                    </div>
+                </div>
 
-                if (!userId || !password) {
-                    const card = document.querySelector('.card');
-                    card.classList.remove('shake');
-                    void card.offsetWidth;
-                    card.classList.add('shake');
-                    return;
+                <div id="methodSpecificFields"></div>
+
+                <div class="form-group">
+                    <label for="depositTo">Deposit To</label>
+                    <select id="depositTo">
+                        <option>Primary Checking · •••• 4821</option>
+                        <option>High-Yield Savings · •••• 7203</option>
+                        <option>Investment Portfolio · •••• 9912</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit" style="margin-top:10px;">Submit Deposit</button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<!-- ══════════════ CARD PAGE ══════════════ -->
+<div class="view action-page" id="cardView">
+    <div class="action-header">
+        <div class="action-header-inner">
+            <button class="back-btn" data-back>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back
+            </button>
+            <div>
+                <div class="action-header-title">Your Card</div>
+                <div class="action-header-sub">Platinum Debit · Aliased</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="action-main">
+        <div class="action-card">
+            <div class="action-icon-hero">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                </svg>
+            </div>
+            <h2 class="action-title">Card Details</h2>
+            <p class="action-desc">Your card is issued under your operational alias. Full details are shown below.</p>
+
+            <div class="credit-card" style="margin-bottom: 24px;">
+                <div class="cc-top">
+                    <div>
+                        <div class="cc-brand">Treasury Reserve</div>
+                        <div class="cc-type">Platinum Debit · Alias</div>
+                        <div class="cc-chip"></div>
+                    </div>
+                </div>
+                <div class="cc-number-label">Card Number</div>
+                <div class="cc-number">4821 7390 1265 4821</div>
+                <div class="cc-bottom">
+                    <div class="cc-field">
+                        <span class="cc-field-label">Cardholder</span>
+                        <span class="cc-field-value">M. ALIAS</span>
+                    </div>
+                    <div class="cc-field">
+                        <span class="cc-field-label">Expires</span>
+                        <span class="cc-field-value">09 / 28</span>
+                    </div>
+                    <div class="cc-field">
+                        <span class="cc-field-label">CVV</span>
+                        <span class="cc-field-value">•••</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-controls" style="grid-template-columns: repeat(2, 1fr);">
+                <button class="card-control" data-card-action="freeze">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="2" x2="12" y2="22"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                    </svg>
+                    Freeze Card
+                </button>
+                <button class="card-control" data-card-action="limits">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    Set Limits
+                </button>
+                <button class="card-control" data-card-action="settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    Change PIN
+                </button>
+                <button class="card-control" data-card-action="virtual">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="16"/>
+                        <line x1="8" y1="12" x2="16" y2="12"/>
+                    </svg>
+                    Virtual Card
+                </button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ══════════════ STATEMENTS PAGE ══════════════ -->
+<div class="view action-page" id="statementsView">
+    <div class="action-header">
+        <div class="action-header-inner">
+            <button class="back-btn" data-back>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back
+            </button>
+            <div>
+                <div class="action-header-title">Statements</div>
+                <div class="action-header-sub">Account history</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="action-main">
+        <div class="action-card">
+            <div class="action-icon-hero">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
+            </div>
+            <h2 class="action-title">Account Statements</h2>
+            <p class="action-desc">Statements become available once your account has activity. Account opened this month.</p>
+
+            <div class="statement-row">
+                <div class="statement-info">
+                    <strong>September 2025 · Current</strong>
+                    <small>Sep 1 – Present · •••• 4821</small>
+                </div>
+                <div class="statement-actions">
+                    <button class="download-btn" data-month="September 2025">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="empty-state" style="padding: 24px 20px;">
+                <strong>No previous statements</strong>
+                <p>Historical statements will appear here once the account has completed its first full month.</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ══════════════ SUPPORT PAGE ══════════════ -->
+<div class="view action-page" id="supportView">
+    <div class="action-header">
+        <div class="action-header-inner">
+            <button class="back-btn" data-back>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back
+            </button>
+            <div>
+                <div class="action-header-title">Private Concierge</div>
+                <div class="action-header-sub">24/7 · Confidential</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="action-main">
+        <div class="action-card">
+            <div class="action-icon-hero">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </div>
+            <h2 class="action-title">Private Concierge</h2>
+            <p class="action-desc">
+                Speak directly with your assigned private banker. All communications are encrypted and
+                recorded under your alias — never your legal name.
+            </p>
+
+            <div class="chat-container" id="chatContainer">
+                <div class="chat-message">
+                    <div class="chat-avatar agent">PB</div>
+                    <div class="chat-bubble">Welcome Mark. I'm Elena, your private banker. How may I assist you today?</div>
+                </div>
+            </div>
+
+            <div class="chat-input-row">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button class="chat-send-btn" id="chatSendBtn">Send</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="toast-host" id="toastHost" aria-live="polite"></div>
+
+<script>
+(function () {
+    'use strict';
+
+    var DEMO_USER = {
+        userId: 'mark.ma',
+        password: 'Treasury@2025',
+        displayName: 'Mark Ma',
+        alias: 'M. Alias',
+        memberId: 'FR-88412'
+    };
+
+    var allViews = document.querySelectorAll('.view');
+
+    function showView(id) {
+        for (var i = 0; i < allViews.length; i++) {
+            var v = allViews[i];
+            v.classList.remove('active');
+            v.setAttribute('hidden', '');
+            v.style.display = 'none';
+            v.style.visibility = 'hidden';
+            v.style.height = '0';
+        }
+        var target = document.getElementById(id);
+        if (!target) return;
+        target.removeAttribute('hidden');
+        target.style.display = '';
+        target.style.visibility = '';
+        target.style.height = '';
+        target.classList.add('active');
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        var nav = document.getElementById('mainNav');
+        if (nav) nav.classList.remove('open');
+    }
+    window.showView = showView;
+
+    var toastHost = document.getElementById('toastHost');
+    function toast(message, kind, ttl) {
+        kind = kind || 'info';
+        ttl = ttl || 3200;
+        var el = document.createElement('div');
+        el.className = 'toast ' + kind;
+        el.textContent = message;
+        toastHost.appendChild(el);
+        setTimeout(function () {
+            el.classList.add('leaving');
+            setTimeout(function () { el.remove(); }, 320);
+        }, ttl);
+    }
+    window.toast = toast;
+
+    // ═══════════════════════════════════════════════════
+    // LOGIN
+    // ═══════════════════════════════════════════════════
+    var loginForm = document.getElementById('loginForm');
+    var submitBtn = document.getElementById('submitBtn');
+    var userIdInput = document.getElementById('userId');
+    var passwordInput = document.getElementById('password');
+    var statusBar = document.getElementById('statusBar');
+    var loginStatus = document.getElementById('loginStatus');
+
+    function setStatus(kind, html) {
+        if (kind === 'error') statusBar.classList.add('error');
+        else statusBar.classList.remove('error');
+        loginStatus.innerHTML = html;
+    }
+
+    function shakeCard() {
+        var card = document.querySelector('.card');
+        if (!card) return;
+        card.classList.remove('shake');
+        void card.offsetWidth;
+        card.classList.add('shake');
+    }
+
+    loginForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var userId = (userIdInput.value || '').trim();
+        var password = (passwordInput.value || '').trim();
+
+        if (!userId || !password) { shakeCard(); return; }
+
+        submitBtn.textContent = 'AUTHENTICATING...';
+        submitBtn.disabled = true;
+
+        setTimeout(function () {
+            var valid = userId.toLowerCase() === DEMO_USER.userId && password === DEMO_USER.password;
+
+            if (valid) {
+                submitBtn.textContent = '✓ ACCESS GRANTED';
+                submitBtn.style.background = 'linear-gradient(180deg, #34d399 0%, #059669 100%)';
+                submitBtn.style.borderColor = '#10b981';
+                setStatus('ok', '✓ AUTHENTICATION SUCCESSFUL <span>· LOADING ACCOUNT</span>');
+
+                setTimeout(function () {
+                    var firstName = DEMO_USER.displayName.split(' ')[0];
+                    document.getElementById('welcomeName').textContent = firstName;
+                    document.getElementById('userDisplayName').textContent = DEMO_USER.displayName;
+                    document.getElementById('userMemberId').textContent = 'ID: ' + DEMO_USER.memberId;
+                    document.getElementById('userAvatar').textContent =
+                        DEMO_USER.displayName.split(' ').map(function (n) { return n[0]; }).join('').slice(0, 2).toUpperCase();
+
+                    var now = new Date();
+                    var dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    var timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+                    document.getElementById('lastLoginLine').textContent =
+                        'Last login: ' + dateStr + ' · ' + timeStr + ' UTC from 203.0.113.42';
+
+                    showView('dashboardView');
+                    toast('Welcome back, Mark', 'success');
+                }, 700);
+            } else {
+                submitBtn.textContent = 'INVALID CREDENTIALS';
+                submitBtn.style.background = 'linear-gradient(180deg, #f87171 0%, #b91c1c 100%)';
+                submitBtn.style.borderColor = '#dc2626';
+                setStatus('error', '✗ AUTHENTICATION FAILED <span>· CHECK CREDENTIALS</span>');
+                shakeCard();
+
+                setTimeout(function () {
+                    submitBtn.textContent = 'Sign In & Access Account';
+                    submitBtn.style.background = '';
+                    submitBtn.style.borderColor = '';
+                    submitBtn.disabled = false;
+                    setStatus('ok', 'SECURE CHANNEL ACTIVE <span>· AES-256 · TLS 1.3</span>');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }, 2200);
+            }
+        }, 850);
+    });
+
+    // ═══════════════════════════════════════════════════
+    // QUICK ACTIONS
+    // ═══════════════════════════════════════════════════
+    var actionMap = {
+        deposit: 'depositView',
+        card: 'cardView',
+        statements: 'statementsView',
+        support: 'supportView'
+    };
+
+    var actionBtns = document.querySelectorAll('.action-btn');
+    for (var i = 0; i < actionBtns.length; i++) {
+        actionBtns[i].addEventListener('click', function () {
+            var action = this.getAttribute('data-action');
+            var viewId = actionMap[action];
+            if (viewId) {
+                var target = document.getElementById(viewId);
+                if (target) {
+                    var receipts = target.querySelectorAll('.receipt');
+                    for (var r = 0; r < receipts.length; r++) receipts[r].classList.remove('show');
                 }
+                showView(viewId);
+            }
+        });
+    }
 
-                submitBtn.textContent = 'AUTHENTICATING...';
-                submitBtn.disabled = true;
+    // ═══════════════════════════════════════════════════
+    // BACK BUTTONS
+    // ═══════════════════════════════════════════════════
+    var backBtns = document.querySelectorAll('[data-back]');
+    for (var b = 0; b < backBtns.length; b++) {
+        backBtns[b].addEventListener('click', function () {
+            showView('dashboardView');
+        });
+    }
 
-                setTimeout(function() {
-                    submitBtn.textContent = '✓ ACCESS GRANTED';
-                    submitBtn.style.background = 'linear-gradient(180deg, #34d399 0%, #059669 100%)';
-                    submitBtn.style.borderColor = '#10b981';
-                    submitBtn.style.textShadow = '0 1px 0 rgba(255, 255, 255, 0.3)';
+    // ═══════════════════════════════════════════════════
+    // MAIN NAV
+    // ═══════════════════════════════════════════════════
+    var navRoute = {
+        overview: 'dashboardView',
+        deposit: 'depositView',
+        statements: 'statementsView',
+        support: 'supportView'
+    };
 
-                    const statusText = document.querySelector('.status-text');
-                    const originalStatus = statusText.innerHTML;
-                    statusText.innerHTML = '✓ AUTHENTICATION SUCCESSFUL <span>· REDIRECTING...</span>';
-                    statusText.style.color = '#34d399';
+    var navLinks = document.querySelectorAll('.main-nav a');
+    for (var n = 0; n < navLinks.length; n++) {
+        navLinks[n].addEventListener('click', function (e) {
+            e.preventDefault();
+            var page = this.getAttribute('data-page');
+            for (var m = 0; m < navLinks.length; m++) navLinks[m].classList.remove('active');
+            this.classList.add('active');
+            var target = navRoute[page];
+            if (target) showView(target);
+        });
+    }
 
-                    setTimeout(function() {
-                        submitBtn.textContent = 'Sign In & Access Gateway';
-                        submitBtn.style.background = '';
-                        submitBtn.style.borderColor = '';
-                        submitBtn.style.textShadow = '';
-                        submitBtn.disabled = false;
-                        statusText.innerHTML = originalStatus;
-                        statusText.style.color = '';
-                    }, 2500);
+    var menuBtn = document.getElementById('menuBtn');
+    var mainNav = document.getElementById('mainNav');
+    if (menuBtn && mainNav) {
+        menuBtn.addEventListener('click', function () {
+            mainNav.classList.toggle('open');
+        });
+    }
 
-                }, 1500);
-            });
+    var notifBtn = document.getElementById('notifBtn');
+    if (notifBtn) {
+        notifBtn.addEventListener('click', function () {
+            toast('Private banker will contact you shortly', 'info');
+            var dot = this.querySelector('.notif-dot');
+            if (dot) dot.style.display = 'none';
+        });
+    }
 
-            window.addEventListener('load', function() {
-                if (window.matchMedia('(hover: hover)').matches) {
-                    document.getElementById('userId').focus();
+    var userChip = document.getElementById('userChip');
+    if (userChip) {
+        userChip.addEventListener('click', function () {
+            if (window.confirm('Sign out of the Treasury Portal?')) {
+                passwordInput.value = '';
+                submitBtn.textContent = 'Sign In & Access Account';
+                submitBtn.disabled = false;
+                submitBtn.style.background = '';
+                submitBtn.style.borderColor = '';
+                setStatus('ok', 'SECURE CHANNEL ACTIVE <span>· AES-256 · TLS 1.3</span>');
+                showView('loginView');
+                toast('Signed out securely', 'info');
+            }
+        });
+    }
+
+    // ═══════════════════════════════════════════════════
+    // DEPOSIT — PENDING INFO BOXES FOR APPROVAL-METHODS
+    // ═══════════════════════════════════════════════════
+    var selectedMethod = 'cheque';
+    var fundingTiles = document.querySelectorAll('#fundingGrid .funding-tile');
+    var methodSpecificFields = document.getElementById('methodSpecificFields');
+
+    function renderMethodFields() {
+        var html = '';
+
+        if (selectedMethod === 'cheque') {
+            html =
+                '<div class="pending-box">' +
+                    '<div class="pending-icon">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                            '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' +
+                        '</svg>' +
+                    '</div>' +
+                    '<div class="pending-content">' +
+                        '<div class="pending-label">Awaiting Treasury Approval</div>' +
+                        '<div class="pending-title">Cheque Endorsement Name Will Be Issued On Approval</div>' +
+                        '<div class="pending-text">' +
+                            'For maximum confidentiality, the <strong>exact alias under which the cashier\'s cheque must be written</strong>, ' +
+                            'the lockbox mailing address, and the endorsement instructions are generated by the Treasury ' +
+                            'only after your deposit instruction has been approved. This prevents any intermediary from ' +
+                            'linking the instrument to your legal identity.' +
+                        '</div>' +
+                        '<div class="pending-steps">' +
+                            '<div class="pending-step"><span class="pending-step-num">1</span>Submit the deposit instruction below.</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">2</span>Treasury reviews and approves (typically within 4 business hours).</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">3</span>Your secure inbox receives the cheque alias, lockbox address, and endorsement template.</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-group">' +
+                    '<label for="chequeAmount">Cheque Amount (USD)</label>' +
+                    '<input type="number" id="chequeAmount" placeholder="0.00" min="50" step="0.01" required>' +
+                '</div>';
+        } else if (selectedMethod === 'parcel') {
+            html =
+                '<div class="form-group">' +
+                    '<label for="parcelCarrier">Courier Service</label>' +
+                    '<select id="parcelCarrier">' +
+                        '<option>UPS · Next Day Air Saver</option>' +
+                        '<option>UPS · 2nd Day Air</option>' +
+                        '<option>UPS · Standard Ground</option>' +
+                    '</select>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group">' +
+                        '<label for="parcelAmount">Declared Amount (USD)</label>' +
+                        '<input type="number" id="parcelAmount" placeholder="0.00" min="50" step="0.01" required>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="parcelTracking">UPS Tracking #</label>' +
+                        '<input type="text" id="parcelTracking" placeholder="1Z..." required>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="security-notice" style="margin-top: 0;">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
+                    '<p><strong>Packing instructions:</strong> Seal cash in vacuum bag, place inside padded envelope, mark contents as <strong>"Documents"</strong> on the UPS label. The vault delivery address will be issued on approval.</p>' +
+                '</div>';
+        } else if (selectedMethod === 'pickup') {
+            html =
+                '<div class="pending-box">' +
+                    '<div class="pending-icon">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                            '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' +
+                        '</svg>' +
+                    '</div>' +
+                    '<div class="pending-content">' +
+                        '<div class="pending-label">Awaiting Treasury Approval</div>' +
+                        '<div class="pending-title">Vault Location & Pickup Code Issued On Approval</div>' +
+                        '<div class="pending-text">' +
+                            'The <strong>specific vault location</strong>, your <strong>one-time pickup code</strong>, the courier\'s identity, ' +
+                            'and the armed escort arrangements are all generated by the Treasury only after your deposit has ' +
+                            'been approved. You will present the pickup code — never your legal identification — at the vault.' +
+                        '</div>' +
+                        '<div class="pending-steps">' +
+                            '<div class="pending-step"><span class="pending-step-num">1</span>Submit the pickup instruction below.</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">2</span>Treasury approves and assigns a vault (typically within 2 business days).</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">3</span>Your secure inbox receives the vault address, pickup window, and code.</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group">' +
+                        '<label for="pickupAmount">Amount (USD)</label>' +
+                        '<input type="number" id="pickupAmount" placeholder="0.00" min="5000" step="0.01" required>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="pickupDate">Preferred Date</label>' +
+                        '<input type="date" id="pickupDate" required>' +
+                    '</div>' +
+                '</div>';
+        } else if (selectedMethod === 'bullion') {
+            html =
+                '<div class="pending-box">' +
+                    '<div class="pending-icon">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                            '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' +
+                        '</svg>' +
+                    '</div>' +
+                    '<div class="pending-content">' +
+                        '<div class="pending-label">Awaiting Treasury Approval</div>' +
+                        '<div class="pending-title">Bullion Intake Address Issued On Approval</div>' +
+                        '<div class="pending-text">' +
+                            'To prevent interception, the <strong>specific vault address</strong> and <strong>refinery intake code</strong> ' +
+                            'for physical bullion delivery are never shared in advance. Once your deposit instruction has been ' +
+                            'approved, the Treasury will issue the exact shipping address, LBMA-refiner routing, and your ' +
+                            'vault consignment number.' +
+                        '</div>' +
+                        '<div class="pending-steps">' +
+                            '<div class="pending-step"><span class="pending-step-num">1</span>Submit the bullion deposit instruction below.</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">2</span>Treasury approves and coordinates with the LBMA refiner.</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">3</span>Your secure inbox receives the vault shipping address and consignment code.</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group">' +
+                        '<label for="bullionMetal">Metal</label>' +
+                        '<select id="bullionMetal">' +
+                            '<option>Gold · 99.99% (LBMA)</option>' +
+                            '<option>Silver · 99.9%</option>' +
+                            '<option>Platinum · 99.95%</option>' +
+                            '<option>Palladium · 99.95%</option>' +
+                        '</select>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="bullionWeight">Total Weight (ozt)</label>' +
+                        '<input type="number" id="bullionWeight" placeholder="e.g. 10.5" min="1" step="0.1" required>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group">' +
+                        '<label for="bullionValue">Estimated Value (USD)</label>' +
+                        '<input type="number" id="bullionValue" placeholder="0.00" min="1000" step="0.01" required>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="bullionRefiner">Refiner</label>' +
+                        '<input type="text" id="bullionRefiner" placeholder="PAMP, Valcambi, Heraeus..." required>' +
+                    '</div>' +
+                '</div>';
+        } else if (selectedMethod === 'wire') {
+            html =
+                '<div class="pending-box">' +
+                    '<div class="pending-icon">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                            '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' +
+                        '</svg>' +
+                    '</div>' +
+                    '<div class="pending-content">' +
+                        '<div class="pending-label">Awaiting Treasury Approval</div>' +
+                        '<div class="pending-title">Wire Beneficiary Details Issued On Approval</div>' +
+                        '<div class="pending-text">' +
+                            'The <strong>beneficiary name</strong>, <strong>SWIFT / BIC code</strong>, <strong>intermediary bank</strong>, ' +
+                            'and <strong>reference template</strong> for your wire are generated by the Treasury only after approval. ' +
+                            'This ensures no receiving bank — or any intermediary along the wire chain — can trace the ' +
+                            'destination back to your legal identity.' +
+                        '</div>' +
+                        '<div class="pending-steps">' +
+                            '<div class="pending-step"><span class="pending-step-num">1</span>Submit the wire deposit instruction below.</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">2</span>Treasury approves and generates the routing details.</div>' +
+                            '<div class="pending-step"><span class="pending-step-num">3</span>Your secure inbox receives the beneficiary, SWIFT, and reference template.</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-group">' +
+                    '<label for="wireAmount">Expected Wire Amount (USD)</label>' +
+                    '<input type="number" id="wireAmount" placeholder="0.00" min="500" step="0.01" required>' +
+                '</div>';
+        } else if (selectedMethod === 'plastic') {
+            html =
+                '<div class="form-group">' +
+                    '<label>Gift Card Brand</label>' +
+                    '<div class="funding-grid" style="margin-top: 0;" id="plasticGrid">' +
+                        '<button type="button" class="funding-tile active" data-plastic="apple"><div class="funding-tile-logo apple">A</div>Apple</button>' +
+                        '<button type="button" class="funding-tile" data-plastic="sephora"><div class="funding-tile-logo sephora">S</div>Sephora</button>' +
+                        '<button type="button" class="funding-tile" data-plastic="google"><div class="funding-tile-logo google">G</div>Google Play</button>' +
+                        '<button type="button" class="funding-tile" data-plastic="nordstrom"><div class="funding-tile-logo nordstrom">N</div>Nordstrom</button>' +
+                        '<button type="button" class="funding-tile" data-plastic="lululemon"><div class="funding-tile-logo lululemon">L</div>Lululemon</button>' +
+                        '<button type="button" class="funding-tile" data-plastic="visa"><div class="funding-tile-logo visa">V</div>Visa Gift</button>' +
+                        '<button type="button" class="funding-tile" data-plastic="mastercard"><div class="funding-tile-logo mastercard">M</div>Mastercard Gift</button>' +
+                        '<button type="button" class="funding-tile" data-plastic="amex"><div class="funding-tile-logo amex">AX</div>Amex Gift</button>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="form-row">' +
+                    '<div class="form-group">' +
+                        '<label for="plasticCode">Card Code / PIN</label>' +
+                        '<input type="text" id="plasticCode" placeholder="Card number or redemption code" required>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="plasticAmount">Face Value (USD)</label>' +
+                        '<input type="number" id="plasticAmount" placeholder="0.00" min="10" step="0.01" required>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="security-notice" style="margin-top: 0;">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
+                    '<p><strong>Card consolidation:</strong> Submit card codes one at a time. Funds are swept through our alias merchant gateway. Digital codes only — never mail physical cards.</p>' +
+                '</div>';
+
+            setTimeout(function () {
+                var plasticTiles = document.querySelectorAll('#plasticGrid .funding-tile');
+                for (var p = 0; p < plasticTiles.length; p++) {
+                    plasticTiles[p].addEventListener('click', function () {
+                        for (var q = 0; q < plasticTiles.length; q++) plasticTiles[q].classList.remove('active');
+                        this.classList.add('active');
+                    });
                 }
-            });
-        })();
-    </script>
+            }, 20);
+        }
+
+        methodSpecificFields.innerHTML = html;
+    }
+
+    for (var t = 0; t < fundingTiles.length; t++) {
+        fundingTiles[t].addEventListener('click', function () {
+            for (var u = 0; u < fundingTiles.length; u++) fundingTiles[u].classList.remove('active');
+            this.classList.add('active');
+            selectedMethod = this.getAttribute('data-method');
+            renderMethodFields();
+        });
+    }
+
+    renderMethodFields();
+
+    // ═══════════════════════════════════════════════════
+    // DEPOSIT FORM SUBMIT
+    // ═══════════════════════════════════════════════════
+    document.getElementById('depositForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var to = document.getElementById('depositTo').value;
+        var methodLabel = '';
+        var amount = 0;
+        var extras = [];
+        var approvalNotice = '';
+
+        if (selectedMethod === 'cheque') {
+            methodLabel = "Cashier's Cheque";
+            var chequeAmount = parseFloat((document.getElementById('chequeAmount') || {}).value) || 0;
+            if (!chequeAmount || chequeAmount < 50) { toast('Cheque amount must be at least $50', 'error'); return; }
+            amount = chequeAmount;
+            approvalNotice = 'Cheque endorsement name, lockbox address and template will be issued after Treasury approval.';
+            extras = [['Endorsement Name', 'Pending Treasury Approval']];
+        } else if (selectedMethod === 'parcel') {
+            methodLabel = 'Cash Parcel (UPS)';
+            var carrier = (document.getElementById('parcelCarrier') || {}).value || '';
+            var parcelAmount = parseFloat((document.getElementById('parcelAmount') || {}).value) || 0;
+            var tracking = (document.getElementById('parcelTracking') || {}).value || '';
+            if (!parcelAmount || !tracking) { toast('Fill all parcel fields', 'error'); return; }
+            amount = parcelAmount;
+            extras = [
+                ['Carrier', carrier],
+                ['UPS Tracking', tracking],
+                ['Vault Address', 'Pending Treasury Approval']
+            ];
+        } else if (selectedMethod === 'pickup') {
+            methodLabel = 'Cash Pickup';
+            var pickupAmount = parseFloat((document.getElementById('pickupAmount') || {}).value) || 0;
+            var pickupDate = (document.getElementById('pickupDate') || {}).value || '';
+            if (!pickupAmount || !pickupDate) { toast('Fill all pickup fields', 'error'); return; }
+            if (pickupAmount < 5000) { toast('Cash pickup minimum is $5,000', 'error'); return; }
+            amount = pickupAmount;
+            approvalNotice = 'Vault location, pickup code and courier identity will be issued after Treasury approval.';
+            extras = [
+                ['Preferred Date', pickupDate],
+                ['Vault Location', 'Pending Treasury Approval'],
+                ['Pickup Code', 'Pending Treasury Approval']
+            ];
+        } else if (selectedMethod === 'bullion') {
+            methodLabel = 'Cold Bullion Bars';
+            var metal = (document.getElementById('bullionMetal') || {}).value || '';
+            var weight = (document.getElementById('bullionWeight') || {}).value || '';
+            var bullionValue = parseFloat((document.getElementById('bullionValue') || {}).value) || 0;
+            var refiner = (document.getElementById('bullionRefiner') || {}).value || '';
+            if (!weight || !bullionValue) { toast('Fill all bullion fields', 'error'); return; }
+            amount = bullionValue;
+            approvalNotice = 'Bullion intake vault address and consignment code will be issued after Treasury approval.';
+            extras = [
+                ['Metal', metal],
+                ['Weight (ozt)', weight],
+                ['Refiner', refiner],
+                ['Intake Address', 'Pending Treasury Approval']
+            ];
+        } else if (selectedMethod === 'wire') {
+            methodLabel = 'Wire Transfer';
+            var wireAmount = parseFloat((document.getElementById('wireAmount') || {}).value) || 0;
+            if (!wireAmount || wireAmount < 500) { toast('Wire amount must be at least $500', 'error'); return; }
+            amount = wireAmount;
+            approvalNotice = 'Wire beneficiary, SWIFT code and reference template will be issued after Treasury approval.';
+            extras = [
+                ['Beneficiary Name', 'Pending Treasury Approval'],
+                ['SWIFT / BIC', 'Pending Treasury Approval'],
+                ['Reference Template', 'Pending Treasury Approval']
+            ];
+        } else if (selectedMethod === 'plastic') {
+            var activePlastic = document.querySelector('#plasticGrid .funding-tile.active');
+            var brand = activePlastic ? activePlastic.getAttribute('data-plastic') : 'Apple';
+            methodLabel = 'Plastic Card · ' + brand.charAt(0).toUpperCase() + brand.slice(1);
+            var plasticCode = (document.getElementById('plasticCode') || {}).value || '';
+            var plasticAmount = parseFloat((document.getElementById('plasticAmount') || {}).value) || 0;
+            if (!plasticCode || !plasticAmount) { toast('Fill card code and amount', 'error'); return; }
+            if (plasticAmount < 10) { toast('Minimum card value is $10', 'error'); return; }
+            amount = plasticAmount;
+            extras = [
+                ['Brand', brand.charAt(0).toUpperCase() + brand.slice(1)],
+                ['Card Code', '••••' + plasticCode.slice(-4)]
+            ];
+        }
+
+        var txnRef = 'REF #DP-' + Math.floor(10000 + Math.random() * 90000);
+        var aliasRef = 'M. ALIAS / ' + txnRef.split(' ')[1];
+
+        var details = document.getElementById('depositReceiptDetails');
+        var html = '';
+        html += '<div class="row"><span>Method</span><span>' + methodLabel + '</span></div>';
+        html += '<div class="row"><span>Amount</span><span>$' + amount.toFixed(2) + '</span></div>';
+        html += '<div class="row"><span>Deposit To</span><span>' + to + '</span></div>';
+        for (var x = 0; x < extras.length; x++) {
+            html += '<div class="row"><span>' + extras[x][0] + '</span><span>' + extras[x][1] + '</span></div>';
+        }
+        html += '<div class="row"><span>Recorded As</span><span style="color:#a78bfa;">' + aliasRef + '</span></div>';
+        html += '<div class="row"><span>Status</span><span style="color:#fbbf24;">Awaiting Treasury Approval</span></div>';
+        if (approvalNotice) {
+            html += '<div class="row" style="border-top:1px solid rgba(251,191,36,0.2); margin-top:8px; padding-top:10px;"><span style="color:#fbbf24;">Note</span><span style="color:#e2e8f0; text-align:right; font-weight:400;">' + approvalNotice + '</span></div>';
+        }
+
+        details.innerHTML = html;
+        document.getElementById('depositReceipt').classList.add('show');
+
+        addTransaction('Deposit · ' + methodLabel, aliasRef + ' · Awaiting approval', amount, true);
+
+        var balanceEl = document.getElementById('checkingBalance');
+        if (balanceEl) {
+            var currentText = balanceEl.textContent.replace(/[$,]/g, '');
+            var current = parseFloat(currentText) || 0;
+            var next = current + amount;
+            var whole = Math.floor(next).toLocaleString('en-US');
+            var cents = '.' + String(Math.round((next - Math.floor(next)) * 100)).padStart(2, '0');
+            balanceEl.innerHTML = '$' + whole + '<span class="cents">' + cents + '</span>';
+        }
+
+        toast('Deposit of $' + amount.toFixed(2) + ' logged · awaiting Treasury approval', 'success');
+        this.reset();
+        selectedMethod = 'cheque';
+        for (var v = 0; v < fundingTiles.length; v++) {
+            fundingTiles[v].classList.toggle('active', fundingTiles[v].getAttribute('data-method') === 'cheque');
+        }
+        renderMethodFields();
+
+        setTimeout(function () {
+            document.getElementById('depositReceipt').classList.remove('show');
+        }, 9000);
+    });
+
+    function addTransaction(description, ref, amount, isIncoming) {
+        var list = document.getElementById('txnList');
+        if (!list) return;
+
+        var empty = list.querySelector('.empty-state');
+        if (empty) empty.remove();
+
+        var row = document.createElement('div');
+        row.className = 'txn-row';
+        row.style.animation = 'fadeInUp 0.4s ease';
+
+        var iconSvg = isIncoming
+            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="7" x2="7" y2="17"/><polyline points="17 17 7 17 7 7"/></svg>'
+            : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
+
+        var amountClass = isIncoming ? 'in' : 'out';
+        var amountSign = isIncoming ? '+' : '−';
+
+        row.innerHTML =
+            '<div class="txn-icon ' + (isIncoming ? 'in' : 'out') + '">' + iconSvg + '</div>' +
+            '<div class="txn-info">' +
+                '<strong>' + description + '</strong>' +
+                '<small>' + ref + '</small>' +
+            '</div>' +
+            '<div class="txn-amount ' + amountClass + '">' + amountSign + '$' + amount.toFixed(2) + '</div>';
+
+        list.insertBefore(row, list.firstChild);
+    }
+
+    // ═══════════════════════════════════════════════════
+    // STATEMENTS DOWNLOAD
+    // ═══════════════════════════════════════════════════
+    var downloadBtns = document.querySelectorAll('.download-btn');
+    for (var d = 0; d < downloadBtns.length; d++) {
+        downloadBtns[d].addEventListener('click', function () {
+            var month = this.getAttribute('data-month');
+            var csv = 'Treasury Reserve · Confidential Statement\n';
+            csv += 'Account Holder (Alias): M. Alias\n';
+            csv += 'Legal Entity: Withheld\n';
+            csv += 'Account: •••• 4821\n';
+            csv += 'Statement Period: ' + month + '\n';
+            csv += 'Generated: ' + new Date().toISOString() + '\n\n';
+            csv += 'Date,Description,Reference,Amount,Balance\n';
+            csv += '(No transactions on file)\n';
+            csv += '\nThis statement is issued under asset-protection protocol.\n';
+            csv += 'The registered legal holder is not disclosed.\n';
+
+            var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'Treasury_Alias_Statement_' + month.replace(/\s/g, '_') + '.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            toast('Statement downloaded · ' + month, 'success');
+        });
+    }
+
+    // ═══════════════════════════════════════════════════
+    // CARD CONTROLS
+    // ═══════════════════════════════════════════════════
+    var cardCtrlMsgs = {
+        freeze: 'Card freeze requested. Card will freeze within 60 seconds.',
+        limits: 'Opening spending limits configuration…',
+        settings: 'Opening PIN change flow…',
+        virtual: 'Generating a new virtual alias card…'
+    };
+    var cardControlBtns = document.querySelectorAll('.card-control');
+    for (var c = 0; c < cardControlBtns.length; c++) {
+        cardControlBtns[c].addEventListener('click', function () {
+            var action = this.getAttribute('data-card-action');
+            toast(cardCtrlMsgs[action] || 'Card action triggered', 'info');
+        });
+    }
+
+    // ═══════════════════════════════════════════════════
+    // SUPPORT CHAT
+    // ═══════════════════════════════════════════════════
+    var chatResponses = [
+        "The Treasury issues cheque aliases, vault addresses, and wire beneficiaries only after each deposit is approved — this is standard asset-protection protocol.",
+        "For cashier's cheques, the endorsement name is not fixed in advance. Once approved, you'll receive the exact alias and lockbox address.",
+        "Bullion intake addresses are rotated per consignment. You'll receive the current vault address upon approval.",
+        "Wires are routed through intermediary banks — that's why the beneficiary and SWIFT are only revealed post-approval.",
+        "Cash pickups require a one-time vault code that expires within 24 hours of issuance.",
+        "Gift card consolidation supports Apple, Sephora, Google Play, Nordstrom, Lululemon, Visa, Mastercard, and Amex.",
+        "Your card is issued under the alias M. Alias — the full PAN never appears in any external statement.",
+        "All deposit instructions are reviewed within 4 business hours. Urgent approvals may be expedited on request."
+    ];
+
+    var chatContainer = document.getElementById('chatContainer');
+    var chatInput = document.getElementById('chatInput');
+    var chatSendBtn = document.getElementById('chatSendBtn');
+
+    function sendChat() {
+        var msg = (chatInput.value || '').trim();
+        if (!msg) return;
+
+        var userMsg = document.createElement('div');
+        userMsg.className = 'chat-message user';
+        userMsg.innerHTML =
+            '<div class="chat-avatar user">MM</div>' +
+            '<div class="chat-bubble">' + msg.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
+        chatContainer.appendChild(userMsg);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        chatInput.value = '';
+
+        var typing = document.createElement('div');
+        typing.className = 'chat-message';
+        typing.innerHTML =
+            '<div class="chat-avatar agent">PB</div>' +
+            '<div class="chat-bubble" style="opacity:0.6;">Typing...</div>';
+        chatContainer.appendChild(typing);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        setTimeout(function () {
+            typing.remove();
+            var agentMsg = document.createElement('div');
+            agentMsg.className = 'chat-message';
+            var reply = chatResponses[Math.floor(Math.random() * chatResponses.length)];
+            agentMsg.innerHTML =
+                '<div class="chat-avatar agent">PB</div>' +
+                '<div class="chat-bubble">' + reply + '</div>';
+            chatContainer.appendChild(agentMsg);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 1400);
+    }
+
+    if (chatSendBtn) chatSendBtn.addEventListener('click', sendChat);
+    if (chatInput) {
+        chatInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); sendChat(); }
+        });
+    }
+
+    var txnFilter = document.getElementById('txnFilter');
+    if (txnFilter) {
+        var filters = ['Last 7 days ▾', 'Last 30 days ▾', 'Last 90 days ▾', 'This year ▾'];
+        var fIdx = 0;
+        txnFilter.addEventListener('click', function () {
+            fIdx = (fIdx + 1) % filters.length;
+            this.textContent = filters[fIdx];
+            toast('Filter: ' + filters[fIdx].replace(' ▾', ''), 'info', 1800);
+        });
+    }
+
+    window.addEventListener('load', function () {
+        if (window.matchMedia('(hover: hover)').matches) {
+            userIdInput.focus();
+        }
+    });
+})();
+</script>
 
 </body>
 </html>
