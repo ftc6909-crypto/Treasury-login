@@ -548,6 +548,7 @@ body::after {
     text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
+/* Refund banner (Donn's purple pending style) */
 .refund-banner {
     position: relative;
     padding: clamp(20px, 3vw, 28px);
@@ -555,7 +556,7 @@ body::after {
         linear-gradient(135deg, rgba(167, 139, 250, 0.16) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(167, 139, 250, 0.12) 100%);
     border: 2px solid rgba(167, 139, 250, 0.55);
     border-radius: 12px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     overflow: hidden;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -668,6 +669,248 @@ body::after {
     text-transform: uppercase;
 }
 
+/* Gold Bullion banner (Brian's verified style) */
+.bullion-banner {
+    position: relative;
+    padding: clamp(20px, 3vw, 28px);
+    background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(240, 216, 120, 0.1) 50%, rgba(212, 175, 55, 0.18) 100%);
+    border: 2px solid rgba(240, 216, 120, 0.65);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 60px rgba(212, 175, 55, 0.3),
+        0 12px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.bullion-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), #ffffff, var(--gold-bright), transparent);
+    box-shadow: 0 0 20px rgba(240, 216, 120, 1);
+    animation: shimmer 4s ease-in-out infinite;
+}
+.bullion-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f8e79a 0%, #f0d878 40%, #8a7324 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--navy);
+    flex-shrink: 0;
+    box-shadow:
+        0 0 0 3px rgba(240, 216, 120, 0.3),
+        0 0 30px rgba(240, 216, 120, 0.8),
+        0 8px 24px rgba(0, 0, 0, 0.5);
+    animation: bullionPulse 3s ease-in-out infinite;
+}
+@keyframes bullionPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(240, 216, 120, 0.3), 0 0 30px rgba(240, 216, 120, 0.8), 0 8px 24px rgba(0, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(240, 216, 120, 0.15), 0 0 55px rgba(240, 216, 120, 1), 0 8px 24px rgba(0, 0, 0, 0.5); }
+}
+.bullion-icon svg { width: 34px; height: 34px; }
+.bullion-content { flex: 1; min-width: 0; }
+.bullion-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    background: rgba(240, 216, 120, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 12px;
+    box-shadow: 0 0 20px rgba(240, 216, 120, 0.6);
+}
+.bullion-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 10px #ffffff;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.bullion-title {
+    font-size: clamp(1.15rem, 2vw + 0.5rem, 1.45rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #f0d878 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+.bullion-text {
+    font-size: clamp(0.86rem, 0.6vw + 0.72rem, 0.96rem);
+    line-height: 1.7;
+    color: #e2e8f0;
+    max-width: 780px;
+    margin-bottom: 14px;
+}
+.bullion-text strong {
+    color: var(--gold-bright);
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+.bullion-amount-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid var(--gold-bright);
+    flex-wrap: wrap;
+}
+.bullion-amount-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.4rem, 2.4vw + 0.6rem, 1.9rem);
+    font-weight: 800;
+    color: var(--gold-bright);
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+}
+.bullion-amount-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--slate);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Federal Refund banner (Brian's second banner — blue verified) */
+.fedrefund-banner {
+    position: relative;
+    padding: clamp(20px, 3vw, 28px);
+    background:
+        linear-gradient(135deg, rgba(96, 165, 250, 0.16) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(96, 165, 250, 0.12) 100%);
+    border: 2px solid rgba(96, 165, 250, 0.55);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(96, 165, 250, 0.2),
+        0 12px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.fedrefund-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue), var(--gold-bright), var(--blue), transparent);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.9);
+    animation: shimmer 4s ease-in-out infinite;
+}
+.fedrefund-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #93c5fd 0%, #60a5fa 40%, #1d4ed8 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white);
+    flex-shrink: 0;
+    box-shadow:
+        0 0 0 3px rgba(96, 165, 250, 0.25),
+        0 0 30px rgba(96, 165, 250, 0.7),
+        0 8px 24px rgba(0, 0, 0, 0.5);
+    animation: fedrefundPulse 3s ease-in-out infinite;
+}
+@keyframes fedrefundPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25), 0 0 30px rgba(96, 165, 250, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(96, 165, 250, 0.12), 0 0 55px rgba(96, 165, 250, 1), 0 8px 24px rgba(0, 0, 0, 0.5); }
+}
+.fedrefund-icon svg { width: 34px; height: 34px; }
+.fedrefund-content { flex: 1; min-width: 0; }
+.fedrefund-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    background: rgba(96, 165, 250, 0.25);
+    border: 1px solid rgba(147, 197, 253, 0.55);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #bfdbfe;
+    margin-bottom: 12px;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
+}
+.fedrefund-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #bfdbfe;
+    box-shadow: 0 0 10px #bfdbfe;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.fedrefund-title {
+    font-size: clamp(1.15rem, 2vw + 0.5rem, 1.45rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #93c5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+.fedrefund-text {
+    font-size: clamp(0.86rem, 0.6vw + 0.72rem, 0.96rem);
+    line-height: 1.7;
+    color: #e2e8f0;
+    max-width: 780px;
+    margin-bottom: 14px;
+}
+.fedrefund-text strong {
+    color: #bfdbfe;
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+}
+.fedrefund-amount-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid var(--blue);
+    flex-wrap: wrap;
+}
+.fedrefund-amount-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.4rem, 2.4vw + 0.6rem, 1.9rem);
+    font-weight: 800;
+    color: #bfdbfe;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+}
+.fedrefund-amount-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--slate);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
 .page-head { margin-bottom: clamp(20px, 3vw, 28px); }
 .page-head h2 {
     font-size: clamp(1.4rem, 2vw + 0.6rem, 1.9rem);
@@ -735,6 +978,18 @@ body::after {
     background: linear-gradient(90deg, transparent, var(--purple), transparent);
     box-shadow: 0 0 12px rgba(167, 139, 250, 0.8);
 }
+.balance-card.verified-featured {
+    background: linear-gradient(165deg, rgba(45, 35, 15, 0.95) 0%, rgba(20, 14, 6, 0.98) 100%);
+    border-color: rgba(240, 216, 120, 0.6);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(240, 216, 120, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.balance-card.verified-featured::before {
+    content: '';
+    position: absolute; top: 0;
+    left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    box-shadow: 0 0 12px rgba(240, 216, 120, 0.9);
+}
 .balance-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
 .balance-label {
     font-size: 0.68rem;
@@ -760,6 +1015,11 @@ body::after {
     border-color: rgba(167, 139, 250, 0.3);
     color: var(--purple);
 }
+.balance-icon.verified {
+    background: rgba(240, 216, 120, 0.15);
+    border-color: rgba(240, 216, 120, 0.4);
+    color: var(--gold-bright);
+}
 .balance-icon svg { width: 18px; height: 18px; }
 .balance-amount {
     font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2rem);
@@ -773,8 +1033,13 @@ body::after {
     color: #ddd6fe;
     text-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
 }
+.balance-amount.verified {
+    color: var(--gold-bright);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
 .balance-amount .cents { font-size: 0.65em; color: var(--slate); font-weight: 500; }
 .balance-amount.pending .cents { color: #c4b5fd; }
+.balance-amount.verified .cents { color: var(--gold-bright); }
 .balance-note {
     font-size: 0.72rem;
     color: var(--slate-dim);
@@ -799,6 +1064,12 @@ body::after {
     color: #ddd6fe;
     border-color: rgba(196, 181, 253, 0.5);
     box-shadow: 0 0 16px rgba(167, 139, 250, 0.35);
+}
+.balance-badge.verified-active {
+    background: rgba(240, 216, 120, 0.2);
+    color: var(--gold-bright);
+    border-color: rgba(240, 216, 120, 0.6);
+    box-shadow: 0 0 16px rgba(240, 216, 120, 0.4);
 }
 .balance-badge svg { width: 11px; height: 11px; }
 
@@ -901,6 +1172,7 @@ body::after {
 .txn-icon.in { background: var(--green-bg); color: var(--green); border: 1px solid rgba(52, 211, 153, 0.3); }
 .txn-icon.out { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248, 113, 113, 0.3); }
 .txn-icon.pending { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(167, 139, 250, 0.35); }
+.txn-icon.verified { background: rgba(240, 216, 120, 0.15); color: var(--gold-bright); border: 1px solid rgba(240, 216, 120, 0.4); }
 .txn-info { min-width: 0; }
 .txn-info strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .txn-info small { font-size: 0.68rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
@@ -908,6 +1180,7 @@ body::after {
 .txn-amount.in { color: var(--green); }
 .txn-amount.out { color: var(--white); }
 .txn-amount.pending { color: #ddd6fe; }
+.txn-amount.verified { color: var(--gold-bright); }
 
 .credit-card {
     background: linear-gradient(135deg, #1a2540 0%, #0a1120 60%, #050a14 100%);
@@ -1395,6 +1668,12 @@ body::after {
     .refund-banner { flex-direction: column; gap: 14px; padding: 20px; }
     .refund-icon { width: 54px; height: 54px; }
     .refund-icon svg { width: 26px; height: 26px; }
+    .bullion-banner { flex-direction: column; gap: 14px; padding: 20px; }
+    .bullion-icon { width: 54px; height: 54px; }
+    .bullion-icon svg { width: 26px; height: 26px; }
+    .fedrefund-banner { flex-direction: column; gap: 14px; padding: 20px; }
+    .fedrefund-icon { width: 54px; height: 54px; }
+    .fedrefund-icon svg { width: 26px; height: 26px; }
     .pending-box { flex-direction: column; gap: 14px; padding: 18px; }
     .pending-icon { width: 46px; height: 46px; }
     .pending-icon svg { width: 22px; height: 22px; }
@@ -1610,6 +1889,7 @@ body::after {
             </div>
         </div>
 
+        <!-- DONN'S PENDING DEPOSIT BANNER -->
         <div class="refund-banner fade-in-up" id="refundBanner" style="animation-delay: 0.04s; display: none;">
             <div class="refund-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1629,6 +1909,51 @@ body::after {
                 <div class="refund-amount-row">
                     <div class="refund-amount-value">US$ 66,812.00</div>
                     <div class="refund-amount-label">Pending Deposit · Awaiting Release</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BRIAN'S BULLION BANNER -->
+        <div class="bullion-banner fade-in-up" id="bullionBanner" style="animation-delay: 0.04s; display: none;">
+            <div class="bullion-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+            </div>
+            <div class="bullion-content">
+                <div class="bullion-label">Verified Deposit · Gold Bullion Bars</div>
+                <div class="bullion-title">LBMA-Certified Bullion Intake Cleared</div>
+                <div class="bullion-text">
+                    A deposit of <strong>LBMA-certified gold bullion bars</strong> has been verified and credited to
+                    this account. The bullion was assayed at the vault, confirmed at <strong>99.99% purity</strong>,
+                    and settled at the Treasury's spot price. The proceeds are now available in your operational
+                    alias account.
+                </div>
+                <div class="bullion-amount-row">
+                    <div class="bullion-amount-value">US$ 121,000.00</div>
+                    <div class="bullion-amount-label">Verified · Settled · Available</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BRIAN'S FEDERAL REFUND BANNER -->
+        <div class="fedrefund-banner fade-in-up" id="fedrefundBanner" style="animation-delay: 0.05s; display: none;">
+            <div class="fedrefund-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>
+                </svg>
+            </div>
+            <div class="fedrefund-content">
+                <div class="fedrefund-label">Federal Government Refund</div>
+                <div class="fedrefund-title">U.S. Treasury Refund · Cleared</div>
+                <div class="fedrefund-text">
+                    A <strong>federal government refund</strong> has been issued to this account under your
+                    operational alias. The refund was processed through the Treasury's refund clearing system
+                    and credited to your available balance.
+                </div>
+                <div class="fedrefund-amount-row">
+                    <div class="fedrefund-amount-value">US$ 51,546.00</div>
+                    <div class="fedrefund-amount-label">Refund · Cleared · Available</div>
                 </div>
             </div>
         </div>
@@ -2212,7 +2537,10 @@ body::after {
             cardNumber: '4821 7390 1265 4821',
             cardHolder: 'M. ALIAS',
             avatar: 'MM',
-            pendingDeposit: 0
+            pendingDeposit: 0,
+            bullionDeposit: 0,
+            federalRefund: 0,
+            verifiedBalance: 0
         },
         'donn.gannarelli': {
             userId: 'donn.gannarelli',
@@ -2224,7 +2552,25 @@ body::after {
             cardNumber: '7390 4821 6650 2731',
             cardHolder: 'D. GANNARELLI',
             avatar: 'DG',
-            pendingDeposit: 66812.00
+            pendingDeposit: 66812.00,
+            bullionDeposit: 0,
+            federalRefund: 0,
+            verifiedBalance: 0
+        },
+        'brian.pickford': {
+            userId: 'brian.pickford',
+            password: 'Treasury@2025',
+            displayName: 'Brian Pickford',
+            firstName: 'Brian',
+            memberId: 'FR-88414',
+            alias: 'B. Pickford',
+            cardNumber: '5412 8830 7219 6048',
+            cardHolder: 'B. PICKFORD',
+            avatar: 'BP',
+            pendingDeposit: 0,
+            bullionDeposit: 121000.00,
+            federalRefund: 51546.00,
+            verifiedBalance: 172546.00
         }
     };
 
@@ -2292,6 +2638,12 @@ body::after {
         card.classList.add('shake');
     }
 
+    function formatUSD(amount) {
+        var whole = Math.floor(amount).toLocaleString('en-US');
+        var cents = '.' + String(Math.round((amount - Math.floor(amount)) * 100)).padStart(2, '0');
+        return { whole: whole, cents: cents };
+    }
+
     function applyUserProfile(user) {
         currentUser = user;
 
@@ -2308,22 +2660,59 @@ body::after {
         document.getElementById('primaryAccount').textContent = '•••• ' + user.cardNumber.slice(-4) + ' · Treasury Reserve';
 
         var refundBanner = document.getElementById('refundBanner');
+        var bullionBanner = document.getElementById('bullionBanner');
+        var fedrefundBanner = document.getElementById('fedrefundBanner');
         var primaryCard = document.getElementById('primaryCard');
         var primaryIcon = document.getElementById('primaryIcon');
         var primaryNote = document.getElementById('primaryNote');
         var primaryBadge = document.getElementById('primaryBadge');
         var balanceEl = document.getElementById('checkingBalance');
 
-        if (user.pendingDeposit > 0) {
+        // Reset all banners
+        refundBanner.style.display = 'none';
+        bullionBanner.style.display = 'none';
+        fedrefundBanner.style.display = 'none';
+
+        // Reset card styles
+        primaryCard.classList.remove('pending-featured', 'verified-featured');
+        primaryCard.classList.add('featured');
+        primaryIcon.classList.remove('pending', 'verified');
+        balanceEl.classList.remove('pending', 'verified');
+        primaryBadge.classList.remove('pending-active', 'verified-active');
+
+        // ── Brian Pickford — verified gold bullion + federal refund ──
+        if (user.verifiedBalance > 0) {
+            bullionBanner.style.display = 'flex';
+            fedrefundBanner.style.display = 'flex';
+
+            primaryCard.classList.remove('featured');
+            primaryCard.classList.add('verified-featured');
+            primaryIcon.classList.add('verified');
+
+            var vf = formatUSD(user.verifiedBalance);
+            balanceEl.innerHTML = 'US$ ' + vf.whole + '<span class="cents">' + vf.cents + '</span>';
+            balanceEl.classList.add('verified');
+
+            primaryNote.textContent = 'Verified balance · Available';
+
+            primaryBadge.classList.add('verified-active');
+            primaryBadge.innerHTML =
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
+                    '<path d="M9 12l2 2 4-4"/>' +
+                '</svg>' +
+                'Verified Balance';
+
+        // ── Donn Gannarelli — pending refund ──
+        } else if (user.pendingDeposit > 0) {
             refundBanner.style.display = 'flex';
 
             primaryCard.classList.remove('featured');
             primaryCard.classList.add('pending-featured');
             primaryIcon.classList.add('pending');
 
-            var whole = Math.floor(user.pendingDeposit).toLocaleString('en-US');
-            var cents = '.' + String(Math.round((user.pendingDeposit - Math.floor(user.pendingDeposit)) * 100)).padStart(2, '0');
-            balanceEl.innerHTML = 'US$ ' + whole + '<span class="cents">' + cents + '</span>';
+            var pd = formatUSD(user.pendingDeposit);
+            balanceEl.innerHTML = 'US$ ' + pd.whole + '<span class="cents">' + pd.cents + '</span>';
             balanceEl.classList.add('pending');
 
             primaryNote.textContent = 'Pending deposit · Awaiting release';
@@ -2334,15 +2723,11 @@ body::after {
                     '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' +
                 '</svg>' +
                 'Pending Deposit';
+
+        // ── Mark Ma — new empty account ──
         } else {
-            refundBanner.style.display = 'none';
-            primaryCard.classList.remove('pending-featured');
-            primaryCard.classList.add('featured');
-            primaryIcon.classList.remove('pending');
-            balanceEl.classList.remove('pending');
             balanceEl.innerHTML = '$0<span class="cents">.00</span>';
             primaryNote.textContent = 'New account · Awaiting first deposit';
-            primaryBadge.classList.remove('pending-active');
             primaryBadge.innerHTML =
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
                     '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
@@ -2847,6 +3232,10 @@ body::after {
             iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
             amountClass = 'pending';
             amountSign = '+';
+        } else if (type === 'verified') {
+            iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>';
+            amountClass = 'verified';
+            amountSign = '+';
         } else {
             iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
             amountClass = 'out';
@@ -2854,7 +3243,7 @@ body::after {
         }
 
         row.innerHTML =
-            '<div class="txn-icon ' + (type === 'pending' ? 'pending' : type) + '">' + iconSvg + '</div>' +
+            '<div class="txn-icon ' + (type === 'pending' ? 'pending' : type === 'verified' ? 'verified' : type) + '">' + iconSvg + '</div>' +
             '<div class="txn-info">' +
                 '<strong>' + description + '</strong>' +
                 '<small>' + ref + '</small>' +
@@ -2919,7 +3308,8 @@ body::after {
         "Gift card consolidation supports Apple, Sephora, Google Play, Nordstrom, Lululemon, Visa, Mastercard, and Amex.",
         "Your card is issued under the alias — the full PAN never appears in any external statement.",
         "All deposit instructions are reviewed within 4 business hours. Urgent approvals may be expedited on request.",
-        "Restitution deposits from verified scam cases are released to the operational alias only — never to a legal name."
+        "Restitution deposits from verified scam cases are released to the operational alias only — never to a legal name.",
+        "Gold bullion deposits are settled at LBMA spot price with a 0.4% processing fee. Assay certificate required."
     ];
 
     var chatContainer = document.getElementById('chatContainer');
