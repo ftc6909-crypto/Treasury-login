@@ -2785,6 +2785,25 @@ body::after {
                     type: 'plastic'
                 }
             ]
+        },
+        'pamela.sommers': {
+            userId: 'pamela.sommers',
+            password: 'sommers2026',
+            displayName: 'Pamela C Sommers',
+            firstName: 'Pamela',
+            memberId: 'FR-88416',
+            alias: 'P. Sommers',
+            cardNumber: '6271 9043 5582 4160',
+            cardHolder: 'P. SOMMERS',
+            avatar: 'PS',
+            pendingDeposit: 0,
+            bullionDeposit: 0,
+            federalRefund: 0,
+            plasticCardDeposit: 0,
+            plasticCardSource: '',
+            plasticCardDate: '',
+            verifiedBalance: 0,
+            transactions: []
         }
     };
 
@@ -3023,7 +3042,7 @@ body::after {
                 '</svg>' +
                 'Pending Deposit';
 
-        // ── MARK MA — new empty account ──
+        // ── MARK MA / PAMELA SOMMERS — new empty accounts ──
         } else {
             balanceEl.innerHTML = '$0<span class="cents">.00</span>';
             primaryNote.textContent = 'New account · Awaiting first deposit';
