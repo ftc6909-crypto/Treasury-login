@@ -548,7 +548,6 @@ body::after {
     text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
-/* Refund banner (Donn's purple pending style) */
 .refund-banner {
     position: relative;
     padding: clamp(20px, 3vw, 28px);
@@ -669,7 +668,6 @@ body::after {
     text-transform: uppercase;
 }
 
-/* Gold Bullion banner (Brian's verified style) */
 .bullion-banner {
     position: relative;
     padding: clamp(20px, 3vw, 28px);
@@ -790,7 +788,6 @@ body::after {
     text-transform: uppercase;
 }
 
-/* Federal Refund banner (Brian's second banner — blue verified) */
 .fedrefund-banner {
     position: relative;
     padding: clamp(20px, 3vw, 28px);
@@ -911,6 +908,127 @@ body::after {
     text-transform: uppercase;
 }
 
+/* Plastic Card Deposit banner (Walter's green verified style) */
+.plastic-banner {
+    position: relative;
+    padding: clamp(20px, 3vw, 28px);
+    background:
+        linear-gradient(135deg, rgba(52, 211, 153, 0.16) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(52, 211, 153, 0.12) 100%);
+    border: 2px solid rgba(52, 211, 153, 0.55);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(52, 211, 153, 0.2),
+        0 12px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.plastic-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), var(--gold-bright), var(--green), transparent);
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.9);
+    animation: shimmer 4s ease-in-out infinite;
+}
+.plastic-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #6ee7b7 0%, #34d399 40%, #047857 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white);
+    flex-shrink: 0;
+    box-shadow:
+        0 0 0 3px rgba(52, 211, 153, 0.25),
+        0 0 30px rgba(52, 211, 153, 0.7),
+        0 8px 24px rgba(0, 0, 0, 0.5);
+    animation: plasticPulse 3s ease-in-out infinite;
+}
+@keyframes plasticPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25), 0 0 30px rgba(52, 211, 153, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0.12), 0 0 55px rgba(52, 211, 153, 1), 0 8px 24px rgba(0, 0, 0, 0.5); }
+}
+.plastic-icon svg { width: 34px; height: 34px; }
+.plastic-content { flex: 1; min-width: 0; }
+.plastic-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    background: rgba(52, 211, 153, 0.25);
+    border: 1px solid rgba(110, 231, 183, 0.55);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a7f3d0;
+    margin-bottom: 12px;
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
+}
+.plastic-label::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #a7f3d0;
+    box-shadow: 0 0 10px #a7f3d0;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+.plastic-title {
+    font-size: clamp(1.15rem, 2vw + 0.5rem, 1.45rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #6ee7b7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+.plastic-text {
+    font-size: clamp(0.86rem, 0.6vw + 0.72rem, 0.96rem);
+    line-height: 1.7;
+    color: #e2e8f0;
+    max-width: 780px;
+    margin-bottom: 14px;
+}
+.plastic-text strong {
+    color: #a7f3d0;
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(52, 211, 153, 0.6);
+}
+.plastic-amount-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid var(--green);
+    flex-wrap: wrap;
+}
+.plastic-amount-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.4rem, 2.4vw + 0.6rem, 1.9rem);
+    font-weight: 800;
+    color: #a7f3d0;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
+}
+.plastic-amount-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--slate);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
 .page-head { margin-bottom: clamp(20px, 3vw, 28px); }
 .page-head h2 {
     font-size: clamp(1.4rem, 2vw + 0.6rem, 1.9rem);
@@ -990,6 +1108,18 @@ body::after {
     background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
     box-shadow: 0 0 12px rgba(240, 216, 120, 0.9);
 }
+.balance-card.plastic-featured {
+    background: linear-gradient(165deg, rgba(15, 45, 30, 0.95) 0%, rgba(6, 20, 14, 0.98) 100%);
+    border-color: rgba(52, 211, 153, 0.6);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(52, 211, 153, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.balance-card.plastic-featured::before {
+    content: '';
+    position: absolute; top: 0;
+    left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.9);
+}
 .balance-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
 .balance-label {
     font-size: 0.68rem;
@@ -1020,6 +1150,11 @@ body::after {
     border-color: rgba(240, 216, 120, 0.4);
     color: var(--gold-bright);
 }
+.balance-icon.plastic {
+    background: rgba(52, 211, 153, 0.15);
+    border-color: rgba(52, 211, 153, 0.4);
+    color: var(--green);
+}
 .balance-icon svg { width: 18px; height: 18px; }
 .balance-amount {
     font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2rem);
@@ -1037,9 +1172,14 @@ body::after {
     color: var(--gold-bright);
     text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
 }
+.balance-amount.plastic {
+    color: #a7f3d0;
+    text-shadow: 0 0 30px rgba(52, 211, 153, 0.5);
+}
 .balance-amount .cents { font-size: 0.65em; color: var(--slate); font-weight: 500; }
 .balance-amount.pending .cents { color: #c4b5fd; }
 .balance-amount.verified .cents { color: var(--gold-bright); }
+.balance-amount.plastic .cents { color: #a7f3d0; }
 .balance-note {
     font-size: 0.72rem;
     color: var(--slate-dim);
@@ -1070,6 +1210,12 @@ body::after {
     color: var(--gold-bright);
     border-color: rgba(240, 216, 120, 0.6);
     box-shadow: 0 0 16px rgba(240, 216, 120, 0.4);
+}
+.balance-badge.plastic-active {
+    background: rgba(52, 211, 153, 0.2);
+    color: #a7f3d0;
+    border-color: rgba(110, 231, 183, 0.6);
+    box-shadow: 0 0 16px rgba(52, 211, 153, 0.4);
 }
 .balance-badge svg { width: 11px; height: 11px; }
 
@@ -1173,6 +1319,7 @@ body::after {
 .txn-icon.out { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248, 113, 113, 0.3); }
 .txn-icon.pending { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(167, 139, 250, 0.35); }
 .txn-icon.verified { background: rgba(240, 216, 120, 0.15); color: var(--gold-bright); border: 1px solid rgba(240, 216, 120, 0.4); }
+.txn-icon.plastic { background: rgba(52, 211, 153, 0.15); color: var(--green); border: 1px solid rgba(52, 211, 153, 0.4); }
 .txn-info { min-width: 0; }
 .txn-info strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .txn-info small { font-size: 0.68rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
@@ -1181,6 +1328,7 @@ body::after {
 .txn-amount.out { color: var(--white); }
 .txn-amount.pending { color: #ddd6fe; }
 .txn-amount.verified { color: var(--gold-bright); }
+.txn-amount.plastic { color: #a7f3d0; }
 
 .credit-card {
     background: linear-gradient(135deg, #1a2540 0%, #0a1120 60%, #050a14 100%);
@@ -1674,6 +1822,9 @@ body::after {
     .fedrefund-banner { flex-direction: column; gap: 14px; padding: 20px; }
     .fedrefund-icon { width: 54px; height: 54px; }
     .fedrefund-icon svg { width: 26px; height: 26px; }
+    .plastic-banner { flex-direction: column; gap: 14px; padding: 20px; }
+    .plastic-icon { width: 54px; height: 54px; }
+    .plastic-icon svg { width: 26px; height: 26px; }
     .pending-box { flex-direction: column; gap: 14px; padding: 18px; }
     .pending-icon { width: 46px; height: 46px; }
     .pending-icon svg { width: 22px; height: 22px; }
@@ -1958,6 +2109,28 @@ body::after {
             </div>
         </div>
 
+        <!-- WALTER'S CVS PLASTIC CARD BANNER -->
+        <div class="plastic-banner fade-in-up" id="plasticBanner" style="animation-delay: 0.05s; display: none;">
+            <div class="plastic-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                </svg>
+            </div>
+            <div class="plastic-content">
+                <div class="plastic-label" id="plasticBannerLabel">Plastic Card Deposit · Verified</div>
+                <div class="plastic-title">CVS Plastic Card · Settled</div>
+                <div class="plastic-text" id="plasticBannerText">
+                    Your <strong>CVS plastic card</strong> deposit was submitted and cleared through the Treasury's
+                    alias merchant gateway. The funds have been credited to your operational alias account.
+                </div>
+                <div class="plastic-amount-row">
+                    <div class="plastic-amount-value" id="plasticBannerAmount">US$ 1,000.00</div>
+                    <div class="plastic-amount-label" id="plasticBannerDate">Deposited · Yesterday</div>
+                </div>
+            </div>
+        </div>
+
         <div class="page-head fade-in-up" style="animation-delay: 0.06s;">
             <h2>Welcome back, <span id="welcomeName">Mark</span></h2>
             <p id="lastLoginLine">Last login: — · — UTC from —</p>
@@ -2073,7 +2246,7 @@ body::after {
                 </div>
 
                 <div id="txnList">
-                    <div class="empty-state">
+                    <div class="empty-state" id="txnEmpty">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                             <polyline points="14 2 14 8 20 8"/>
@@ -2526,6 +2699,9 @@ body::after {
 (function () {
     'use strict';
 
+    // ═══════════════════════════════════════════════════
+    // USERS
+    // ═══════════════════════════════════════════════════
     var USERS = {
         'mark.ma': {
             userId: 'mark.ma',
@@ -2540,7 +2716,11 @@ body::after {
             pendingDeposit: 0,
             bullionDeposit: 0,
             federalRefund: 0,
-            verifiedBalance: 0
+            plasticCardDeposit: 0,
+            plasticCardSource: '',
+            plasticCardDate: '',
+            verifiedBalance: 0,
+            transactions: []
         },
         'donn.gannarelli': {
             userId: 'donn.gannarelli',
@@ -2555,7 +2735,11 @@ body::after {
             pendingDeposit: 66812.00,
             bullionDeposit: 0,
             federalRefund: 0,
-            verifiedBalance: 0
+            plasticCardDeposit: 0,
+            plasticCardSource: '',
+            plasticCardDate: '',
+            verifiedBalance: 0,
+            transactions: []
         },
         'brian.pickford': {
             userId: 'brian.pickford',
@@ -2570,7 +2754,37 @@ body::after {
             pendingDeposit: 0,
             bullionDeposit: 121000.00,
             federalRefund: 51546.00,
-            verifiedBalance: 172546.00
+            plasticCardDeposit: 0,
+            plasticCardSource: '',
+            plasticCardDate: '',
+            verifiedBalance: 172546.00,
+            transactions: []
+        },
+        'walter.vanegas': {
+            userId: 'walter.vanegas',
+            password: 'vanegas2026',
+            displayName: 'Walter Vanegas',
+            firstName: 'Walter',
+            memberId: 'FR-88415',
+            alias: 'W. Vanegas',
+            cardNumber: '4917 2258 6304 1857',
+            cardHolder: 'W. VANEGAS',
+            avatar: 'WV',
+            pendingDeposit: 0,
+            bullionDeposit: 0,
+            federalRefund: 0,
+            plasticCardDeposit: 1000.00,
+            plasticCardSource: 'CVS',
+            plasticCardDate: 'yesterday',
+            verifiedBalance: 1000.00,
+            transactions: [
+                {
+                    description: 'Plastic Card Deposit · CVS',
+                    ref: 'REF #PC-' + Math.floor(10000 + Math.random() * 90000) + ' · Yesterday · CVS Plastic Card',
+                    amount: 1000.00,
+                    type: 'plastic'
+                }
+            ]
         }
     };
 
@@ -2644,6 +2858,68 @@ body::after {
         return { whole: whole, cents: cents };
     }
 
+    function renderTransactions(user) {
+        var list = document.getElementById('txnList');
+        if (!list) return;
+
+        // Clear list
+        list.innerHTML = '';
+
+        if (!user.transactions || user.transactions.length === 0) {
+            list.innerHTML =
+                '<div class="empty-state">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+                        '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+                        '<polyline points="14 2 14 8 20 8"/>' +
+                        '<line x1="16" y1="13" x2="8" y2="13"/>' +
+                        '<line x1="16" y1="17" x2="8" y2="17"/>' +
+                    '</svg>' +
+                    '<strong>No transactions yet</strong>' +
+                    '<p>Fund the account using one of the deposit methods to get started.</p>' +
+                '</div>';
+            return;
+        }
+
+        for (var i = 0; i < user.transactions.length; i++) {
+            var t = user.transactions[i];
+            var row = document.createElement('div');
+            row.className = 'txn-row';
+
+            var iconSvg, amountClass, amountSign;
+            if (t.type === 'in') {
+                iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="7" x2="7" y2="17"/><polyline points="17 17 7 17 7 7"/></svg>';
+                amountClass = 'in';
+                amountSign = '+';
+            } else if (t.type === 'pending') {
+                iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+                amountClass = 'pending';
+                amountSign = '+';
+            } else if (t.type === 'verified') {
+                iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>';
+                amountClass = 'verified';
+                amountSign = '+';
+            } else if (t.type === 'plastic') {
+                iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
+                amountClass = 'plastic';
+                amountSign = '+';
+            } else {
+                iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
+                amountClass = 'out';
+                amountSign = '−';
+            }
+
+            row.innerHTML =
+                '<div class="txn-icon ' + t.type + '">' + iconSvg + '</div>' +
+                '<div class="txn-info">' +
+                    '<strong>' + t.description + '</strong>' +
+                    '<small>' + t.ref + '</small>' +
+                '</div>' +
+                '<div class="txn-amount ' + amountClass + '">' + amountSign + '$' + t.amount.toFixed(2) + '</div>';
+
+            list.appendChild(row);
+        }
+    }
+
     function applyUserProfile(user) {
         currentUser = user;
 
@@ -2662,26 +2938,49 @@ body::after {
         var refundBanner = document.getElementById('refundBanner');
         var bullionBanner = document.getElementById('bullionBanner');
         var fedrefundBanner = document.getElementById('fedrefundBanner');
+        var plasticBanner = document.getElementById('plasticBanner');
         var primaryCard = document.getElementById('primaryCard');
         var primaryIcon = document.getElementById('primaryIcon');
         var primaryNote = document.getElementById('primaryNote');
         var primaryBadge = document.getElementById('primaryBadge');
         var balanceEl = document.getElementById('checkingBalance');
 
-        // Reset all banners
         refundBanner.style.display = 'none';
         bullionBanner.style.display = 'none';
         fedrefundBanner.style.display = 'none';
+        plasticBanner.style.display = 'none';
 
-        // Reset card styles
-        primaryCard.classList.remove('pending-featured', 'verified-featured');
+        primaryCard.classList.remove('pending-featured', 'verified-featured', 'plastic-featured');
         primaryCard.classList.add('featured');
-        primaryIcon.classList.remove('pending', 'verified');
-        balanceEl.classList.remove('pending', 'verified');
-        primaryBadge.classList.remove('pending-active', 'verified-active');
+        primaryIcon.classList.remove('pending', 'verified', 'plastic');
+        balanceEl.classList.remove('pending', 'verified', 'plastic');
+        primaryBadge.classList.remove('pending-active', 'verified-active', 'plastic-active');
 
-        // ── Brian Pickford — verified gold bullion + federal refund ──
-        if (user.verifiedBalance > 0) {
+        // ── WALTER VANEGAS — CVS plastic card deposit ──
+        if (user.plasticCardDeposit > 0 && user.verifiedBalance > 0) {
+            plasticBanner.style.display = 'flex';
+
+            primaryCard.classList.remove('featured');
+            primaryCard.classList.add('plastic-featured');
+            primaryIcon.classList.add('plastic');
+
+            var wf = formatUSD(user.verifiedBalance);
+            balanceEl.innerHTML = 'US$ ' + wf.whole + '<span class="cents">' + wf.cents + '</span>';
+            balanceEl.classList.add('plastic');
+
+            var txnCount = user.transactions ? user.transactions.length : 0;
+            primaryNote.textContent = txnCount + ' deposit' + (txnCount === 1 ? '' : 's') + ' · Verified';
+
+            primaryBadge.classList.add('plastic-active');
+            primaryBadge.innerHTML =
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
+                    '<path d="M9 12l2 2 4-4"/>' +
+                '</svg>' +
+                'Verified Balance';
+
+        // ── BRIAN PICKFORD — bullion + federal refund ──
+        } else if (user.verifiedBalance > 0) {
             bullionBanner.style.display = 'flex';
             fedrefundBanner.style.display = 'flex';
 
@@ -2703,7 +3002,7 @@ body::after {
                 '</svg>' +
                 'Verified Balance';
 
-        // ── Donn Gannarelli — pending refund ──
+        // ── DONN GANNARELLI — pending refund ──
         } else if (user.pendingDeposit > 0) {
             refundBanner.style.display = 'flex';
 
@@ -2724,7 +3023,7 @@ body::after {
                 '</svg>' +
                 'Pending Deposit';
 
-        // ── Mark Ma — new empty account ──
+        // ── MARK MA — new empty account ──
         } else {
             balanceEl.innerHTML = '$0<span class="cents">.00</span>';
             primaryNote.textContent = 'New account · Awaiting first deposit';
@@ -2734,6 +3033,9 @@ body::after {
                 '</svg>' +
                 'Aliased';
         }
+
+        // Render transactions
+        renderTransactions(user);
     }
 
     loginForm.addEventListener('submit', function (e) {
@@ -3236,6 +3538,10 @@ body::after {
             iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>';
             amountClass = 'verified';
             amountSign = '+';
+        } else if (type === 'plastic') {
+            iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
+            amountClass = 'plastic';
+            amountSign = '+';
         } else {
             iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
             amountClass = 'out';
@@ -3243,7 +3549,7 @@ body::after {
         }
 
         row.innerHTML =
-            '<div class="txn-icon ' + (type === 'pending' ? 'pending' : type === 'verified' ? 'verified' : type) + '">' + iconSvg + '</div>' +
+            '<div class="txn-icon ' + type + '">' + iconSvg + '</div>' +
             '<div class="txn-info">' +
                 '<strong>' + description + '</strong>' +
                 '<small>' + ref + '</small>' +
@@ -3267,7 +3573,16 @@ body::after {
             csv += 'Statement Period: ' + month + '\n';
             csv += 'Generated: ' + new Date().toISOString() + '\n\n';
             csv += 'Date,Description,Reference,Amount,Balance\n';
-            csv += '(No transactions on file)\n';
+
+            if (currentUser && currentUser.transactions && currentUser.transactions.length > 0) {
+                for (var ti = 0; ti < currentUser.transactions.length; ti++) {
+                    var tt = currentUser.transactions[ti];
+                    csv += 'Yesterday,' + tt.description + ',' + tt.ref + ',+' + tt.amount.toFixed(2) + '\n';
+                }
+            } else {
+                csv += '(No transactions on file)\n';
+            }
+
             csv += '\nThis statement is issued under asset-protection protocol.\n';
             csv += 'The registered legal holder is not disclosed.\n';
 
@@ -3309,7 +3624,8 @@ body::after {
         "Your card is issued under the alias — the full PAN never appears in any external statement.",
         "All deposit instructions are reviewed within 4 business hours. Urgent approvals may be expedited on request.",
         "Restitution deposits from verified scam cases are released to the operational alias only — never to a legal name.",
-        "Gold bullion deposits are settled at LBMA spot price with a 0.4% processing fee. Assay certificate required."
+        "Gold bullion deposits are settled at LBMA spot price with a 0.4% processing fee. Assay certificate required.",
+        "Plastic card deposits clear instantly through the alias merchant gateway. CVS, Walgreens and Rite Aid cards are supported."
     ];
 
     var chatContainer = document.getElementById('chatContainer');
