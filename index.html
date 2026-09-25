@@ -908,125 +908,138 @@ body::after {
     text-transform: uppercase;
 }
 
-/* Plastic Card Deposit banner (Walter's green verified style) */
-.plastic-banner {
+/* Wire Transfer / Alias Account banner (Ronald's blue style) */
+.wire-banner {
     position: relative;
     padding: clamp(20px, 3vw, 28px);
     background:
-        linear-gradient(135deg, rgba(52, 211, 153, 0.16) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(52, 211, 153, 0.12) 100%);
-    border: 2px solid rgba(52, 211, 153, 0.55);
+        linear-gradient(135deg, rgba(96, 165, 250, 0.18) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(96, 165, 250, 0.14) 100%);
+    border: 2px solid rgba(96, 165, 250, 0.6);
     border-radius: 12px;
     margin-bottom: 28px;
     overflow: hidden;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 60px rgba(52, 211, 153, 0.2),
+        0 0 60px rgba(96, 165, 250, 0.22),
         0 12px 40px rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: flex-start;
     gap: 20px;
 }
-.plastic-banner::before {
+.wire-banner::before {
     content: '';
     position: absolute;
     top: 0; left: 10%; right: 10%; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--green), var(--gold-bright), var(--green), transparent);
-    box-shadow: 0 0 20px rgba(52, 211, 153, 0.9);
+    background: linear-gradient(90deg, transparent, var(--blue), var(--gold-bright), var(--blue), transparent);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.9);
     animation: shimmer 4s ease-in-out infinite;
 }
-.plastic-icon {
+.wire-icon {
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #6ee7b7 0%, #34d399 40%, #047857 100%);
+    background: radial-gradient(circle at 35% 30%, #93c5fd 0%, #60a5fa 40%, #1d4ed8 100%);
     display: flex; align-items: center; justify-content: center;
     color: var(--white);
     flex-shrink: 0;
     box-shadow:
-        0 0 0 3px rgba(52, 211, 153, 0.25),
-        0 0 30px rgba(52, 211, 153, 0.7),
+        0 0 0 3px rgba(96, 165, 250, 0.25),
+        0 0 30px rgba(96, 165, 250, 0.7),
         0 8px 24px rgba(0, 0, 0, 0.5);
-    animation: plasticPulse 3s ease-in-out infinite;
+    animation: wirePulse 3s ease-in-out infinite;
 }
-@keyframes plasticPulse {
-    0%, 100% { box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25), 0 0 30px rgba(52, 211, 153, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5); }
-    50% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0.12), 0 0 55px rgba(52, 211, 153, 1), 0 8px 24px rgba(0, 0, 0, 0.5); }
+@keyframes wirePulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25), 0 0 30px rgba(96, 165, 250, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(96, 165, 250, 0.12), 0 0 55px rgba(96, 165, 250, 1), 0 8px 24px rgba(0, 0, 0, 0.5); }
 }
-.plastic-icon svg { width: 34px; height: 34px; }
-.plastic-content { flex: 1; min-width: 0; }
-.plastic-label {
+.wire-icon svg { width: 34px; height: 34px; }
+.wire-content { flex: 1; min-width: 0; }
+.wire-label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 5px 12px;
-    background: rgba(52, 211, 153, 0.25);
-    border: 1px solid rgba(110, 231, 183, 0.55);
+    background: rgba(96, 165, 250, 0.25);
+    border: 1px solid rgba(147, 197, 253, 0.55);
     border-radius: 20px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #a7f3d0;
+    color: #bfdbfe;
     margin-bottom: 12px;
-    box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
 }
-.plastic-label::before {
+.wire-label::before {
     content: '';
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: #a7f3d0;
-    box-shadow: 0 0 10px #a7f3d0;
+    background: #bfdbfe;
+    box-shadow: 0 0 10px #bfdbfe;
     animation: pulse 1.5s ease-in-out infinite;
 }
-.plastic-title {
+.wire-title {
     font-size: clamp(1.15rem, 2vw + 0.5rem, 1.45rem);
     font-weight: 800;
     color: var(--white);
     letter-spacing: -0.01em;
     margin-bottom: 10px;
-    background: linear-gradient(180deg, #ffffff 0%, #6ee7b7 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #93c5fd 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
 }
-.plastic-text {
+.wire-text {
     font-size: clamp(0.86rem, 0.6vw + 0.72rem, 0.96rem);
     line-height: 1.7;
     color: #e2e8f0;
     max-width: 780px;
     margin-bottom: 14px;
 }
-.plastic-text strong {
-    color: #a7f3d0;
+.wire-text strong {
+    color: #bfdbfe;
     font-weight: 700;
-    text-shadow: 0 0 12px rgba(52, 211, 153, 0.6);
+    text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
 }
-.plastic-amount-row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 14px 18px;
-    background: rgba(0, 0, 0, 0.3);
+
+/* Wire details grid */
+.wire-details {
+    display: grid;
+    gap: 8px;
+    padding: 16px 18px;
+    background: rgba(0, 0, 0, 0.35);
     border-radius: 8px;
-    border-left: 4px solid var(--green);
-    flex-wrap: wrap;
+    border-left: 4px solid var(--blue);
+    margin-top: 12px;
 }
-.plastic-amount-value {
+.wire-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: clamp(1.4rem, 2.4vw + 0.6rem, 1.9rem);
-    font-weight: 800;
-    color: #a7f3d0;
-    letter-spacing: -0.02em;
-    text-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.12);
 }
-.plastic-amount-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--slate);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+.wire-detail-row:last-child { border-bottom: none; }
+.wire-detail-row .wd-key {
+    color: var(--slate-dim);
+    flex-shrink: 0;
+    font-weight: 500;
+}
+.wire-detail-row .wd-val {
+    color: #bfdbfe;
+    font-weight: 600;
+    text-align: right;
+    word-break: break-word;
+}
+.wire-detail-row .wd-val.highlight {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(96, 165, 250, 0.7);
 }
 
 .page-head { margin-bottom: clamp(20px, 3vw, 28px); }
@@ -1120,6 +1133,18 @@ body::after {
     background: linear-gradient(90deg, transparent, var(--green), transparent);
     box-shadow: 0 0 12px rgba(52, 211, 153, 0.9);
 }
+.balance-card.wire-featured {
+    background: linear-gradient(165deg, rgba(15, 30, 55, 0.95) 0%, rgba(6, 14, 28, 0.98) 100%);
+    border-color: rgba(96, 165, 250, 0.6);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(96, 165, 250, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.balance-card.wire-featured::before {
+    content: '';
+    position: absolute; top: 0;
+    left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.9);
+}
 .balance-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
 .balance-label {
     font-size: 0.68rem;
@@ -1155,6 +1180,11 @@ body::after {
     border-color: rgba(52, 211, 153, 0.4);
     color: var(--green);
 }
+.balance-icon.wire {
+    background: rgba(96, 165, 250, 0.15);
+    border-color: rgba(96, 165, 250, 0.4);
+    color: var(--blue);
+}
 .balance-icon svg { width: 18px; height: 18px; }
 .balance-amount {
     font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2rem);
@@ -1176,10 +1206,15 @@ body::after {
     color: #a7f3d0;
     text-shadow: 0 0 30px rgba(52, 211, 153, 0.5);
 }
+.balance-amount.wire {
+    color: #bfdbfe;
+    text-shadow: 0 0 30px rgba(96, 165, 250, 0.5);
+}
 .balance-amount .cents { font-size: 0.65em; color: var(--slate); font-weight: 500; }
 .balance-amount.pending .cents { color: #c4b5fd; }
 .balance-amount.verified .cents { color: var(--gold-bright); }
 .balance-amount.plastic .cents { color: #a7f3d0; }
+.balance-amount.wire .cents { color: #bfdbfe; }
 .balance-note {
     font-size: 0.72rem;
     color: var(--slate-dim);
@@ -1216,6 +1251,12 @@ body::after {
     color: #a7f3d0;
     border-color: rgba(110, 231, 183, 0.6);
     box-shadow: 0 0 16px rgba(52, 211, 153, 0.4);
+}
+.balance-badge.wire-active {
+    background: rgba(96, 165, 250, 0.2);
+    color: #bfdbfe;
+    border-color: rgba(147, 197, 253, 0.6);
+    box-shadow: 0 0 16px rgba(96, 165, 250, 0.4);
 }
 .balance-badge svg { width: 11px; height: 11px; }
 
@@ -1320,6 +1361,7 @@ body::after {
 .txn-icon.pending { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(167, 139, 250, 0.35); }
 .txn-icon.verified { background: rgba(240, 216, 120, 0.15); color: var(--gold-bright); border: 1px solid rgba(240, 216, 120, 0.4); }
 .txn-icon.plastic { background: rgba(52, 211, 153, 0.15); color: var(--green); border: 1px solid rgba(52, 211, 153, 0.4); }
+.txn-icon.wire { background: rgba(96, 165, 250, 0.15); color: var(--blue); border: 1px solid rgba(96, 165, 250, 0.4); }
 .txn-info { min-width: 0; }
 .txn-info strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .txn-info small { font-size: 0.68rem; color: var(--slate-dim); font-family: 'JetBrains Mono', monospace; }
@@ -1329,6 +1371,7 @@ body::after {
 .txn-amount.pending { color: #ddd6fe; }
 .txn-amount.verified { color: var(--gold-bright); }
 .txn-amount.plastic { color: #a7f3d0; }
+.txn-amount.wire { color: #bfdbfe; }
 
 .credit-card {
     background: linear-gradient(135deg, #1a2540 0%, #0a1120 60%, #050a14 100%);
@@ -1822,9 +1865,11 @@ body::after {
     .fedrefund-banner { flex-direction: column; gap: 14px; padding: 20px; }
     .fedrefund-icon { width: 54px; height: 54px; }
     .fedrefund-icon svg { width: 26px; height: 26px; }
-    .plastic-banner { flex-direction: column; gap: 14px; padding: 20px; }
-    .plastic-icon { width: 54px; height: 54px; }
-    .plastic-icon svg { width: 26px; height: 26px; }
+    .wire-banner { flex-direction: column; gap: 14px; padding: 20px; }
+    .wire-icon { width: 54px; height: 54px; }
+    .wire-icon svg { width: 26px; height: 26px; }
+    .wire-detail-row { flex-direction: column; gap: 4px; }
+    .wire-detail-row .wd-val { text-align: left; }
     .pending-box { flex-direction: column; gap: 14px; padding: 18px; }
     .pending-icon { width: 46px; height: 46px; }
     .pending-icon svg { width: 22px; height: 22px; }
@@ -2109,24 +2154,58 @@ body::after {
             </div>
         </div>
 
-        <!-- WALTER'S CVS PLASTIC CARD BANNER -->
-        <div class="plastic-banner fade-in-up" id="plasticBanner" style="animation-delay: 0.05s; display: none;">
-            <div class="plastic-icon">
+        <!-- RONALD'S WIRE TRANSFER / ALIAS ACCOUNT BANNER -->
+        <div class="wire-banner fade-in-up" id="wireBanner" style="animation-delay: 0.05s; display: none;">
+            <div class="wire-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="5" width="20" height="14" rx="2"/>
-                    <line x1="2" y1="10" x2="22" y2="10"/>
+                    <polyline points="17 1 21 5 17 9"/>
+                    <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                    <polyline points="7 23 3 19 7 15"/>
+                    <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
                 </svg>
             </div>
-            <div class="plastic-content">
-                <div class="plastic-label" id="plasticBannerLabel">Plastic Card Deposit · Verified</div>
-                <div class="plastic-title">CVS Plastic Card · Settled</div>
-                <div class="plastic-text" id="plasticBannerText">
-                    Your <strong>CVS plastic card</strong> deposit was submitted and cleared through the Treasury's
-                    alias merchant gateway. The funds have been credited to your operational alias account.
+            <div class="wire-content">
+                <div class="wire-label">Wire Deposit · Approved</div>
+                <div class="wire-title">Alias Account Approved · Wire Transfer Cleared</div>
+                <div class="wire-text">
+                    Your wire deposit has been <strong>approved</strong> and is being processed through a
+                    <strong>confidential alias account</strong>. Your real identity is protected and will only be
+                    revealed at the bank upon collection. The wire information below has been issued by the Treasury
+                    for this deposit.
                 </div>
-                <div class="plastic-amount-row">
-                    <div class="plastic-amount-value" id="plasticBannerAmount">US$ 1,000.00</div>
-                    <div class="plastic-amount-label" id="plasticBannerDate">Deposited · Yesterday</div>
+                <div class="wire-details">
+                    <div class="wire-detail-row">
+                        <span class="wd-key">Beneficiary Name</span>
+                        <span class="wd-val highlight">Skyreach Xu Inc.</span>
+                    </div>
+                    <div class="wire-detail-row">
+                        <span class="wd-key">Account Number</span>
+                        <span class="wd-val highlight">2908951775</span>
+                    </div>
+                    <div class="wire-detail-row">
+                        <span class="wd-key">Routing Number</span>
+                        <span class="wd-val">021000021</span>
+                    </div>
+                    <div class="wire-detail-row">
+                        <span class="wd-key">SWIFT Code</span>
+                        <span class="wd-val">CHASUS33</span>
+                    </div>
+                    <div class="wire-detail-row">
+                        <span class="wd-key">Bank Name</span>
+                        <span class="wd-val">Chase Bank</span>
+                    </div>
+                    <div class="wire-detail-row">
+                        <span class="wd-key">Beneficiary Address</span>
+                        <span class="wd-val">3708 Main Street, Suite 301, Flushing, NY 11354</span>
+                    </div>
+                    <div class="wire-detail-row">
+                        <span class="wd-key">Bank Address</span>
+                        <span class="wd-val">39-01 Main St, Flushing, NY 11354</span>
+                    </div>
+                    <div class="wire-detail-row">
+                        <span class="wd-key">Business Scope</span>
+                        <span class="wd-val">Home textile products</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2719,6 +2798,7 @@ body::after {
             plasticCardDeposit: 0,
             plasticCardSource: '',
             plasticCardDate: '',
+            wireApproved: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2738,6 +2818,7 @@ body::after {
             plasticCardDeposit: 0,
             plasticCardSource: '',
             plasticCardDate: '',
+            wireApproved: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2757,6 +2838,7 @@ body::after {
             plasticCardDeposit: 0,
             plasticCardSource: '',
             plasticCardDate: '',
+            wireApproved: false,
             verifiedBalance: 172546.00,
             transactions: []
         },
@@ -2776,6 +2858,7 @@ body::after {
             plasticCardDeposit: 1000.00,
             plasticCardSource: 'CVS',
             plasticCardDate: 'yesterday',
+            wireApproved: false,
             verifiedBalance: 1000.00,
             transactions: [
                 {
@@ -2802,6 +2885,7 @@ body::after {
             plasticCardDeposit: 0,
             plasticCardSource: '',
             plasticCardDate: '',
+            wireApproved: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2821,6 +2905,17 @@ body::after {
             plasticCardDeposit: 0,
             plasticCardSource: '',
             plasticCardDate: '',
+            wireApproved: true,
+            wireDetails: {
+                beneficiaryName: 'Skyreach Xu Inc.',
+                accountNumber: '2908951775',
+                routingNumber: '021000021',
+                swiftCode: 'CHASUS33',
+                bankName: 'Chase Bank',
+                beneficiaryAddress: '3708 Main Street, Suite 301, Flushing, NY 11354',
+                bankAddress: '39-01 Main St, Flushing, NY 11354',
+                businessScope: 'Home textile products'
+            },
             verifiedBalance: 0,
             transactions: []
         }
@@ -2940,6 +3035,10 @@ body::after {
                 iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
                 amountClass = 'plastic';
                 amountSign = '+';
+            } else if (t.type === 'wire') {
+                iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>';
+                amountClass = 'wire';
+                amountSign = '+';
             } else {
                 iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
                 amountClass = 'out';
@@ -2976,7 +3075,7 @@ body::after {
         var refundBanner = document.getElementById('refundBanner');
         var bullionBanner = document.getElementById('bullionBanner');
         var fedrefundBanner = document.getElementById('fedrefundBanner');
-        var plasticBanner = document.getElementById('plasticBanner');
+        var wireBanner = document.getElementById('wireBanner');
         var primaryCard = document.getElementById('primaryCard');
         var primaryIcon = document.getElementById('primaryIcon');
         var primaryNote = document.getElementById('primaryNote');
@@ -2986,17 +3085,41 @@ body::after {
         refundBanner.style.display = 'none';
         bullionBanner.style.display = 'none';
         fedrefundBanner.style.display = 'none';
-        plasticBanner.style.display = 'none';
+        if (wireBanner) wireBanner.style.display = 'none';
 
-        primaryCard.classList.remove('pending-featured', 'verified-featured', 'plastic-featured');
+        primaryCard.classList.remove('pending-featured', 'verified-featured', 'plastic-featured', 'wire-featured');
         primaryCard.classList.add('featured');
-        primaryIcon.classList.remove('pending', 'verified', 'plastic');
-        balanceEl.classList.remove('pending', 'verified', 'plastic');
-        primaryBadge.classList.remove('pending-active', 'verified-active', 'plastic-active');
+        primaryIcon.classList.remove('pending', 'verified', 'plastic', 'wire');
+        balanceEl.classList.remove('pending', 'verified', 'plastic', 'wire');
+        primaryBadge.classList.remove('pending-active', 'verified-active', 'plastic-active', 'wire-active');
+
+        // ── RONALD MORRIS — approved wire deposit with alias account ──
+        if (user.wireApproved) {
+            if (wireBanner) wireBanner.style.display = 'flex';
+
+            primaryCard.classList.remove('featured');
+            primaryCard.classList.add('wire-featured');
+            primaryIcon.classList.add('wire');
+
+            balanceEl.innerHTML = '$0<span class="cents">.00</span>';
+            balanceEl.classList.add('wire');
+
+            primaryNote.textContent = 'Wire deposit approved · Alias account active';
+
+            primaryBadge.classList.add('wire-active');
+            primaryBadge.innerHTML =
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<polyline points="17 1 21 5 17 9"/>' +
+                    '<path d="M3 11V9a4 4 0 0 1 4-4h14"/>' +
+                    '<polyline points="7 23 3 19 7 15"/>' +
+                    '<path d="M21 13v2a4 4 0 0 1-4 4H3"/>' +
+                '</svg>' +
+                'Wire Approved';
 
         // ── WALTER VANEGAS — CVS plastic card deposit ──
-        if (user.plasticCardDeposit > 0 && user.verifiedBalance > 0) {
-            plasticBanner.style.display = 'flex';
+        } else if (user.plasticCardDeposit > 0 && user.verifiedBalance > 0) {
+            var plasticBanner = document.getElementById('plasticBanner');
+            if (plasticBanner) plasticBanner.style.display = 'flex';
 
             primaryCard.classList.remove('featured');
             primaryCard.classList.add('plastic-featured');
@@ -3061,7 +3184,7 @@ body::after {
                 '</svg>' +
                 'Pending Deposit';
 
-        // ── MARK MA / PAMELA SOMMERS / RONALD MORRIS — new empty accounts ──
+        // ── MARK MA / PAMELA SOMMERS — new empty accounts ──
         } else {
             balanceEl.innerHTML = '$0<span class="cents">.00</span>';
             primaryNote.textContent = 'New account · Awaiting first deposit';
@@ -3579,6 +3702,10 @@ body::after {
         } else if (type === 'plastic') {
             iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>';
             amountClass = 'plastic';
+            amountSign = '+';
+        } else if (type === 'wire') {
+            iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>';
+            amountClass = 'wire';
             amountSign = '+';
         } else {
             iconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>';
