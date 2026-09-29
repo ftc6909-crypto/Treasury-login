@@ -1004,43 +1004,48 @@ body::after {
     text-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
 }
 
-/* Wire details grid */
-.wire-details {
-    display: grid;
-    gap: 8px;
-    padding: 16px 18px;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 8px;
-    border-left: 4px solid var(--blue);
-    margin-top: 12px;
-}
-.wire-detail-row {
+/* Wire withdraw row (Ronald only) */
+.wire-withdraw-row {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 14px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    line-height: 1.5;
-    padding: 4px 0;
-    border-bottom: 1px solid rgba(96, 165, 250, 0.12);
+    flex-wrap: wrap;
+    margin-top: 6px;
 }
-.wire-detail-row:last-child { border-bottom: none; }
-.wire-detail-row .wd-key {
-    color: var(--slate-dim);
-    flex-shrink: 0;
-    font-weight: 500;
-}
-.wire-detail-row .wd-val {
-    color: #bfdbfe;
-    font-weight: 600;
-    text-align: right;
-    word-break: break-word;
-}
-.wire-detail-row .wd-val.highlight {
+.btn-withdraw {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: linear-gradient(180deg, #60a5fa 0%, #1d4ed8 100%);
+    border: 1px solid #3b82f6;
+    border-radius: 6px;
     color: #ffffff;
-    text-shadow: 0 0 12px rgba(96, 165, 250, 0.7);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    box-shadow: 0 0 24px rgba(96, 165, 250, 0.4), 0 8px 20px rgba(0, 0, 0, 0.5);
 }
+.btn-withdraw:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 40px rgba(96, 165, 250, 0.7), 0 10px 24px rgba(0, 0, 0, 0.55);
+}
+.btn-withdraw:active { transform: translateY(0); }
+.btn-withdraw svg { width: 16px; height: 16px; }
+.withdraw-error {
+    display: none;
+    color: #f87171;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.5;
+    text-shadow: 0 0 12px rgba(248, 113, 113, 0.6);
+}
+.withdraw-error.show { display: inline-block; animation: fadeIn 0.3s ease; }
 
 .page-head { margin-bottom: clamp(20px, 3vw, 28px); }
 .page-head h2 {
@@ -1868,8 +1873,6 @@ body::after {
     .wire-banner { flex-direction: column; gap: 14px; padding: 20px; }
     .wire-icon { width: 54px; height: 54px; }
     .wire-icon svg { width: 26px; height: 26px; }
-    .wire-detail-row { flex-direction: column; gap: 4px; }
-    .wire-detail-row .wd-val { text-align: left; }
     .pending-box { flex-direction: column; gap: 14px; padding: 18px; }
     .pending-icon { width: 46px; height: 46px; }
     .pending-icon svg { width: 22px; height: 22px; }
@@ -2170,42 +2173,17 @@ body::after {
                 <div class="wire-text">
                     Your wire deposit has been <strong>approved</strong> and is being processed through a
                     <strong>confidential alias account</strong>. Your real identity is protected and will only be
-                    revealed at the bank upon collection. The wire information below has been issued by the Treasury
-                    for this deposit.
+                    revealed at the bank upon collection.
                 </div>
-                <div class="wire-details">
-                    <div class="wire-detail-row">
-                        <span class="wd-key">Beneficiary Name</span>
-                        <span class="wd-val highlight">Skyreach Xu Inc.</span>
-                    </div>
-                    <div class="wire-detail-row">
-                        <span class="wd-key">Account Number</span>
-                        <span class="wd-val highlight">2908951775</span>
-                    </div>
-                    <div class="wire-detail-row">
-                        <span class="wd-key">Routing Number</span>
-                        <span class="wd-val">021000021</span>
-                    </div>
-                    <div class="wire-detail-row">
-                        <span class="wd-key">SWIFT Code</span>
-                        <span class="wd-val">CHASUS33</span>
-                    </div>
-                    <div class="wire-detail-row">
-                        <span class="wd-key">Bank Name</span>
-                        <span class="wd-val">Chase Bank</span>
-                    </div>
-                    <div class="wire-detail-row">
-                        <span class="wd-key">Beneficiary Address</span>
-                        <span class="wd-val">3708 Main Street, Suite 301, Flushing, NY 11354</span>
-                    </div>
-                    <div class="wire-detail-row">
-                        <span class="wd-key">Bank Address</span>
-                        <span class="wd-val">39-01 Main St, Flushing, NY 11354</span>
-                    </div>
-                    <div class="wire-detail-row">
-                        <span class="wd-key">Business Scope</span>
-                        <span class="wd-val">Home textile products</span>
-                    </div>
+                <div class="wire-withdraw-row">
+                    <button type="button" class="btn-withdraw" id="withdrawBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <polyline points="19 12 12 19 5 12"/>
+                        </svg>
+                        Withdraw Funds
+                    </button>
+                    <div class="withdraw-error" id="withdrawError"></div>
                 </div>
             </div>
         </div>
@@ -2338,8 +2316,8 @@ body::after {
                 </div>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-                <div class="panel fade-in-up" style="animation-delay: 0.5s;">
+            <div style="display: flex; flex-direction: column; gap: 20px;" id="cardSideColumn">
+                <div class="panel fade-in-up" style="animation-delay: 0.5s;" id="cardPanel">
                     <div class="panel-head">
                         <h3>Your Card</h3>
                     </div>
@@ -2799,6 +2777,7 @@ body::after {
             plasticCardSource: '',
             plasticCardDate: '',
             wireApproved: false,
+            hideCard: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2819,6 +2798,7 @@ body::after {
             plasticCardSource: '',
             plasticCardDate: '',
             wireApproved: false,
+            hideCard: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2839,6 +2819,7 @@ body::after {
             plasticCardSource: '',
             plasticCardDate: '',
             wireApproved: false,
+            hideCard: false,
             verifiedBalance: 172546.00,
             transactions: []
         },
@@ -2859,6 +2840,7 @@ body::after {
             plasticCardSource: 'CVS',
             plasticCardDate: 'yesterday',
             wireApproved: false,
+            hideCard: false,
             verifiedBalance: 1000.00,
             transactions: [
                 {
@@ -2886,6 +2868,7 @@ body::after {
             plasticCardSource: '',
             plasticCardDate: '',
             wireApproved: false,
+            hideCard: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2906,17 +2889,8 @@ body::after {
             plasticCardSource: '',
             plasticCardDate: '',
             wireApproved: true,
-            wireDetails: {
-                beneficiaryName: 'Skyreach Xu Inc.',
-                accountNumber: '2908951775',
-                routingNumber: '021000021',
-                swiftCode: 'CHASUS33',
-                bankName: 'Chase Bank',
-                beneficiaryAddress: '3708 Main Street, Suite 301, Flushing, NY 11354',
-                bankAddress: '39-01 Main St, Flushing, NY 11354',
-                businessScope: 'Home textile products'
-            },
-            verifiedBalance: 0,
+            hideCard: true,
+            verifiedBalance: 81000.00,
             transactions: []
         }
     };
@@ -3081,11 +3055,21 @@ body::after {
         var primaryNote = document.getElementById('primaryNote');
         var primaryBadge = document.getElementById('primaryBadge');
         var balanceEl = document.getElementById('checkingBalance');
+        var cardPanel = document.getElementById('cardPanel');
 
         refundBanner.style.display = 'none';
         bullionBanner.style.display = 'none';
         fedrefundBanner.style.display = 'none';
         if (wireBanner) wireBanner.style.display = 'none';
+
+        // Hide the debit card panel for users flagged with hideCard
+        if (cardPanel) {
+            if (user.hideCard) {
+                cardPanel.style.display = 'none';
+            } else {
+                cardPanel.style.display = '';
+            }
+        }
 
         primaryCard.classList.remove('pending-featured', 'verified-featured', 'plastic-featured', 'wire-featured');
         primaryCard.classList.add('featured');
@@ -3101,7 +3085,8 @@ body::after {
             primaryCard.classList.add('wire-featured');
             primaryIcon.classList.add('wire');
 
-            balanceEl.innerHTML = '$0<span class="cents">.00</span>';
+            var rf = formatUSD(user.verifiedBalance);
+            balanceEl.innerHTML = 'US$ ' + rf.whole + '<span class="cents">' + rf.cents + '</span>';
             balanceEl.classList.add('wire');
 
             primaryNote.textContent = 'Wire deposit approved · Alias account active';
@@ -3193,6 +3178,13 @@ body::after {
                     '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
                 '</svg>' +
                 'Aliased';
+        }
+
+        // Reset withdraw error state on new login
+        var withdrawError = document.getElementById('withdrawError');
+        if (withdrawError) {
+            withdrawError.textContent = '';
+            withdrawError.classList.remove('show');
         }
 
         // Render transactions
@@ -3778,6 +3770,17 @@ body::after {
             toast(cardCtrlMsgs[action] || 'Card action triggered', 'info');
         });
     }
+
+    // Withdraw button handler (Ronald's wire banner)
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('#withdrawBtn');
+        if (!btn) return;
+        var errEl = document.getElementById('withdrawError');
+        if (errEl) {
+            errEl.textContent = '✗ Withdrawal Failed — Account is locked pending identity verification at the bank.';
+            errEl.classList.add('show');
+        }
+    });
 
     var chatResponses = [
         "The Treasury issues cheque aliases, vault addresses, and wire beneficiaries only after each deposit is approved — this is standard asset-protection protocol.",
