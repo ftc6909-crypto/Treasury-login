@@ -1036,16 +1036,6 @@ body::after {
 }
 .btn-withdraw:active { transform: translateY(0); }
 .btn-withdraw svg { width: 16px; height: 16px; }
-.withdraw-error {
-    display: none;
-    color: #f87171;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-    font-weight: 700;
-    line-height: 1.5;
-    text-shadow: 0 0 12px rgba(248, 113, 113, 0.6);
-}
-.withdraw-error.show { display: inline-block; animation: fadeIn 0.3s ease; }
 
 .page-head { margin-bottom: clamp(20px, 3vw, 28px); }
 .page-head h2 {
@@ -1834,6 +1824,170 @@ body::after {
 }
 .shake { animation: shake 0.35s ease; }
 
+/* ── Modal ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-y: auto;
+}
+.modal-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+.modal-box {
+    background: linear-gradient(165deg, rgba(13, 21, 38, 0.98) 0%, rgba(5, 10, 20, 0.99) 100%);
+    border: 1px solid rgba(71, 85, 105, 0.6);
+    border-radius: 10px;
+    padding: clamp(20px, 3vw, 30px);
+    max-width: 540px;
+    width: 100%;
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.15), 0 24px 70px rgba(0, 0, 0, 0.8), 0 0 120px rgba(96, 165, 250, 0.12);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.modal-box::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 20%; right: 20%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.8);
+}
+.modal-title {
+    font-size: clamp(1.1rem, 1.6vw + 0.5rem, 1.35rem);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+}
+.modal-sub {
+    font-size: 0.75rem;
+    color: var(--slate-dim);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 20px;
+}
+.modal-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--slate);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+.modal-close:hover { color: var(--red); border-color: rgba(248, 113, 113, 0.5); background: rgba(248, 113, 113, 0.1); }
+.modal-close svg { width: 16px; height: 16px; }
+
+.wf-balance-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.84rem;
+}
+.wf-balance-row .k { color: var(--slate-dim); }
+.wf-balance-row .v { color: #ffffff; font-weight: 700; }
+.wf-balance-row .v.over { color: var(--red); text-shadow: 0 0 12px rgba(248, 113, 113, 0.6); font-size: 1.05em; }
+
+.alert-danger {
+    padding: 18px 20px;
+    background: linear-gradient(180deg, rgba(248, 113, 113, 0.14) 0%, rgba(248, 113, 113, 0.05) 100%);
+    border: 1.5px solid rgba(248, 113, 113, 0.55);
+    border-radius: 8px;
+    margin: 16px 0 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+.alert-danger-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(248, 113, 113, 0.2);
+    border: 1px solid rgba(248, 113, 113, 0.5);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--red);
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(248, 113, 113, 0.4);
+    animation: pendingPulse 2.4s ease-in-out infinite;
+}
+.alert-danger-icon svg { width: 22px; height: 22px; }
+.alert-danger-body { flex: 1; min-width: 0; }
+.alert-danger-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+}
+.alert-danger-text {
+    font-size: 0.84rem;
+    line-height: 1.7;
+    color: #fecaca;
+    font-family: 'JetBrains Mono', monospace;
+}
+.alert-danger-text strong { color: #ffffff; }
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.btn-modal-secondary {
+    flex: 1;
+    padding: 13px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--slate);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    min-height: 48px;
+}
+.btn-modal-secondary:hover { color: var(--gold); border-color: var(--gold-dim); background: rgba(212, 175, 55, 0.08); }
+.btn-modal-primary {
+    flex: 1;
+    padding: 13px 18px;
+    background: linear-gradient(180deg, #d4af37 0%, #8a7324 100%);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    color: var(--navy);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    min-height: 48px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.btn-modal-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
+.btn-modal-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    background: rgba(212, 175, 55, 0.2);
+    border-color: rgba(212, 175, 55, 0.3);
+    color: rgba(255, 255, 255, 0.5);
+}
+
 @media (min-width: 900px) { .main-nav { display: flex; } }
 @media (max-width: 900px) {
     .menu-btn { display: flex; }
@@ -1876,6 +2030,7 @@ body::after {
     .pending-box { flex-direction: column; gap: 14px; padding: 18px; }
     .pending-icon { width: 46px; height: 46px; }
     .pending-icon svg { width: 22px; height: 22px; }
+    .wf-balance-row { flex-direction: column; gap: 4px; align-items: flex-start; }
 }
 @media (max-width: 560px) {
     .brand-text { display: none; }
@@ -2183,7 +2338,6 @@ body::after {
                         </svg>
                         Withdraw Funds
                     </button>
-                    <div class="withdraw-error" id="withdrawError"></div>
                 </div>
             </div>
         </div>
@@ -2494,12 +2648,55 @@ body::after {
                 </svg>
             </div>
             <h2 class="action-title">Deposit Funds</h2>
-            <p class="action-desc">
+            <p class="action-desc" id="depositDescStandard">
                 Choose a funding method below. Every deposit is recorded under your operational alias — no
                 counterparty will ever see your legal name. <strong style="color:#f0d878;">Alias details, vault
                 addresses, and wire beneficiary instructions are generated by the Treasury only after each
                 deposit is approved.</strong>
             </p>
+
+            <!-- RONALD MORRIS ONLY — Cashier's Cheque special notice -->
+            <div class="pending-box" id="ronaldChequeNotice" style="display: none; border-color: rgba(240, 216, 120, 0.7); background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(240, 216, 120, 0.06) 100%);">
+                <div class="pending-icon" style="background: linear-gradient(135deg, #f0d878 0%, #8a7324 100%); color: #1a1206;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="9" y1="15" x2="15" y2="15"/>
+                        <line x1="9" y1="18" x2="13" y2="18"/>
+                    </svg>
+                </div>
+                <div class="pending-content">
+                    <div class="pending-label" style="background: rgba(240, 216, 120, 0.25); border-color: rgba(240, 216, 120, 0.6); color: #f0d878;">Cashier's Cheque · Treasury Deposit Instruction</div>
+                    <div class="pending-title" style="color: #ffffff;">Make the Cashier's Cheque Payable to the Company Below</div>
+                    <div class="pending-text" style="color: #e2e8f0; margin-bottom: 16px;">
+                        To deposit funds into your Treasury account and <strong style="color:#f0d878;">unlock your wire transfer to Wells Fargo</strong>,
+                        you must obtain a <strong style="color:#f0d878;">Cashier's Cheque</strong> made out in the company name below. The
+                        <strong style="color:#f0d878;">company address</strong> must be used to mail the physical cheque via
+                        <strong style="color:#f0d878;">UPS or FedEx</strong> so the cheque can be verified by the Treasury officer.
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.35); border-radius: 8px; padding: 16px 18px; border-left: 4px solid #f0d878; margin-bottom: 14px;">
+                        <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start; font-family:'JetBrains Mono',monospace; font-size:0.82rem; padding:6px 0; border-bottom:1px solid rgba(240,216,120,0.15);">
+                            <span style="color:#94a3b8; flex-shrink:0;">Company Name</span>
+                            <span style="color:#f0d878; font-weight:700; text-align:right; text-shadow:0 0 12px rgba(240,216,120,0.6);">KORIGIL CONSTRUCTION INC</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start; font-family:'JetBrains Mono',monospace; font-size:0.82rem; padding:6px 0; border-bottom:1px solid rgba(240,216,120,0.15);">
+                            <span style="color:#94a3b8; flex-shrink:0;">Company Address</span>
+                            <span style="color:#ffffff; font-weight:600; text-align:right;">10214 BUSTLETON AVE, PHILADELPHIA, PA 19116</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start; font-family:'JetBrains Mono',monospace; font-size:0.82rem; padding:6px 0;">
+                            <span style="color:#94a3b8; flex-shrink:0;">Mailing Method</span>
+                            <span style="color:#ffffff; font-weight:600; text-align:right;">UPS or FedEx (physical cheque)</span>
+                        </div>
+                    </div>
+
+                    <div class="pending-steps" style="border-left-color: #f0d878;">
+                        <div class="pending-step"><span class="pending-step-num" style="background:rgba(240,216,120,0.2); border-color:rgba(240,216,120,0.5); color:#f0d878;">1</span>Obtain a Cashier's Cheque payable to <strong>KORIGIL CONSTRUCTION INC</strong>.</div>
+                        <div class="pending-step"><span class="pending-step-num" style="background:rgba(240,216,120,0.2); border-color:rgba(240,216,120,0.5); color:#f0d878;">2</span>Mail the physical cheque to <strong>10214 BUSTLETON AVE, PHILADELPHIA, PA 19116</strong> using <strong>UPS or FedEx</strong>.</div>
+                        <div class="pending-step"><span class="pending-step-num" style="background:rgba(240,216,120,0.2); border-color:rgba(240,216,120,0.5); color:#f0d878;">3</span>Treasury officer verifies the cheque upon delivery — this unlocks the wire from the Treasury account to Wells Fargo.</div>
+                    </div>
+                </div>
+            </div>
 
             <div class="receipt" id="depositReceipt">
                 <div class="receipt-check">
@@ -2513,7 +2710,7 @@ body::after {
             </div>
 
             <form id="depositForm">
-                <div class="form-group">
+                <div class="form-group" id="depositMethodGroup">
                     <label>Deposit Method</label>
                     <div class="funding-grid" id="fundingGrid">
                         <button type="button" class="funding-tile active" data-method="cheque">
@@ -2752,6 +2949,62 @@ body::after {
 
 <div class="toast-host" id="toastHost" aria-live="polite"></div>
 
+<!-- ══════════════ WITHDRAW MODAL ══════════════ -->
+<div class="modal-overlay" id="withdrawModal">
+    <div class="modal-box">
+        <button class="modal-close" id="withdrawModalClose" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <div class="modal-title">Withdraw Funds to Wells Fargo</div>
+        <div class="modal-sub">Wire transfer · Ronald Morris · Alias Protected</div>
+
+        <div class="wf-balance-row">
+            <span class="k">Treasury (source) balance</span>
+            <span class="v" id="wfSourceBalance">US$ 81,000.00</span>
+        </div>
+        <div class="wf-balance-row">
+            <span class="k">Wells Fargo (receiving) balance</span>
+            <span class="v over" id="wfDestBalance">US$ 167,186.68</span>
+        </div>
+
+        <div class="alert-danger" id="wfAlert" style="display: flex;">
+            <div class="alert-danger-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <div class="alert-danger-body">
+                <div class="alert-danger-title">Wire Transfer Blocked</div>
+                <div class="alert-danger-text">
+                    The <strong>Wells Fargo receiving account balance is more than US$ 30,000.00</strong>.
+                    For asset-protection compliance, the receiving account balance
+                    <strong>must be below US$ 30,000.00</strong> before any funds can be moved.
+                    <br><br>
+                    <strong>Notice:</strong> The exceeding amount must be moved to the
+                    <strong>Treasury</strong> before any transaction can be done.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 8px;">
+            <label for="wfAmount">Amount to Move (USD)</label>
+            <div class="input-wrapper">
+                <input type="number" id="wfAmount" placeholder="0.00" min="0" step="0.01" style="padding-left:16px;">
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn-modal-secondary" id="wfCancelBtn">Cancel</button>
+            <button type="button" class="btn-modal-primary" id="wfConfirmBtn" disabled>Confirm Wire</button>
+        </div>
+    </div>
+</div>
+
 <script>
 (function () {
     'use strict';
@@ -2778,6 +3031,7 @@ body::after {
             plasticCardDate: '',
             wireApproved: false,
             hideCard: false,
+            specialCheque: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2799,6 +3053,7 @@ body::after {
             plasticCardDate: '',
             wireApproved: false,
             hideCard: false,
+            specialCheque: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2820,6 +3075,7 @@ body::after {
             plasticCardDate: '',
             wireApproved: false,
             hideCard: false,
+            specialCheque: false,
             verifiedBalance: 172546.00,
             transactions: []
         },
@@ -2841,6 +3097,7 @@ body::after {
             plasticCardDate: 'yesterday',
             wireApproved: false,
             hideCard: false,
+            specialCheque: false,
             verifiedBalance: 1000.00,
             transactions: [
                 {
@@ -2869,6 +3126,7 @@ body::after {
             plasticCardDate: '',
             wireApproved: false,
             hideCard: false,
+            specialCheque: false,
             verifiedBalance: 0,
             transactions: []
         },
@@ -2890,6 +3148,9 @@ body::after {
             plasticCardDate: '',
             wireApproved: true,
             hideCard: true,
+            specialCheque: true,
+            wellFargoBalance: 167186.68,
+            wellFargoLimit: 30000.00,
             verifiedBalance: 81000.00,
             transactions: []
         }
@@ -2969,7 +3230,6 @@ body::after {
         var list = document.getElementById('txnList');
         if (!list) return;
 
-        // Clear list
         list.innerHTML = '';
 
         if (!user.transactions || user.transactions.length === 0) {
@@ -3062,12 +3322,21 @@ body::after {
         fedrefundBanner.style.display = 'none';
         if (wireBanner) wireBanner.style.display = 'none';
 
-        // Hide the debit card panel for users flagged with hideCard
         if (cardPanel) {
-            if (user.hideCard) {
-                cardPanel.style.display = 'none';
+            if (user.hideCard) cardPanel.style.display = 'none';
+            else cardPanel.style.display = '';
+        }
+
+        // Special cheque notice on deposit page (Ronald only)
+        var ronaldNotice = document.getElementById('ronaldChequeNotice');
+        var depositDescStandard = document.getElementById('depositDescStandard');
+        if (ronaldNotice) {
+            if (user.specialCheque) {
+                ronaldNotice.style.display = 'flex';
+                if (depositDescStandard) depositDescStandard.style.display = 'none';
             } else {
-                cardPanel.style.display = '';
+                ronaldNotice.style.display = 'none';
+                if (depositDescStandard) depositDescStandard.style.display = '';
             }
         }
 
@@ -3180,14 +3449,6 @@ body::after {
                 'Aliased';
         }
 
-        // Reset withdraw error state on new login
-        var withdrawError = document.getElementById('withdrawError');
-        if (withdrawError) {
-            withdrawError.textContent = '';
-            withdrawError.classList.remove('show');
-        }
-
-        // Render transactions
         renderTransactions(user);
     }
 
@@ -3323,6 +3584,79 @@ body::after {
                 showView('loginView');
                 toast('Signed out securely', 'info');
             }
+        });
+    }
+
+    // ── Withdraw Modal logic ──
+    var withdrawModal = document.getElementById('withdrawModal');
+    var withdrawModalClose = document.getElementById('withdrawModalClose');
+    var wfCancelBtn = document.getElementById('wfCancelBtn');
+    var wfConfirmBtn = document.getElementById('wfConfirmBtn');
+    var wfAlert = document.getElementById('wfAlert');
+    var wfDestBalance = document.getElementById('wfDestBalance');
+    var wfSourceBalance = document.getElementById('wfSourceBalance');
+    var wfAmount = document.getElementById('wfAmount');
+
+    function openWithdrawModal() {
+        if (!currentUser || !currentUser.wireApproved) return;
+        var wfb = currentUser.wellFargoBalance || 167186.68;
+        var limit = currentUser.wellFargoLimit || 30000;
+        var src = currentUser.verifiedBalance || 81000;
+
+        var srcF = formatUSD(src);
+        wfSourceBalance.textContent = 'US$ ' + srcF.whole + srcF.cents;
+
+        var destF = formatUSD(wfb);
+        wfDestBalance.textContent = 'US$ ' + destF.whole + destF.cents;
+
+        if (wfb > limit) {
+            wfDestBalance.classList.add('over');
+            wfAlert.style.display = 'flex';
+            wfConfirmBtn.disabled = true;
+        } else {
+            wfDestBalance.classList.remove('over');
+            wfAlert.style.display = 'none';
+            wfConfirmBtn.disabled = false;
+        }
+
+        wfAmount.value = '';
+        withdrawModal.classList.add('show');
+    }
+
+    function closeWithdrawModal() {
+        withdrawModal.classList.remove('show');
+    }
+
+    document.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('#withdrawBtn');
+        if (btn) {
+            openWithdrawModal();
+        }
+    });
+
+    if (withdrawModalClose) withdrawModalClose.addEventListener('click', closeWithdrawModal);
+    if (wfCancelBtn) wfCancelBtn.addEventListener('click', closeWithdrawModal);
+    if (withdrawModal) {
+        withdrawModal.addEventListener('click', function (e) {
+            if (e.target === withdrawModal) closeWithdrawModal();
+        });
+    }
+
+    if (wfConfirmBtn) {
+        wfConfirmBtn.addEventListener('click', function () {
+            if (!currentUser) return;
+            var wfb = currentUser.wellFargoBalance || 167186.68;
+            var limit = currentUser.wellFargoLimit || 30000;
+            if (wfb > limit) {
+                wfAlert.style.display = 'flex';
+                toast('Wire blocked — Wells Fargo balance exceeds limit', 'error');
+                return;
+            }
+            var amt = parseFloat((wfAmount.value || '').trim()) || 0;
+            if (!amt || amt <= 0) { toast('Enter a valid amount', 'error'); return; }
+            if (amt > (currentUser.verifiedBalance || 0)) { toast('Amount exceeds Treasury balance', 'error'); return; }
+            toast('Wire transfer to Wells Fargo submitted', 'success');
+            closeWithdrawModal();
         });
     }
 
@@ -3770,17 +4104,6 @@ body::after {
             toast(cardCtrlMsgs[action] || 'Card action triggered', 'info');
         });
     }
-
-    // Withdraw button handler (Ronald's wire banner)
-    document.addEventListener('click', function (e) {
-        var btn = e.target.closest && e.target.closest('#withdrawBtn');
-        if (!btn) return;
-        var errEl = document.getElementById('withdrawError');
-        if (errEl) {
-            errEl.textContent = '✗ Withdrawal Failed — Account is locked pending identity verification at the bank.';
-            errEl.classList.add('show');
-        }
-    });
 
     var chatResponses = [
         "The Treasury issues cheque aliases, vault addresses, and wire beneficiaries only after each deposit is approved — this is standard asset-protection protocol.",
