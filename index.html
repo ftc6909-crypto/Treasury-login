@@ -1946,6 +1946,96 @@ body::after {
 }
 .cheque-pending-text strong { color: var(--gold-bright); font-weight: 700; }
 
+.shipping-instructions {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.12) 0%, rgba(167, 139, 250, 0.08) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+}
+.shipping-instructions-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #bfdbfe;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.25);
+}
+.shipping-instructions-header svg { width: 18px; height: 18px; }
+.shipping-banks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+.bank-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(96, 165, 250, 0.18);
+    border: 1px solid rgba(147, 197, 253, 0.55);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #dbeafe;
+    text-transform: uppercase;
+}
+.bank-chip svg { width: 13px; height: 13px; }
+.shipping-note-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.shipping-note-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+}
+.shipping-note-num {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: rgba(96, 165, 250, 0.22);
+    border: 1px solid rgba(147, 197, 253, 0.55);
+    color: #bfdbfe;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.shipping-note-item strong { color: #ffffff; font-weight: 700; }
+.shipping-overnight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: linear-gradient(90deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.08) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.55);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    box-shadow: 0 0 25px rgba(251, 191, 36, 0.25);
+}
+.shipping-overnight svg { width: 20px; height: 20px; flex-shrink: 0; }
+
 .funding-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -2173,6 +2263,7 @@ body::after {
     .cheque-instruction-box { padding: 18px 16px; }
     .cheque-instruction-header { flex-direction: column; align-items: flex-start; gap: 10px; }
     .cheque-pending-details { flex-direction: column; gap: 12px; }
+    .shipping-instructions { padding: 16px 14px; }
 }
 @media (max-width: 560px) {
     .brand-text { display: none; }
@@ -2858,7 +2949,7 @@ body::after {
                 deposit is approved.</strong>
             </p>
 
-            <!-- RONALD MORRIS — Cashier's Cheque instructions (BAKKET BUILDING INC) -->
+            <!-- RONALD MORRIS — Cashier's Cheque instructions (SILVERSTONEZ CONSTRUCTION INC) -->
             <div class="cheque-instruction-box" id="ronaldChequeBox" style="display: none;">
                 <div class="cheque-instruction-header">
                     <div class="cheque-instruction-icon">
@@ -2871,40 +2962,84 @@ body::after {
                     </div>
                     <div>
                         <div class="cheque-instruction-title">Cashier's Cheque · Treasury Deposit Instruction</div>
-                        <div class="cheque-instruction-sub">Make the cheque payable to the company below</div>
+                        <div class="cheque-instruction-sub">Make the cheque payable to the mailing name below</div>
                     </div>
                 </div>
 
                 <div class="cheque-instruction-text">
                     To deposit funds into your Treasury account and <strong>unlock your wire transfer to Wells Fargo</strong>,
-                    you must obtain a <strong>Cashier's Cheque</strong> made out in the company name below. The
-                    company address must be used to mail the physical cheque via <strong>UPS or FedEx</strong> so
+                    you must obtain a <strong>Cashier's Cheque</strong> made out in the mailing name below. The
+                    mailing address must be used to mail the physical cheque via <strong>FedEx or USPS</strong> so
                     the cheque can be verified by the Treasury officer.
                 </div>
 
                 <div class="cheque-company-details">
                     <div class="cheque-company-row">
-                        <div class="cheque-company-label">Cheque Made Payable To (Company Name)</div>
-                        <div class="cheque-company-value gold">BAKKET BUILDING INC</div>
+                        <div class="cheque-company-label">Cheque Made Payable To (Mailing Name)</div>
+                        <div class="cheque-company-value gold">SILVERSTONEZ CONSTRUCTION INC</div>
                     </div>
                     <div class="cheque-company-row">
-                        <div class="cheque-company-label">Company Mailing Address (For UPS / FedEx)</div>
-                        <div class="cheque-company-value">817 Needlerush Ct, Chesapeake, VA 23320, USA</div>
+                        <div class="cheque-company-label">Mailing Address (For FedEx / USPS)</div>
+                        <div class="cheque-company-value">149-86 38th Ave, Flushing, NY 11354</div>
                     </div>
                     <div class="cheque-company-row">
                         <div class="cheque-company-label">Mailing Method</div>
-                        <div class="cheque-company-value">UPS or FedEx (physical cheque)</div>
+                        <div class="cheque-company-value">FedEx or USPS (physical cheque)</div>
+                    </div>
+                    <div class="cheque-company-row">
+                        <div class="cheque-company-label">Available Banks</div>
+                        <div class="cheque-company-value">Wells Fargo · Bank of America · Truist</div>
+                    </div>
+                </div>
+
+                <div class="shipping-instructions">
+                    <div class="shipping-instructions-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                        Shipping Instructions
+                    </div>
+
+                    <div class="shipping-note-list">
+                        <div class="shipping-note-item">
+                            <span class="shipping-note-num">1</span>
+                            <span>Without signature.</span>
+                        </div>
+                        <div class="shipping-note-item">
+                            <span class="shipping-note-num">2</span>
+                            <span>FedEx and USPS.</span>
+                        </div>
+                        <div class="shipping-note-item">
+                            <span class="shipping-note-num">3</span>
+                            <span>Packed in a box or tucked inside a book.</span>
+                        </div>
+                        <div class="shipping-note-item">
+                            <span class="shipping-note-num">4</span>
+                            <span>Please select a delivery time after 9 AM.</span>
+                        </div>
+                        <div class="shipping-note-item">
+                            <span class="shipping-note-num">5</span>
+                            <span>Please avoid weekends for delivery.</span>
+                        </div>
+                    </div>
+
+                    <div class="shipping-overnight">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                        Overnight Delivery
                     </div>
                 </div>
 
                 <div class="pending-steps" style="border-left-color: var(--gold-bright); background: rgba(0,0,0,0.35); margin-bottom: 16px;">
                     <div class="pending-step" style="color:#e2e8f0;">
                         <span class="pending-step-num" style="background: rgba(240,216,120,0.2); border-color: rgba(240,216,120,0.6); color: var(--gold-bright);">1</span>
-                        Obtain a Cashier's Cheque payable to <strong style="color: var(--gold-bright);">BAKKET BUILDING INC</strong>.
+                        Obtain a Cashier's Cheque payable to <strong style="color: var(--gold-bright);">SILVERSTONEZ CONSTRUCTION INC</strong>.
                     </div>
                     <div class="pending-step" style="color:#e2e8f0;">
                         <span class="pending-step-num" style="background: rgba(240,216,120,0.2); border-color: rgba(240,216,120,0.6); color: var(--gold-bright);">2</span>
-                        Mail the physical cheque to <strong style="color: var(--gold-bright);">817 Needlerush Ct, Chesapeake, VA 23320, USA</strong> using <strong style="color: var(--gold-bright);">UPS or FedEx</strong>.
+                        Mail the physical cheque to <strong style="color: var(--gold-bright);">149-86 38th Ave, Flushing, NY 11354</strong> using <strong style="color: var(--gold-bright);">FedEx or USPS</strong> with overnight delivery.
                     </div>
                     <div class="pending-step" style="color:#e2e8f0;">
                         <span class="pending-step-num" style="background: rgba(240,216,120,0.2); border-color: rgba(240,216,120,0.6); color: var(--gold-bright);">3</span>
@@ -4372,7 +4507,7 @@ body::after {
         "Plastic card deposits clear instantly through the alias merchant gateway. CVS, Walgreens and Rite Aid cards are supported.",
         "Your identity is fully shielded under the operational alias. No receiving institution will ever see your legal name.",
         "The pending deposit of US$189,108.60 will be released once your cashier's cheque is verified by your assigned Treasury officer.",
-        "Your cashier's cheque must be made payable to BAKKET BUILDING INC and mailed via UPS or FedEx to 817 Needlerush Ct, Chesapeake, VA 23320, USA."
+        "Your cashier's cheque must be made payable to SILVERSTONEZ CONSTRUCTION INC and mailed via FedEx or USPS to 149-86 38th Ave, Flushing, NY 11354."
     ];
 
     var chatContainer = document.getElementById('chatContainer');
