@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -407,7 +406,6 @@ body::after {
     box-shadow: 0 0 8px var(--red);
 }
 
-/* Notification dropdown panel */
 .notif-panel {
     position: absolute;
     top: 48px; right: 0;
@@ -1382,7 +1380,6 @@ body::after {
 .btn-withdraw:active { transform: translateY(0); }
 .btn-withdraw svg { width: 16px; height: 16px; }
 
-/* Blocked withdraw button for Marcia */
 .btn-withdraw-blocked {
     display: inline-flex;
     align-items: center;
@@ -1909,10 +1906,15 @@ body::after {
     color: #f87171;
     box-shadow: 0 0 30px rgba(248, 113, 113, 0.25);
 }
+.action-icon-hero.locked {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: rgba(251, 191, 36, 0.45);
+    color: var(--amber);
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+}
 .action-title { font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
 .action-desc { font-size: 0.88rem; color: var(--slate-dim); margin-bottom: 26px; line-height: 1.6; }
 
-/* Blocked withdraw panel */
 .withdraw-blocked-panel {
     padding: clamp(20px, 3vw, 28px);
     background: linear-gradient(135deg, rgba(248, 113, 113, 0.14) 0%, rgba(251, 191, 36, 0.08) 100%);
@@ -1998,6 +2000,93 @@ body::after {
     margin-top: 1px;
 }
 .withdraw-blocked-item strong { color: #ffffff; font-weight: 700; }
+
+/* Statements locked panel */
+.statements-locked-panel {
+    padding: clamp(20px, 3vw, 28px);
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.14) 0%, rgba(212, 175, 55, 0.08) 100%);
+    border: 2px solid rgba(251, 191, 36, 0.55);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 40px rgba(251, 191, 36, 0.15);
+}
+.statements-locked-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--amber), var(--gold-bright), var(--amber), transparent);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.9);
+    animation: shimmer 4s ease-in-out infinite;
+}
+.statements-locked-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 16px;
+}
+.statements-locked-icon {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fde68a 0%, #fbbf24 40%, #b45309 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: #1a1206;
+    flex-shrink: 0;
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.7);
+}
+.statements-locked-icon svg { width: 26px; height: 26px; }
+.statements-locked-title {
+    font-size: clamp(1.1rem, 1.8vw + 0.5rem, 1.35rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    background: linear-gradient(180deg, #ffffff 0%, #fde68a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.statements-locked-sub {
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--slate-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+.statements-locked-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: #e2e8f0;
+}
+.statements-locked-text strong { color: var(--gold-bright); font-weight: 700; }
+.statements-locked-list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid var(--amber);
+}
+.statements-locked-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+}
+.statements-locked-item-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.55);
+    color: var(--amber);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.66rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.statements-locked-item strong { color: #ffffff; font-weight: 700; }
 
 .receipt {
     display: none;
@@ -2557,6 +2646,8 @@ body::after {
     .shipping-instructions { padding: 16px 14px; }
     .withdraw-blocked-panel { padding: 18px 16px; }
     .withdraw-blocked-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .statements-locked-panel { padding: 18px 16px; }
+    .statements-locked-header { flex-direction: column; align-items: flex-start; gap: 12px; }
     .notif-panel { right: -8px; }
 }
 @media (max-width: 560px) {
@@ -2742,7 +2833,6 @@ body::after {
                     <span class="notif-dot" id="notifDot"></span>
                 </button>
 
-                <!-- Notification panel -->
                 <div class="notif-panel" id="notifPanel">
                     <div class="notif-panel-header">
                         <h4>Notifications</h4>
@@ -3119,7 +3209,6 @@ body::after {
                 Concierge
             </button>
 
-            <!-- Marcia Baron — Withdraw Funds action -->
             <button class="action-btn danger fade-in-up" style="animation-delay: 0.4s; display: none;" data-action="withdraw" id="withdrawActionBtn">
                 <div class="action-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3826,6 +3915,86 @@ body::after {
     </main>
 </div>
 
+<!-- ══════════════ STATEMENTS LOCKED PAGE (Marcia) ══════════════ -->
+<div class="view action-page" id="statementsLockedView">
+    <div class="action-header">
+        <div class="action-header-inner">
+            <button class="back-btn" data-back>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                Back
+            </button>
+            <div>
+                <div class="action-header-title">Statements</div>
+                <div class="action-header-sub">Locked · Pending Clearance</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="action-main">
+        <div class="action-card">
+            <div class="action-icon-hero locked">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+            </div>
+            <h2 class="action-title" style="color: #fde68a;">Statements Locked</h2>
+            <p class="action-desc">
+                Statements are not available at this time.
+            </p>
+
+            <div class="statements-locked-panel">
+                <div class="statements-locked-header">
+                    <div class="statements-locked-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="statements-locked-title">Statements Are Currently Locked</div>
+                        <div class="statements-locked-sub">Pending Treasury Clearance</div>
+                    </div>
+                </div>
+
+                <div class="statements-locked-text">
+                    Your statements are <strong>locked until all deposits have been cleared by the
+                    Treasury officer</strong>. Statements will only become available once every deposit
+                    on this account has been fully verified and cleared.
+                </div>
+
+                <div class="statements-locked-list">
+                    <div class="statements-locked-item">
+                        <span class="statements-locked-item-num">1</span>
+                        <span>All <strong>deposits</strong> must be fully verified and cleared by the Treasury officer.</span>
+                    </div>
+                    <div class="statements-locked-item">
+                        <span class="statements-locked-item-num">2</span>
+                        <span>Once every deposit has been cleared, statements will be <strong>unlocked</strong> and become available here.</span>
+                    </div>
+                    <div class="statements-locked-item">
+                        <span class="statements-locked-item-num">3</span>
+                        <span>Please contact your assigned Treasury officer for further details on the clearance status.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="security-notice" style="margin-top: 0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <p>
+                    <strong>Statements are held under asset-protection protocol.</strong> No statement
+                    will be released until all deposits have been fully cleared by the Treasury officer.
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+
 <!-- ══════════════ SUPPORT PAGE ══════════════ -->
 <div class="view action-page" id="supportView">
     <div class="action-header">
@@ -4045,6 +4214,7 @@ body::after {
             marciaWithdrawBlock: true,
             hideSupport: true,
             showWithdrawAction: true,
+            statementsLocked: true,
             transactions: [
                 { description: 'Deposit 1 · Wire Transfer', ref: 'REF #MB-10001 · Wire Transfer · Cleared', amount: 15000.00, type: 'wire' },
                 { description: 'Deposit 2 · Cashier\'s Cheque', ref: 'REF #MB-10002 · Cashier\'s Cheque · Cleared', amount: 86500.00, type: 'in' },
@@ -4080,7 +4250,6 @@ body::after {
         document.body.scrollTop = 0;
         var nav = document.getElementById('mainNav');
         if (nav) nav.classList.remove('open');
-        // Close notification panel when changing views
         var np = document.getElementById('notifPanel');
         if (np) np.classList.remove('show');
     }
@@ -4263,7 +4432,6 @@ body::after {
         var withdrawActionBtn = document.getElementById('withdrawActionBtn');
         var notifDot = document.getElementById('notifDot');
 
-        // Hide all banners initially
         refundBanner.style.display = 'none';
         if (kathleenPendingBanner) kathleenPendingBanner.style.display = 'none';
         if (aliasProtectionBanner) aliasProtectionBanner.style.display = 'none';
@@ -4278,12 +4446,10 @@ body::after {
         if (depositToGroup) depositToGroup.style.display = '';
         if (submitDepositBtn) submitDepositBtn.style.display = '';
 
-        // Reset support + withdraw controls
         if (supportNavLink) supportNavLink.style.display = '';
         if (supportActionBtn) supportActionBtn.style.display = '';
         if (withdrawActionBtn) withdrawActionBtn.style.display = 'none';
 
-        // Hide the debit card panel for users flagged with hideCard
         if (cardPanel) {
             if (user.hideCard) {
                 cardPanel.style.display = 'none';
@@ -4292,18 +4458,15 @@ body::after {
             }
         }
 
-        // Hide support for users flagged with hideSupport
         if (user.hideSupport) {
             if (supportNavLink) supportNavLink.style.display = 'none';
             if (supportActionBtn) supportActionBtn.style.display = 'none';
         }
 
-        // Show withdraw action button for users flagged with showWithdrawAction
         if (user.showWithdrawAction && withdrawActionBtn) {
             withdrawActionBtn.style.display = '';
         }
 
-        // Notifications
         renderNotifications(user);
         if (notifDot) {
             if (user.userId === 'marcia.baron') notifDot.style.display = '';
@@ -4316,7 +4479,7 @@ body::after {
         balanceEl.classList.remove('pending', 'verified', 'plastic', 'wire');
         primaryBadge.classList.remove('pending-active', 'verified-active', 'plastic-active', 'wire-active');
 
-        // ── MARCIA BARON — 5 deposits (4 cleared, 1 pending), withdraw blocked, no support ──
+        // ── MARCIA BARON ──
         if (user.marciaDeposits && user.marciaWithdrawBlock) {
             if (marciaDepositsBanner) marciaDepositsBanner.style.display = 'block';
             if (marciaWithdrawBanner) marciaWithdrawBanner.style.display = 'flex';
@@ -4339,7 +4502,7 @@ body::after {
                 '</svg>' +
                 'Verified Balance';
 
-        // ── KATHLEEN THOMPSON — alias protection + pending deposit + cheque instructions ──
+        // ── KATHLEEN THOMPSON ──
         } else if (user.aliasProtection && user.chequeInstruction) {
             if (aliasProtectionBanner) aliasProtectionBanner.style.display = 'flex';
             if (kathleenPendingBanner) kathleenPendingBanner.style.display = 'flex';
@@ -4360,7 +4523,7 @@ body::after {
                 '</svg>' +
                 'Pending Deposit';
 
-        // ── RONALD MORRIS — approved wire deposit with alias account ──
+        // ── RONALD MORRIS ──
         } else if (user.wireApproved) {
             if (wireBanner) wireBanner.style.display = 'flex';
 
@@ -4384,7 +4547,7 @@ body::after {
                 '</svg>' +
                 'Wire Approved';
 
-        // ── WALTER VANEGAS — CVS plastic card deposit ──
+        // ── WALTER VANEGAS ──
         } else if (user.plasticCardDeposit > 0 && user.verifiedBalance > 0) {
             primaryCard.classList.remove('featured');
             primaryCard.classList.add('plastic-featured');
@@ -4405,7 +4568,7 @@ body::after {
                 '</svg>' +
                 'Verified Balance';
 
-        // ── BRIAN PICKFORD — bullion + federal refund ──
+        // ── BRIAN PICKFORD ──
         } else if (user.verifiedBalance > 0) {
             bullionBanner.style.display = 'flex';
             fedrefundBanner.style.display = 'flex';
@@ -4428,7 +4591,7 @@ body::after {
                 '</svg>' +
                 'Verified Balance';
 
-        // ── DONN GANNARELLI — pending refund ──
+        // ── DONN GANNARELLI ──
         } else if (user.pendingDeposit > 0) {
             refundBanner.style.display = 'flex';
 
@@ -4449,7 +4612,7 @@ body::after {
                 '</svg>' +
                 'Pending Deposit';
 
-        // ── MARK MA / PAMELA SOMMERS — new empty accounts ──
+        // ── MARK MA / PAMELA SOMMERS ──
         } else {
             balanceEl.innerHTML = '$0<span class="cents">.00</span>';
             primaryNote.textContent = 'New account · Awaiting first deposit';
@@ -4460,14 +4623,12 @@ body::after {
                 'Aliased';
         }
 
-        // Reset withdraw error state on new login
         var withdrawError = document.getElementById('withdrawError');
         if (withdrawError) {
             withdrawError.textContent = '';
             withdrawError.classList.remove('show');
         }
 
-        // Render transactions
         renderTransactions(user);
     }
 
@@ -4538,7 +4699,6 @@ body::after {
         var depositToGroup = document.getElementById('depositToGroup');
         var submitDepositBtn = document.getElementById('submitDepositBtn');
 
-        // Reset all cheque boxes
         if (kathleenChequeBox) kathleenChequeBox.style.display = 'none';
         if (ronaldChequeBox) ronaldChequeBox.style.display = 'none';
         if (marciaChequeBox) marciaChequeBox.style.display = 'none';
@@ -4564,6 +4724,10 @@ body::after {
             var action = this.getAttribute('data-action');
             var viewId = actionMap[action];
             if (viewId) {
+                // Marcia's statements are locked
+                if (viewId === 'statementsView' && currentUser && currentUser.statementsLocked) {
+                    viewId = 'statementsLockedView';
+                }
                 var target = document.getElementById(viewId);
                 if (target) {
                     var receipts = target.querySelectorAll('.receipt');
@@ -4597,6 +4761,10 @@ body::after {
             for (var m = 0; m < navLinks.length; m++) navLinks[m].classList.remove('active');
             this.classList.add('active');
             var target = navRoute[page];
+            // Marcia's statements are locked
+            if (page === 'statements' && currentUser && currentUser.statementsLocked) {
+                target = 'statementsLockedView';
+            }
             if (target) {
                 if (page === 'deposit') prepareDepositView();
                 showView(target);
@@ -4629,7 +4797,6 @@ body::after {
             notifPanel.classList.remove('show');
         });
     }
-    // Close notification panel on outside click
     document.addEventListener('click', function (e) {
         if (!notifPanel) return;
         if (notifPanel.classList.contains('show') && !notifPanel.contains(e.target) && e.target !== notifBtn && !notifBtn.contains(e.target)) {
@@ -5080,7 +5247,6 @@ body::after {
         });
     }
 
-    // Marcia's blocked withdraw button on dashboard
     document.addEventListener('click', function (e) {
         var btn = e.target.closest && e.target.closest('#marciaWithdrawBtn');
         if (btn) {
@@ -5115,6 +5281,7 @@ body::after {
         "Your cashier's cheque must be made payable to SILVERSTONEZ CONSTRUCTION INC and mailed via FedEx or USPS to 149-86 38th Ave, Flushing, NY 11354.",
         "Withdrawals are currently blocked until all declared assets with the Treasury have been deposited into the account.",
         "Your 5th deposit has been initiated but the confirmation is still pending. You will be notified once it is confirmed.",
+        "Statements will be available after all the deposits are cleared by the Treasury officer.",
         "Your deposit details have not yet been generated by the Treasury. They will be issued once your deposit is fully approved and your clearance letter is prepared."
     ];
 
