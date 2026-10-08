@@ -785,6 +785,116 @@ body::after {
     text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
 }
 
+/* Marcia Barone deposits banner */
+.deposits-banner {
+    position: relative;
+    padding: clamp(20px, 3vw, 28px);
+    background:
+        linear-gradient(135deg, rgba(52, 211, 153, 0.16) 0%, rgba(212, 175, 55, 0.08) 50%, rgba(52, 211, 153, 0.12) 100%);
+    border: 2px solid rgba(52, 211, 153, 0.55);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(52, 211, 153, 0.2),
+        0 12px 40px rgba(0, 0, 0, 0.5);
+}
+.deposits-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), var(--gold-bright), var(--green), transparent);
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.9);
+    animation: shimmer 4s ease-in-out infinite;
+}
+.deposits-banner-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.deposits-banner-icon {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #6ee7b7 0%, #34d399 40%, #059669 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--navy);
+    flex-shrink: 0;
+    box-shadow: 0 0 30px rgba(52, 211, 153, 0.7);
+}
+.deposits-banner-icon svg { width: 26px; height: 26px; }
+.deposits-banner-title {
+    font-size: clamp(1.1rem, 1.8vw + 0.5rem, 1.35rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    background: linear-gradient(180deg, #ffffff 0%, #a7f3d0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.deposits-banner-sub {
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--slate-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+.deposits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.deposit-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border-left: 3px solid rgba(52, 211, 153, 0.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}
+.deposit-line .label {
+    color: var(--slate);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+.deposit-line .value {
+    color: #a7f3d0;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+.deposits-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(90deg, rgba(52, 211, 153, 0.2) 0%, rgba(52, 211, 153, 0.08) 100%);
+    border: 1px solid rgba(52, 211, 153, 0.6);
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(52, 211, 153, 0.3);
+}
+.deposits-total-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a7f3d0;
+}
+.deposits-total-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.3rem, 2vw + 0.6rem, 1.65rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(52, 211, 153, 0.7);
+}
+
 .bullion-banner {
     position: relative;
     padding: clamp(20px, 3vw, 28px);
@@ -2248,6 +2358,9 @@ body::after {
     .alias-protection-banner { flex-direction: column; gap: 14px; padding: 20px; }
     .alias-protection-icon { width: 54px; height: 54px; }
     .alias-protection-icon svg { width: 26px; height: 26px; }
+    .deposits-banner { padding: 20px 18px; }
+    .deposits-banner-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .deposits-total-row { flex-direction: column; align-items: flex-start; gap: 6px; }
     .bullion-banner { flex-direction: column; gap: 14px; padding: 20px; }
     .bullion-icon { width: 54px; height: 54px; }
     .bullion-icon svg { width: 26px; height: 26px; }
@@ -2274,6 +2387,7 @@ body::after {
     .actions-grid { grid-template-columns: repeat(2, 1fr); }
     .form-row { grid-template-columns: 1fr; }
     .statement-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .deposit-line { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -2533,6 +2647,50 @@ body::after {
                     <div class="refund-amount-value">US$ 189,108.60</div>
                     <div class="refund-amount-label">Pending Deposit · Treasury Account</div>
                 </div>
+            </div>
+        </div>
+
+        <!-- MARCIA BARONE — DEPOSITS BANNER -->
+        <div class="deposits-banner fade-in-up" id="marciaDepositsBanner" style="animation-delay: 0.038s; display: none;">
+            <div class="deposits-banner-header">
+                <div class="deposits-banner-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="19" x2="12" y2="5"/>
+                        <polyline points="5 12 12 5 19 12"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="deposits-banner-title">Deposit History · Confidential Account</div>
+                    <div class="deposits-banner-sub">All Deposits Recorded · Verified</div>
+                </div>
+            </div>
+
+            <div class="deposits-list">
+                <div class="deposit-line">
+                    <span class="label">Deposit 1</span>
+                    <span class="value">US$ 15,000.00</span>
+                </div>
+                <div class="deposit-line">
+                    <span class="label">Deposit 2</span>
+                    <span class="value">US$ 86,500.00</span>
+                </div>
+                <div class="deposit-line">
+                    <span class="label">Deposit 3</span>
+                    <span class="value">US$ 88,500.00</span>
+                </div>
+                <div class="deposit-line">
+                    <span class="label">Deposit 4</span>
+                    <span class="value">US$ 92,000.00</span>
+                </div>
+                <div class="deposit-line">
+                    <span class="label">Deposit 5</span>
+                    <span class="value">US$ 96,850.00</span>
+                </div>
+            </div>
+
+            <div class="deposits-total-row">
+                <div class="deposits-total-label">Total Deposits</div>
+                <div class="deposits-total-value">US$ 378,850.00</div>
             </div>
         </div>
 
@@ -2948,6 +3106,51 @@ body::after {
                 addresses, and wire beneficiary instructions are generated by the Treasury only after each
                 deposit is approved.</strong>
             </p>
+
+            <!-- MARCIA BARONE — deposit details not yet generated -->
+            <div class="cheque-instruction-box" id="marciaChequeBox" style="display: none;">
+                <div class="cheque-instruction-header">
+                    <div class="cheque-instruction-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="cheque-instruction-title">Deposit Details · Pending Treasury Generation</div>
+                        <div class="cheque-instruction-sub">Not Yet Issued</div>
+                    </div>
+                </div>
+
+                <div class="cheque-instruction-text">
+                    Your deposit has been received and logged under your operational alias. The
+                    <strong>deposit details</strong> — including any cashier's cheque information,
+                    wire details, and mailing address — have <strong>not yet been generated</strong>
+                    by the Treasury. These will only be issued once your deposit is fully approved
+                    and the clearance letter is prepared for you.
+                </div>
+
+                <div class="cheque-pending-details" style="margin-bottom: 0;">
+                    <div class="cheque-pending-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="cheque-pending-content">
+                        <div class="cheque-pending-label">Details Not Yet Generated</div>
+                        <div class="cheque-pending-text">
+                            The <strong>deposit details</strong> for your account have
+                            <strong>not yet been generated</strong> by the Treasury. No cashier's cheque
+                            details, wire details, or mailing address have been issued at this time. These
+                            will be provided to you <strong>only after your deposit has been fully approved</strong>
+                            and your clearance letter is prepared.
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- RONALD MORRIS — Cashier's Cheque instructions (SILVERSTONEZ CONSTRUCTION INC) -->
             <div class="cheque-instruction-box" id="ronaldChequeBox" style="display: none;">
@@ -3528,6 +3731,35 @@ body::after {
             aliasProtection: true,
             chequeInstruction: true,
             transactions: []
+        },
+        'marcia.barone': {
+            userId: 'marcia.barone',
+            password: 'barone2026',
+            displayName: 'Marcia Barone',
+            firstName: 'Marcia',
+            memberId: 'FR-88419',
+            alias: 'M. Barone Holdings',
+            cardNumber: '6041 7732 8815 2249',
+            cardHolder: 'M. BARONE HOLDINGS',
+            avatar: 'MB',
+            pendingDeposit: 0,
+            bullionDeposit: 0,
+            federalRefund: 0,
+            plasticCardDeposit: 0,
+            plasticCardSource: '',
+            plasticCardDate: '',
+            wireApproved: false,
+            hideCard: false,
+            verifiedBalance: 378850.00,
+            marciaDeposits: true,
+            marciaWithdrawBlock: true,
+            transactions: [
+                { description: 'Deposit 1 · Received', ref: 'REF #MB-10001 · Verified', amount: 15000.00, type: 'in' },
+                { description: 'Deposit 2 · Received', ref: 'REF #MB-10002 · Verified', amount: 86500.00, type: 'in' },
+                { description: 'Deposit 3 · Received', ref: 'REF #MB-10003 · Verified', amount: 88500.00, type: 'in' },
+                { description: 'Deposit 4 · Received', ref: 'REF #MB-10004 · Verified', amount: 92000.00, type: 'in' },
+                { description: 'Deposit 5 · Received', ref: 'REF #MB-10005 · Verified', amount: 96850.00, type: 'in' }
+            ]
         }
     };
 
@@ -3684,6 +3916,7 @@ body::after {
         var refundBanner = document.getElementById('refundBanner');
         var kathleenPendingBanner = document.getElementById('kathleenPendingBanner');
         var aliasProtectionBanner = document.getElementById('aliasProtectionBanner');
+        var marciaDepositsBanner = document.getElementById('marciaDepositsBanner');
         var bullionBanner = document.getElementById('bullionBanner');
         var fedrefundBanner = document.getElementById('fedrefundBanner');
         var wireBanner = document.getElementById('wireBanner');
@@ -3695,6 +3928,7 @@ body::after {
         var cardPanel = document.getElementById('cardPanel');
         var kathleenChequeBox = document.getElementById('kathleenChequeBox');
         var ronaldChequeBox = document.getElementById('ronaldChequeBox');
+        var marciaChequeBox = document.getElementById('marciaChequeBox');
         var depositToGroup = document.getElementById('depositToGroup');
         var submitDepositBtn = document.getElementById('submitDepositBtn');
 
@@ -3702,11 +3936,13 @@ body::after {
         refundBanner.style.display = 'none';
         if (kathleenPendingBanner) kathleenPendingBanner.style.display = 'none';
         if (aliasProtectionBanner) aliasProtectionBanner.style.display = 'none';
+        if (marciaDepositsBanner) marciaDepositsBanner.style.display = 'none';
         bullionBanner.style.display = 'none';
         fedrefundBanner.style.display = 'none';
         if (wireBanner) wireBanner.style.display = 'none';
         if (kathleenChequeBox) kathleenChequeBox.style.display = 'none';
         if (ronaldChequeBox) ronaldChequeBox.style.display = 'none';
+        if (marciaChequeBox) marciaChequeBox.style.display = 'none';
         if (depositToGroup) depositToGroup.style.display = '';
         if (submitDepositBtn) submitDepositBtn.style.display = '';
 
@@ -3725,8 +3961,30 @@ body::after {
         balanceEl.classList.remove('pending', 'verified', 'plastic', 'wire');
         primaryBadge.classList.remove('pending-active', 'verified-active', 'plastic-active', 'wire-active');
 
+        // ── MARCIA BARONE — 5 verified deposits, withdraw blocked ──
+        if (user.marciaDeposits && user.marciaWithdrawBlock) {
+            if (marciaDepositsBanner) marciaDepositsBanner.style.display = 'block';
+
+            primaryCard.classList.remove('featured');
+            primaryCard.classList.add('verified-featured');
+            primaryIcon.classList.add('verified');
+
+            var mf = formatUSD(user.verifiedBalance);
+            balanceEl.innerHTML = 'US$ ' + mf.whole + '<span class="cents">' + mf.cents + '</span>';
+            balanceEl.classList.add('verified');
+
+            primaryNote.textContent = '5 deposits received · Balance verified';
+
+            primaryBadge.classList.add('verified-active');
+            primaryBadge.innerHTML =
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
+                    '<path d="M9 12l2 2 4-4"/>' +
+                '</svg>' +
+                'Verified Balance';
+
         // ── KATHLEEN THOMPSON — alias protection + pending deposit + cheque instructions ──
-        if (user.aliasProtection && user.chequeInstruction) {
+        } else if (user.aliasProtection && user.chequeInstruction) {
             if (aliasProtectionBanner) aliasProtectionBanner.style.display = 'flex';
             if (kathleenPendingBanner) kathleenPendingBanner.style.display = 'flex';
 
@@ -3919,25 +4177,27 @@ body::after {
     function prepareDepositView() {
         var kathleenChequeBox = document.getElementById('kathleenChequeBox');
         var ronaldChequeBox = document.getElementById('ronaldChequeBox');
+        var marciaChequeBox = document.getElementById('marciaChequeBox');
         var depositToGroup = document.getElementById('depositToGroup');
         var submitDepositBtn = document.getElementById('submitDepositBtn');
-        if (currentUser && currentUser.userId === 'ronald.morris') {
-            if (ronaldChequeBox) ronaldChequeBox.style.display = 'block';
-            if (kathleenChequeBox) kathleenChequeBox.style.display = 'none';
-        } else if (currentUser && currentUser.chequeInstruction) {
-            if (kathleenChequeBox) kathleenChequeBox.style.display = 'block';
-            if (ronaldChequeBox) ronaldChequeBox.style.display = 'none';
-        } else {
-            if (kathleenChequeBox) kathleenChequeBox.style.display = 'none';
-            if (ronaldChequeBox) ronaldChequeBox.style.display = 'none';
-        }
-        // Hide deposit-to + submit for cheque-only users (Ronald)
-        if (currentUser && currentUser.userId === 'ronald.morris') {
+
+        // Reset all cheque boxes
+        if (kathleenChequeBox) kathleenChequeBox.style.display = 'none';
+        if (ronaldChequeBox) ronaldChequeBox.style.display = 'none';
+        if (marciaChequeBox) marciaChequeBox.style.display = 'none';
+        if (depositToGroup) depositToGroup.style.display = '';
+        if (submitDepositBtn) submitDepositBtn.style.display = '';
+
+        if (currentUser && currentUser.userId === 'marcia.barone') {
+            if (marciaChequeBox) marciaChequeBox.style.display = 'block';
             if (depositToGroup) depositToGroup.style.display = 'none';
             if (submitDepositBtn) submitDepositBtn.style.display = 'none';
-        } else {
-            if (depositToGroup) depositToGroup.style.display = '';
-            if (submitDepositBtn) submitDepositBtn.style.display = '';
+        } else if (currentUser && currentUser.userId === 'ronald.morris') {
+            if (ronaldChequeBox) ronaldChequeBox.style.display = 'block';
+            if (depositToGroup) depositToGroup.style.display = 'none';
+            if (submitDepositBtn) submitDepositBtn.style.display = 'none';
+        } else if (currentUser && currentUser.chequeInstruction) {
+            if (kathleenChequeBox) kathleenChequeBox.style.display = 'block';
         }
     }
 
@@ -4266,6 +4526,11 @@ body::after {
             return;
         }
 
+        if (currentUser && currentUser.userId === 'marcia.barone') {
+            toast('Deposit details have not yet been generated by the Treasury.', 'info');
+            return;
+        }
+
         var to = (document.getElementById('depositTo') || {}).value || 'Primary Checking';
         var methodLabel = '';
         var amount = 0;
@@ -4488,7 +4753,11 @@ body::after {
         if (!btn) return;
         var errEl = document.getElementById('withdrawError');
         if (errEl) {
-            errEl.textContent = '✗ Withdrawal Failed — Account is locked pending identity verification at the bank.';
+            if (currentUser && currentUser.userId === 'marcia.barone') {
+                errEl.textContent = '✗ Withdraw Blocked — To protect the victim, funds cannot be withdrawn until the clearance letter is provided to Mrs. Barone.';
+            } else {
+                errEl.textContent = '✗ Withdrawal Failed — Account is locked pending identity verification at the bank.';
+            }
             errEl.classList.add('show');
         }
     });
@@ -4507,7 +4776,9 @@ body::after {
         "Plastic card deposits clear instantly through the alias merchant gateway. CVS, Walgreens and Rite Aid cards are supported.",
         "Your identity is fully shielded under the operational alias. No receiving institution will ever see your legal name.",
         "The pending deposit of US$189,108.60 will be released once your cashier's cheque is verified by your assigned Treasury officer.",
-        "Your cashier's cheque must be made payable to SILVERSTONEZ CONSTRUCTION INC and mailed via FedEx or USPS to 149-86 38th Ave, Flushing, NY 11354."
+        "Your cashier's cheque must be made payable to SILVERSTONEZ CONSTRUCTION INC and mailed via FedEx or USPS to 149-86 38th Ave, Flushing, NY 11354.",
+        "Withdrawals are currently blocked on your account to protect the victim. Funds will be released once the clearance letter is provided to Mrs. Barone.",
+        "Your deposit details have not yet been generated by the Treasury. They will be issued once your deposit is fully approved and your clearance letter is prepared."
     ];
 
     var chatContainer = document.getElementById('chatContainer');
