@@ -951,6 +951,11 @@ body::after {
     border-left-color: rgba(251, 191, 36, 0.85);
     background: rgba(251, 191, 36, 0.06);
 }
+.deposit-line.empty {
+    justify-content: center;
+    border-left-color: rgba(148, 163, 184, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+}
 .deposit-line .label {
     color: var(--slate);
     font-weight: 600;
@@ -958,6 +963,12 @@ body::after {
     display: flex;
     flex-direction: column;
     gap: 3px;
+}
+.deposit-line.empty .label {
+    color: var(--slate-dim);
+    text-align: center;
+    flex-direction: row;
+    font-style: italic;
 }
 .deposit-line .label small {
     font-size: 0.66rem;
@@ -2002,7 +2013,6 @@ body::after {
 }
 .withdraw-blocked-item strong { color: #ffffff; font-weight: 700; }
 
-/* Statements locked panel */
 .statements-locked-panel {
     padding: clamp(20px, 3vw, 28px);
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.14) 0%, rgba(212, 175, 55, 0.08) 100%);
@@ -2934,49 +2944,8 @@ body::after {
             </div>
         </div>
 
-        <!-- MARCIA BARON — DEPOSITS BANNER -->
-        <div class="deposits-banner fade-in-up" id="marciaDepositsBanner" style="animation-delay: 0.038s; display: none;">
-            <div class="deposits-banner-header">
-                <div class="deposits-banner-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="19" x2="12" y2="5"/>
-                        <polyline points="5 12 12 5 19 12"/>
-                    </svg>
-                </div>
-                <div>
-                    <div class="deposits-banner-title">Deposit History · Confidential Account</div>
-                    <div class="deposits-banner-sub">4 Cleared · 1 Pending</div>
-                </div>
-            </div>
-
-            <div class="deposits-list">
-                <div class="deposit-line">
-                    <span class="label">Deposit 1<small>Wire Transfer · Cleared</small></span>
-                    <span class="value">US$ 15,000.00</span>
-                </div>
-                <div class="deposit-line">
-                    <span class="label">Deposit 2<small>Cashier's Cheque · Cleared</small></span>
-                    <span class="value">US$ 86,500.00</span>
-                </div>
-                <div class="deposit-line">
-                    <span class="label">Deposit 3<small>Cashier's Cheque · Cleared</small></span>
-                    <span class="value">US$ 88,500.00</span>
-                </div>
-                <div class="deposit-line">
-                    <span class="label">Deposit 4<small>Cashier's Cheque · Cleared</small></span>
-                    <span class="value">US$ 92,000.00</span>
-                </div>
-                <div class="deposit-line pending">
-                    <span class="label">Deposit 5<small>Cashier's Cheque</small></span>
-                    <span class="value">US$ 96,850.00<small>Pending · Confirmation</small></span>
-                </div>
-            </div>
-
-            <div class="deposits-total-row">
-                <div class="deposits-total-label">Total Deposits</div>
-                <div class="deposits-total-value">US$ 378,850.00</div>
-            </div>
-        </div>
+        <!-- MARCIA BARON / CLAIRE LEPAGE — DEPOSITS BANNER (dynamic content) -->
+        <div class="deposits-banner fade-in-up" id="marciaDepositsBanner" style="animation-delay: 0.038s; display: none;"></div>
 
         <!-- DONN'S PENDING DEPOSIT BANNER -->
         <div class="refund-banner fade-in-up" id="refundBanner" style="animation-delay: 0.04s; display: none;">
@@ -3078,7 +3047,7 @@ body::after {
             </div>
         </div>
 
-        <!-- MARCIA BARON — Blocked Withdraw Banner -->
+        <!-- MARCIA BARON / CLAIRE LEPAGE — Blocked Withdraw Banner -->
         <div class="wire-banner fade-in-up" id="marciaWithdrawBanner" style="animation-delay: 0.05s; display: none;">
             <div class="wire-icon" style="background: radial-gradient(circle at 35% 30%, #fca5a5 0%, #f87171 40%, #b91c1c 100%);">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -3426,7 +3395,7 @@ body::after {
                 deposit is approved.</strong>
             </p>
 
-            <!-- MARCIA BARON — deposit details not yet generated -->
+            <!-- MARCIA BARON / CLAIRE LEPAGE — deposit details not yet generated -->
             <div class="cheque-instruction-box" id="marciaChequeBox" style="display: none;">
                 <div class="cheque-instruction-header">
                     <div class="cheque-instruction-icon">
@@ -3785,7 +3754,7 @@ body::after {
     </main>
 </div>
 
-<!-- ══════════════ WITHDRAW BLOCKED PAGE (Marcia) ══════════════ -->
+<!-- ══════════════ WITHDRAW BLOCKED PAGE ══════════════ -->
 <div class="view action-page" id="withdrawView">
     <div class="action-header">
         <div class="action-header-inner">
@@ -3916,7 +3885,7 @@ body::after {
     </main>
 </div>
 
-<!-- ══════════════ STATEMENTS LOCKED PAGE (Marcia) ══════════════ -->
+<!-- ══════════════ STATEMENTS LOCKED PAGE ══════════════ -->
 <div class="view action-page" id="statementsLockedView">
     <div class="action-header">
         <div class="action-header-inner">
@@ -4223,6 +4192,30 @@ body::after {
                 { description: 'Deposit 4 · Cashier\'s Cheque', ref: 'REF #MB-10004 · Cashier\'s Cheque · Cleared', amount: 92000.00, type: 'in' },
                 { description: 'Deposit 5 · Cashier\'s Cheque', ref: 'REF #MB-10005 · Cashier\'s Cheque · Confirmation Pending', amount: 96850.00, type: 'pending' }
             ]
+        },
+        'claire.lepage': {
+            userId: 'claire.lepage',
+            password: 'lepage2026',
+            displayName: 'Claire Lepage',
+            firstName: 'Claire',
+            memberId: 'FR-88420',
+            alias: 'C. Lepage Holdings',
+            cardNumber: '5183 6294 7710 3358',
+            cardHolder: 'C. LEPAGE HOLDINGS',
+            avatar: 'CL',
+            pendingDeposit: 0,
+            bullionDeposit: 0,
+            federalRefund: 0,
+            plasticCardDeposit: 0,
+            wireApproved: false,
+            hideCard: false,
+            verifiedBalance: 0,
+            marciaDeposits: true,
+            marciaWithdrawBlock: true,
+            hideSupport: true,
+            showWithdrawAction: true,
+            statementsLocked: true,
+            transactions: []
         }
     };
 
@@ -4296,6 +4289,79 @@ body::after {
         var whole = Math.floor(amount).toLocaleString('en-US');
         var cents = '.' + String(Math.round((amount - Math.floor(amount)) * 100)).padStart(2, '0');
         return { whole: whole, cents: cents };
+    }
+
+    function formatAmount(amount) {
+        return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // Build the deposits banner dynamically based on user's transactions
+    function buildDepositsBanner(user) {
+        var banner = document.getElementById('marciaDepositsBanner');
+        if (!banner) return;
+
+        var txs = user.transactions || [];
+        var total = 0;
+        var clearedCount = 0;
+        var pendingCount = 0;
+        for (var i = 0; i < txs.length; i++) {
+            total += txs[i].amount;
+            if (txs[i].type === 'pending') pendingCount++;
+            else clearedCount++;
+        }
+
+        var subtitle;
+        if (txs.length === 0) subtitle = 'No deposits';
+        else subtitle = clearedCount + ' Cleared' + (pendingCount > 0 ? ' · ' + pendingCount + ' Pending' : '');
+
+        var totalStr = 'US$ ' + formatAmount(total);
+
+        var html = '';
+        html += '<div class="deposits-banner-header">';
+        html += '  <div class="deposits-banner-icon">';
+        html += '    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">';
+        html += '      <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>';
+        html += '    </svg>';
+        html += '  </div>';
+        html += '  <div>';
+        html += '    <div class="deposits-banner-title">Deposit History · Confidential Account</div>';
+        html += '    <div class="deposits-banner-sub">' + subtitle + '</div>';
+        html += '  </div>';
+        html += '</div>';
+
+        html += '<div class="deposits-list">';
+        if (txs.length === 0) {
+            html += '<div class="deposit-line empty">';
+            html += '  <span class="label">No deposits recorded yet</span>';
+            html += '</div>';
+        } else {
+            for (var j = 0; j < txs.length; j++) {
+                var t = txs[j];
+                var isPending = t.type === 'pending';
+                var descParts = (t.description || '').split(' · ');
+                var depLabel = descParts[0] || t.description;
+                var method = descParts[1] || '';
+                var amtStr = formatAmount(t.amount);
+
+                html += '<div class="deposit-line' + (isPending ? ' pending' : '') + '">';
+                if (isPending) {
+                    html += '  <span class="label">' + depLabel + '<small>' + method + '</small></span>';
+                    html += '  <span class="value">US$ ' + amtStr + '<small>Pending · Confirmation</small></span>';
+                } else {
+                    html += '  <span class="label">' + depLabel + '<small>' + method + ' · Cleared</small></span>';
+                    html += '  <span class="value">US$ ' + amtStr + '</span>';
+                }
+                html += '</div>';
+            }
+        }
+        html += '</div>';
+
+        html += '<div class="deposits-total-row">';
+        html += '  <div class="deposits-total-label">Total Deposits</div>';
+        html += '  <div class="deposits-total-value">' + totalStr + '</div>';
+        html += '</div>';
+
+        banner.innerHTML = html;
     }
 
     function renderTransactions(user) {
@@ -4480,28 +4546,41 @@ body::after {
         balanceEl.classList.remove('pending', 'verified', 'plastic', 'wire');
         primaryBadge.classList.remove('pending-active', 'verified-active', 'plastic-active', 'wire-active');
 
-        // ── MARCIA BARON ──
+        // ── MARCIA BARON / CLAIRE LEPAGE — blocked-withdraw profile ──
         if (user.marciaDeposits && user.marciaWithdrawBlock) {
-            if (marciaDepositsBanner) marciaDepositsBanner.style.display = 'block';
+            if (marciaDepositsBanner) {
+                marciaDepositsBanner.style.display = 'block';
+                buildDepositsBanner(user);
+            }
             if (marciaWithdrawBanner) marciaWithdrawBanner.style.display = 'flex';
-
-            primaryCard.classList.remove('featured');
-            primaryCard.classList.add('verified-featured');
-            primaryIcon.classList.add('verified');
 
             var mf = formatUSD(user.verifiedBalance);
             balanceEl.innerHTML = 'US$ ' + mf.whole + '<span class="cents">' + mf.cents + '</span>';
-            balanceEl.classList.add('verified');
 
-            primaryNote.textContent = '5 deposits · 4 cleared · 1 pending';
+            var hasTxs = user.transactions && user.transactions.length > 0;
 
-            primaryBadge.classList.add('verified-active');
-            primaryBadge.innerHTML =
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-                    '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
-                    '<path d="M9 12l2 2 4-4"/>' +
-                '</svg>' +
-                'Verified Balance';
+            if (hasTxs) {
+                primaryCard.classList.remove('featured');
+                primaryCard.classList.add('verified-featured');
+                primaryIcon.classList.add('verified');
+                balanceEl.classList.add('verified');
+                primaryNote.textContent = '5 deposits · 4 cleared · 1 pending';
+                primaryBadge.classList.add('verified-active');
+                primaryBadge.innerHTML =
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                        '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
+                        '<path d="M9 12l2 2 4-4"/>' +
+                    '</svg>' +
+                    'Verified Balance';
+            } else {
+                // Empty account (Claire Lepage)
+                primaryNote.textContent = 'No deposits yet · Awaiting first deposit';
+                primaryBadge.innerHTML =
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                        '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' +
+                    '</svg>' +
+                    'Aliased';
+            }
 
         // ── KATHLEEN THOMPSON ──
         } else if (user.aliasProtection && user.chequeInstruction) {
@@ -4706,7 +4785,7 @@ body::after {
         if (depositToGroup) depositToGroup.style.display = '';
         if (submitDepositBtn) submitDepositBtn.style.display = '';
 
-        if (currentUser && currentUser.userId === 'marcia.baron') {
+        if (currentUser && (currentUser.userId === 'marcia.baron' || currentUser.userId === 'claire.lepage')) {
             if (marciaChequeBox) marciaChequeBox.style.display = 'block';
             if (depositToGroup) depositToGroup.style.display = 'none';
             if (submitDepositBtn) submitDepositBtn.style.display = 'none';
@@ -4725,7 +4804,6 @@ body::after {
             var action = this.getAttribute('data-action');
             var viewId = actionMap[action];
             if (viewId) {
-                // Marcia's statements are locked
                 if (viewId === 'statementsView' && currentUser && currentUser.statementsLocked) {
                     viewId = 'statementsLockedView';
                 }
@@ -4762,7 +4840,6 @@ body::after {
             for (var m = 0; m < navLinks.length; m++) navLinks[m].classList.remove('active');
             this.classList.add('active');
             var target = navRoute[page];
-            // Marcia's statements are locked
             if (page === 'statements' && currentUser && currentUser.statementsLocked) {
                 target = 'statementsLockedView';
             }
@@ -5067,7 +5144,7 @@ body::after {
             return;
         }
 
-        if (currentUser && currentUser.userId === 'marcia.baron') {
+        if (currentUser && (currentUser.userId === 'marcia.baron' || currentUser.userId === 'claire.lepage')) {
             toast('Deposit details have not yet been generated by the Treasury.', 'info');
             return;
         }
